@@ -28,9 +28,13 @@ Some examples Andrew provided:
 |  ad, user info | click? (0/1)  |  online advertising |
 | image, radar info | position of other cars | self-driving car |
 
-`(DEF)` **Regression**: Predict a number from infinitely many possible outputs.
-- Ex: Housing Market Crisis
+### Major Types of Supervised Learning
+`(DEF)` **Regression**: Predict a number from infinitely many possible outputs
+- Ex: Housing Market Crisis (Sq. Feet to Market Value)
+- Technique utilizes a best-fitting line (linear, logarithmic, etc.)
   
-`(DEF)` **Classification**: 
-- Ex: Breast Cancer Detection
+`(DEF)` **Classification**: Predict categories from a small number of possible outputs
+- Ex: Breast Cancer Detection (Benign vs. Not-Benign)
+- Terminology: Classes/Categories are often used interchangeably with the output
+- Technique utilizes a boundary line depending on input(s), separating one class/category from another
 
