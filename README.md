@@ -15,7 +15,7 @@ Machine Learning Algorithms
 - Reinforcement Learning
 
 ## Supervised Learning
-`(DEF)` Supervised Learning: Learning via input (x) to output mappings.
+`(DEF)` Supervised Learning: Learning via input (x) to output mappings.\
 Key characteristic: **Learns from being given examples and the "right answers".**
 
 Given input(s), the algorithm will make a "guess" and output based on what it had previously learned.
