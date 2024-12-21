@@ -10,6 +10,9 @@ My notes from "Machine Learning Specialization" by Andrew Ng
 
 # Tools
 - Jupyter Notebook
+- Libraries
+  - NumPy, scientific computing
+  - Matplotlib, plotting data
 
 
 # What is Machine Learning?
@@ -70,6 +73,9 @@ Process:
 
 **How to represent $f$**: $f_{w,b}(x)=wx+b$\
 *Can also drop the subscript $w,b$ &#8594; $f(x)=wx+b$
+- Notation:
+  - $w$ = parameter: weight
+  - $b$ = parameter: bias
 
 `(DEF)` **Univariate Linear Regression**: Fancy name for linear regression with one variable (single feature x)
 
