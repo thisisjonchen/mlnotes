@@ -55,6 +55,8 @@ Some examples Andrew provided:
 ## Linear Regression
 `(DEF)` **Linear Regression**: Fits a best-fitting, straight (linear) line to your data
 
+`(DEF)` **Univariate Linear Regression**: Fancy name for linear regression with one variable (single feature x)
+
 `(DEF)` **Training Set**: Data used to train the model
 - Notation:
     - $x$ = features, "input" variable
@@ -77,8 +79,6 @@ Process:
 - $x$ &#8594; $f$ &#8594; $\hat{y}$
     - Ex: size &#8594; Model $f$ &#8594; estimated price
 
-`(DEF)` **Univariate Linear Regression**: Fancy name for linear regression with one variable (single feature x)
-
 ### Cost Function
 Question: How to find how $\hat{y}$ compares to the true target $y^{(i)}$?\
 Answer: Use a **cost function**
@@ -89,6 +89,15 @@ Answer: Use a **cost function**
 - *NOTE*: Andrew says that the reason we divide by 2 here is to make future calculations "neater"
 
 The squared error cost function is not the only one that exists -- there are more.
+
+**The goal** with linear regression is to minimize the cost function $J(w,b)$
+
+
+
+
+
+
+
 
 
 # Unsupervised Learning
