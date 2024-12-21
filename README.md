@@ -5,10 +5,12 @@
 2. [What is Machine Learning?](#what-is-machine-learning)
 3. [Supervised Learning](#supervised-learning)
     * 3.1 [Linear Regression](#linear-regression)
+      * 3.11 [Cost Function](#cost-function)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
-- Jupyter Notebook
+- Language: Python
+- Platform: Jupyter Notebook
 - Libraries
   - NumPy, scientific computing
   - Matplotlib, plotting data
@@ -58,7 +60,12 @@ Some examples Andrew provided:
     - $x$ = features, "input" variable
     - $y$ = targets, "output" variable
     - $m$ = number of training examples
-    - $f$ = model after training wherein we plug in $x$ to get $\hat{y}$
+    - $f$ = model, an equation obtained from training wherein we plug in $x$ to get $\hat{y}$
+        - `(EQUATION)` $f_{w,b}(x)=wx+b$
+        - Can also drop the subscript $w,b$ &#8594; $f(x)=wx+b$
+           - $\hat{y} = w(x^{(i)}) + b$
+           - $w$ = parameter: weight
+           - $b$ = parameter: bias
     - $\hat{y}$ = prediction for y
     - $(x, y)$ = single training example (pair)
     - $(x^{(i)}, y^{(i)})$ = $i^{th}$ training example with relation to the $i^th$ row (1st, 2nd, 3rd...)
@@ -67,20 +74,21 @@ Some examples Andrew provided:
      
 Process:
 - Training Set &#8594; Learning Algorithm &#8594; Model $f$
-- $x$ &#8594; Model $f$ &#8594; $\hat{y}$
+- $x$ &#8594; $f$ &#8594; $\hat{y}$
     - Ex: size &#8594; Model $f$ &#8594; estimated price
-
-**How to represent $f$**: $f_{w,b}(x)=wx+b$\
-*Can also drop the subscript $w,b$ &#8594; $f(x)=wx+b$
-- Notation:
-  - $w$ = parameter: weight
-  - $b$ = parameter: bias
 
 `(DEF)` **Univariate Linear Regression**: Fancy name for linear regression with one variable (single feature x)
 
+### Cost Function
+Question: How to find how $\hat{y}$ compares to the true target $y^{(i)}$?\
+Answer: Use a **cost function**
 
+**Squared Error Cost Function**
+- The most common used cost function for most regression related models
+- `(EQUATION)` $J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} \left( \hat{y}^{(i)} - y^{(i)} \right)^2 = \frac{1}{2m} \sum_{i=1}^{m} \left( f_{w,b}(x^{(i)}) - y^{(i)} \right)^2$
+- *NOTE*: Andrew says that the reason we divide by 2 here is to make future calculations "neater"
 
-
+The squared error cost function is not the only one that exists -- there are more.
 
 
 # Unsupervised Learning
