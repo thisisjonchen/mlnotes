@@ -1,5 +1,4 @@
 # Machine Learning Notes 📝
-My notes from "Machine Learning Specialization" by Andrew Ng
 
 ## Table of Contents
 1. [Tools](#tools)
