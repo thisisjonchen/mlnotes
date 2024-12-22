@@ -42,7 +42,7 @@ Some examples Andrew provided:
 
 ### Major Types of Supervised Learning
 `(DEF)` **Regression**: Predict a number from infinitely many possible outputs
-- Ex: Housing Market Crisis (Sq. Feet to Market Value)
+- Ex: Housing Market Prices (Sq. Feet to Market Value)
 - Graphing technique utilizes a best-fitting line (linear, logarithmic, etc.)
 - Models: Linear Regression
   
@@ -88,9 +88,12 @@ Answer: Use a **cost function**
 - `(EQUATION)` $J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} \left( \hat{y}^{(i)} - y^{(i)} \right)^2 = \frac{1}{2m} \sum_{i=1}^{m} \left( f_{w,b}(x^{(i)}) - y^{(i)} \right)^2$
 - *NOTE*: Andrew says that the reason we divide by 2 here is to make future calculations "neater"
 
-The squared error cost function is not the only one that exists -- there are more.
+The squared error cost function is not the only cost function that exists -- there are more.
 
-**The goal** with linear regression is to minimize the cost function $J(w,b)$
+**The goal** of regression is to minimize the cost function $J(w,b)$
+- When we use random $w$, we can get a graph with x-axis $w$ and y-axis $J(w)$ (note, this is excluding $b$ for now to make the example simpler). With this, we can find the minimum $J(w)$ and use it in our model $f$ (2D).
+- With both $w, b$, we get a plot where it looks like one part of a hyperbolic paraboloid (or "hammock", "soup bowl", and "curved dinner plate"). This plot would have $b$ and $w$ as parameters/inputs on the x and y-axis, and $J(w,b)$ on the z-axis (3D).
+  - This can also be accompanied by a contour (topographic) plot with $w$ on the x-axis, $b$ on the y-axis. At the center of the contour plot (where the lines are "growing" from) is where $J(w,b)$ is the minimum.
 
 
 
