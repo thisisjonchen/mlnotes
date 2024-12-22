@@ -60,18 +60,18 @@ Some examples Andrew provided:
 
 `(DEF)` **Training Set**: Data used to train the model
 - Notation:
-    - $x$ = features, "input" variable
-    - $y$ = targets, "output" variable
-    - $m$ = number of training examples
-    - $f$ = model, an equation obtained from training wherein we plug in $x$ to get $\hat{y}$
+    - $x$: features, "input" variable
+    - $y$: targets, "output" variable
+    - $m$: number of training examples
+    - $f$: model, an equation obtained from training wherein we plug in $x$ to get $\hat{y}$
         - `(EQUATION)` $f_{w,b}(x)=wx+b$
         - Can also drop the subscript $w,b$ &#8594; $f(x)=wx+b$
            - $\hat{y} = w(x^{(i)}) + b$
-           - $w$ = parameter: weight
-           - $b$ = parameter: bias
-    - $\hat{y}$ = prediction for y
-    - $(x, y)$ = single training example (pair)
-    - $(x^{(i)}, y^{(i)})$ = $i^{th}$ training example with relation to the $i^th$ row (1st, 2nd, 3rd...)
+           - $w$: parameter weight
+           - $b$: parameter bias
+    - $\hat{y}$: prediction for y
+    - $(x, y)$: single training example (pair)
+    - $(x^{(i)}, y^{(i)})$: $i^{th}$ training example with relation to the $i^th$ row (1st, 2nd, 3rd...)
       - *NOTE*: $x^{(i)}$ is not exponentiation, but denotes the row
       - $(x^{(1)}, y^{(1)})$ refers to the 1st training example at row 1 of the training set
      
@@ -106,7 +106,17 @@ Outline:
 - Keep changing $w,b$ to reduce $J(w,b)$, until we settle at or near a minimum
 - *NOTE*: There may be >1 minimum
 
-`(EQUATION)` $w = w-\alpha\frac{d}{dw}J(w,b)$
+Correct Implementation - **Simultaneous** Update $w,b$\
+`(EQUATION/ASSIGNMENT)` $tmp_w = w-\alpha\frac{d}{dw}J(w,b)$\
+`(EQUATION/ASSIGNMENT)` $tmp_b = b-\alpha\frac{d}{db}J(w,b)$\
+`(ASSIGNMENT)` $w = tmp_w$\
+`(ASSIGNMENT)` $b = tmp_b$
+- Repeat until convergence
+- $\alpha$: learning rate (usually a small positive number between 0 and 1)
+  - Large $\alpha$: more aggressive descent
+  - Small $\alpha$: less agressive descent
+- $\frac{d}{dw}J(w,b)$ and $\frac{d}{db}J(w,b)$: derivative of the cost function (gradient vector)
+
 
 
 
