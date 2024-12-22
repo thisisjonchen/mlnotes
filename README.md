@@ -1,4 +1,5 @@
 # Machine Learning Notes 📝
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/thisisjonchen/mlnotes/main?display_timestamp=author&style=for-the-badge)
 
 ## Table of Contents
 1. [Tools](#tools)
