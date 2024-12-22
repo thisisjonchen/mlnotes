@@ -6,6 +6,7 @@
 3. [Supervised Learning](#supervised-learning)
     * 3.1 [Linear Regression](#linear-regression)
       * 3.11 [Cost Function](#cost-function)
+      * 3.12 [Gradient Descent](#gradient-descent)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -92,11 +93,20 @@ The squared error cost function is not the only cost function that exists -- the
 
 **The goal** of regression is to minimize the cost function $J(w,b)$
 - When we use random $w$, we can get a graph with x-axis $w$ and y-axis $J(w)$ (note, this is excluding $b$ for now to make the example simpler). With this, we can find the minimum $J(w)$ and use it in our model $f$ (2D).
-- With both $w, b$, we get a plot where it looks like one part of a hyperbolic paraboloid (or "hammock", "soup bowl", and "curved dinner plate"). This plot would have $b$ and $w$ as parameters/inputs on the x and y-axis, and $J(w,b)$ on the z-axis (3D).
+- With both $w, b$, we get a plot where it looks like one part of a hyperbolic paraboloid (or "hammock", "soup bowl", and "curved dinner plate"). This plot would have $b$ and $w$ as parameters/inputs on the bottom axes, and $J(w,b)$ on the vertical axis (3D).
   - This can also be accompanied by a contour (topographic) plot with $w$ on the x-axis, $b$ on the y-axis. At the center of the contour plot (where the lines are "growing" from) is where $J(w,b)$ is the minimum.
 
+Now, how can we more easily find the minimum $w,b$? We can use an algorithm called **Gradient Descent**.
 
+### Gradient Descent
+One of the most important building blocks in machine learning, helps minimize some *any* function.
 
+Outline:
+- Start with some $w,b$ (a common approach is to first set $w$=0, $b$=0)
+- Keep changing $w,b$ to reduce $J(w,b)$, until we settle at or near a minimum
+- *NOTE*: There may be >1 minimum
+
+`(EQUATION)` $w = w-\alpha\frac{d}{dw}J(w,b)$
 
 
 
