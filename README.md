@@ -1,6 +1,8 @@
 # Machine Learning Notes 📝
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/thisisjonchen/mlnotes/main?display_timestamp=author&style=for-the-badge)
 
+My notes from Andrew Ng's "Machine Learning Specialization" 
+
 ## Table of Contents
 1. [Tools](#tools)
 2. [What is Machine Learning?](#what-is-machine-learning)
@@ -105,7 +107,7 @@ One of the most important building blocks in machine learning, helps minimize so
 Outline:
 - Start with some $w,b$ (a common approach is to first set $w$=0, $b$=0)
 - Keep changing $w,b$ to reduce $J(w,b)$, until we settle at or near a minimum
-- *NOTE*: There may be >1 minimum
+- *NOTE*: There may be >1 minimum, but with a squared error cost function, it will **never** have multiple local minima (only one global minimum)
 
 Correct Implementation - **Simultaneous** Update $w,b$\
 `(EQUATION/ASSIGNMENT)` $tmp_w = w-\alpha\frac{d}{dw}J(w,b)$\
@@ -119,12 +121,17 @@ Correct Implementation - **Simultaneous** Update $w,b$\
     - If too large, it is possible to miss/overshoot the minimum entirely. May fail to converge &#8594; diverge.
   - Small $\alpha$: less agressive descent
     - If too small, the # of updates required will grow significantly, but gradient descent will still work
-- $\frac{d}{dw}J(w,b)$ and $\frac{d}{db}J(w,b)$: derivative of the cost function (gradient vector)
+- $\frac{d}{dw}J(w,b)$ and $\frac{d}{db}J(w,b)$: derivative of the cost function (gradient vector... this is where the "divide by two" from earlier comes in handy)
+  - $\frac{d}{dw}J(w,b) = \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)})-y^{(i)})x^{(i)}$
+  - $\frac{d}{dw}J(w,b) = \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)})-y^{(i)})$
   - Positive $\frac{d}{dw}J(w,b)$ or $\frac{d}{db}J(w,b)$: $w$ or $b$ decreases slightly
   - Negative $\frac{d}{dw}J(w,b)$ or $\frac{d}{db}J(w,b)$: $w$ or $b$ increases slightly
 - **If you are already at a local minimum**, then further gradient descent steps will do nothing.
   - Near a local minimum, the derivative becomes smaller &#8594; update steps become smaller
   - Thus, can reach minimum without modifying/decreasing the learning rate $\alpha$
+
+
+
 
 
 
