@@ -113,11 +113,18 @@ Correct Implementation - **Simultaneous** Update $w,b$\
 `(ASSIGNMENT)` $w = tmp_w$\
 `(ASSIGNMENT)` $b = tmp_b$
 - Repeat until convergence
-- $\alpha$: learning rate (usually a small positive number between 0 and 1)
+- $\alpha$: learning rate (usually a small **positive** number between 0 and 1)
+  - *Highly important.* If $\alpha$ is chosen pooorly, the rate of descent may not even work at all.
   - Large $\alpha$: more aggressive descent
+    - If too large, it is possible to miss/overshoot the minimum entirely. May fail to converge &#8594; diverge.
   - Small $\alpha$: less agressive descent
+    - If too small, the # of updates required will grow significantly, but gradient descent will still work
 - $\frac{d}{dw}J(w,b)$ and $\frac{d}{db}J(w,b)$: derivative of the cost function (gradient vector)
-
+  - Positive $\frac{d}{dw}J(w,b)$ or $\frac{d}{db}J(w,b)$: $w$ or $b$ decreases slightly
+  - Negative $\frac{d}{dw}J(w,b)$ or $\frac{d}{db}J(w,b)$: $w$ or $b$ increases slightly
+- **If you are already at a local minimum**, then further gradient descent steps will do nothing.
+  - Near a local minimum, the derivative becomes smaller &#8594; update steps become smaller
+  - Thus, can reach minimum without modifying/decreasing the learning rate $\alpha$
 
 
 
