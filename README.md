@@ -129,6 +129,10 @@ Correct Implementation - **Simultaneous** Update $w,b$\
 - **If you are already at a local minimum**, then further gradient descent steps will do nothing.
   - Near a local minimum, the derivative becomes smaller &#8594; update steps become smaller
   - Thus, can reach minimum without modifying/decreasing the learning rate $\alpha$
+ 
+"Batch" Gradient Descent
+- "Batch": Each step of gradient descent uses *all the training examples*
+- There are other gradient descent algorithms that look at just the subsets
 
 
 
