@@ -11,13 +11,14 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.11 [Cost Function](#cost-function)
       * 3.12 [Gradient Descent](#gradient-descent)
       * 3.13 [Multiple Features](#multiple-features)
+      * 3.14 [Vectorization](#vectorization)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
 - Language: Python
 - Platform: Jupyter Notebook
 - Libraries
-  - NumPy, scientific computing + lin algebra
+  - NumPy, scientific computing + lin algebra in Python
   - Matplotlib, plotting data
 
 
@@ -153,8 +154,14 @@ A multiple linear regression equation would be `(EQUATION)` $f_{w,b}(x)=w_1x_1 +
 - $\vec{w} = [w_1 w_2 w_3 ... w_n]$ (parameters of the model)
 - $\vec{x} = [w_1 w_2 w_3 ... w_n]$ (vector)
 - $b$: a scalar number
+  
+Using $\vec{w}$ and $\vec{x}$, we can simplify `(EQUATION)` $f_{w,b}(x)$ = $\vec{w} \cdot \vec{x} + b$ **(Vectorization)**
 
-Using $\vec{w}$ and $\vec{x}$, we can simplify `(EQUATION)` $f_{w,b}(x)$ = $\vec{w} \cdot \vec{x} + b$ **(Vectorization)**\
+### Vectorization 
+Behind the scenes:
+- Without vectorization (e.g. a for loop): will run iteratively
+- With vectorization: will run in parallel **MUCH MORE EFFICIENT** (even more efficient with specialized hardware like GPUs with thousands of cores - CUDA)
+  - Efficient &#8594; Scale to large datasets
 
 To implement this in Python, we can use **NumPy** with arrays:
 ```
@@ -163,7 +170,19 @@ b = 4
 x = np.array([10, 20, 30])
 f = np.dot(w,x) + b
 ```
-Will significantly run faster than manually specifying $w[0] * x[0] + ...$ or with for loop and makes code shorter, especially when $n$ is large.
+Will significantly run faster than manually specifying $w[0] * x[0] + ... + w[n] * x[n]$ or with for loop and makes code shorter, especially when $n$ is large.
+
+This can also be applied to the **gradient descent** algorithm
+- $\vec{w} = (w_1 w_2 ... w_n)$
+- $\vec{d} = (d_1 d_2 ... d_n)$
+
+In Python:
+```
+w = np.array([0.5, 1.3, ... 3.4])
+d = np.array([0.3, 0.2, ... 0.4])
+a = 0.1 # alpha, learning rate
+w = w - a * d
+```
 
     
 
