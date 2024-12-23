@@ -151,8 +151,8 @@ More Notation:
 Previously, a univariate linear regression model equation would be $f_{w,b}(x)=wx+b$\
 A multiple linear regression equation would be `(EQUATION)` $f_{w,b}(x)=w_1x_1 + w_2x_2 + ... + w_nx_n +b$
 - *NOTE*: This is **not the same** as multivariate regression (it is a different thing)
-- $\vec{w} = [w_1 w_2 w_3 ... w_n]$ (parameters of the model)
-- $\vec{x} = [w_1 w_2 w_3 ... w_n]$ (vector)
+- $\vec{w} = [w_1 \ w_2 \ w_3 ... w_n]$ (parameters of the model)
+- $\vec{x} = [w_1 \ w_2 \ w_3 ... w_n]$ (vector)
 - $b$: a scalar number
   
 Using $\vec{w}$ and $\vec{x}$, we can simplify `(EQUATION)` $f_{w,b}(x)$ = $\vec{w} \cdot \vec{x} + b$ **(Vectorization)**
@@ -173,8 +173,8 @@ f = np.dot(w,x) + b
 Will significantly run faster than manually specifying $w[0] * x[0] + ... + w[n] * x[n]$ or with for loop and makes code shorter, especially when $n$ is large.
 
 This can also be applied to the **gradient descent** algorithm
-- $\vec{w} = (w_1 w_2 ... w_n)$
-- $\vec{d} = (d_1 d_2 ... d_n)$
+- $\vec{w} = (w_1 \ w_2 ... w_n)$
+- $\vec{d} = (d_1 \ d_2 ... d_n)$
 
 In Python:
 ```
