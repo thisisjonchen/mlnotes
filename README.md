@@ -10,6 +10,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
     * 3.1 [Linear Regression](#linear-regression)
       * 3.11 [Cost Function](#cost-function)
       * 3.12 [Gradient Descent](#gradient-descent)
+      * 3.13 [Multiple Features](#multiple-features)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -88,7 +89,7 @@ Question: How to find how $\hat{y}$ compares to the true target $y^{(i)}$?\
 Answer: Use a **cost function**
 
 **Squared Error Cost Function**
-- The most common used cost function for most regression related models
+- The most commonly used cost function for most regression-related models
 - `(EQUATION)` $J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} \left( \hat{y}^{(i)} - y^{(i)} \right)^2 = \frac{1}{2m} \sum_{i=1}^{m} \left( f_{w,b}(x^{(i)}) - y^{(i)} \right)^2$
 - *NOTE*: Andrew says that the reason we divide by 2 here is to make future calculations "neater"
 
@@ -96,13 +97,13 @@ The squared error cost function is not the only cost function that exists -- the
 
 **The goal** of regression is to minimize the cost function $J(w,b)$
 - When we use random $w$, we can get a graph with x-axis $w$ and y-axis $J(w)$ (note, this is excluding $b$ for now to make the example simpler). With this, we can find the minimum $J(w)$ and use it in our model $f$ (2D).
-- With both $w, b$, we get a plot where it looks like one part of a hyperbolic paraboloid (or "hammock", "soup bowl", and "curved dinner plate"). This plot would have $b$ and $w$ as parameters/inputs on the bottom axes, and $J(w,b)$ on the vertical axis (3D).
-  - This can also be accompanied by a contour (topographic) plot with $w$ on the x-axis, $b$ on the y-axis. At the center of the contour plot (where the lines are "growing" from) is where $J(w,b)$ is the minimum.
+- With both $w, b$, we get a plot where it looks like one part of a hyperbolic paraboloid (or "hammock", "soup bowl", and "curved dinner plate"). This plot would have $b$ and $w$ as parameters/inputs on the bottom axes and $J(w,b)$ on the vertical axis (3D).
+  - This can also be accompanied by a contour (topographic) plot with $w$ on the x-axis and $b$ on the y-axis. At the center of the contour plot (where the lines are "growing" from) is where $J(w,b)$ is the minimum.
 
 Now, how can we more easily find the minimum $w,b$? We can use an algorithm called **Gradient Descent**.
 
 ### Gradient Descent
-One of the most important building blocks in machine learning, helps minimize some *any* function.
+One of the most important building blocks in machine learning helps minimize some *any* function.
 
 Outline:
 - Start with some $w,b$ (a common approach is to first set $w$=0, $b$=0)
@@ -133,6 +134,44 @@ Correct Implementation - **Simultaneous** Update $w,b$\
 "Batch" Gradient Descent
 - "Batch": Each step of gradient descent uses *all the training examples*
 - There are other gradient descent algorithms that look at just the subsets
+
+
+### Multiple Features
+Rather than use just one feature $x$, we can increase the number of inputs ("features") that our model considers by using the notation $x_1, x_2, ... x_j$
+
+More Notation:
+- $x_j$: $j^{th}$ feature
+- $n$: number of features
+- $\vec{x}^{(i)}$: number of $i^{th}$ training examples
+  - For example, if we had three features, $\vec{x}^{(1)}$ may equal [1416 3 2] (a row matrix)
+- $x_{j}^{(i)}$: value of feature $j$ in $i^{(th)}$ training example
+  - Using the same values in the previous example, $x_{1}^{(1)}$ = 1416 (1-indexed)
+
+Previously, a univariate linear regression model equation would be $f_{w,b}(x)=wx+b$\
+A multiple linear regression equation would be `(EQUATION)` $f_{w,b}(x)=w_1x_1 + w_2x_2 + ... + w_nx_n +b$
+- *NOTE*: This is **not the same** as multivariate regression (it is a different thing)
+- $\vec{w} = [w_1 w_2 w_3 ... w_n]$ (parameters of the model)
+- $\vec{x} = [w_1 w_2 w_3 ... w_n]$ (vector)
+- $b$: a scalar number
+
+Using $\vec{w}$ and $\vec{x}$, we can simplify `(EQUATION)` $f_{w,b}(x)$ = $\vec{w} \cdot \vec{x} + b$
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
