@@ -17,7 +17,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
 - Language: Python
 - Platform: Jupyter Notebook
 - Libraries
-  - NumPy, scientific computing
+  - NumPy, scientific computing + lin algebra
   - Matplotlib, plotting data
 
 
@@ -154,7 +154,16 @@ A multiple linear regression equation would be `(EQUATION)` $f_{w,b}(x)=w_1x_1 +
 - $\vec{x} = [w_1 w_2 w_3 ... w_n]$ (vector)
 - $b$: a scalar number
 
-Using $\vec{w}$ and $\vec{x}$, we can simplify `(EQUATION)` $f_{w,b}(x)$ = $\vec{w} \cdot \vec{x} + b$
+Using $\vec{w}$ and $\vec{x}$, we can simplify `(EQUATION)` $f_{w,b}(x)$ = $\vec{w} \cdot \vec{x} + b$ **(Vectorization)**\
+
+To implement this in Python, we can use **NumPy** with arrays:
+```
+w = np.array([1.0, 2.5, -3.3])
+b = 4
+x = np.array([10, 20, 30])
+f = np.dot(w,x) + b
+```
+Will significantly run faster than manually specifying $w[0] * x[0] + ...$ or with for loop and makes code shorter, especially when $n$ is large.
 
     
 
