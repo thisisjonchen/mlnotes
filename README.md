@@ -12,6 +12,9 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.12 [Gradient Descent](#gradient-descent)
       * 3.13 [Multiple Features](#multiple-features)
       * 3.14 [Vectorization](#vectorization)
+      * 3.15 [The Normal Equation](#the-normal-equation)
+      * 3.16 [Feature Scaling](#feature-scaling)
+      * 3.17 [Checking Gradient Convergence](#checking-gradient-descent-for-convergence)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -172,9 +175,12 @@ f = np.dot(w,x) + b
 ```
 Will significantly run faster than manually specifying $w[0] * x[0] + ... + w[n] * x[n]$ or with for loop and makes code shorter, especially when $n$ is large.
 
-This can also be applied to the **gradient descent** algorithm
-- $\vec{w} = (w_1 \ w_2 ... w_n)$
-- $\vec{d} = (d_1 \ d_2 ... d_n)$
+The cost function can be re-written to include the vector $\vec{w}$: $J(\vec{w}, b)$
+
+This can also be applied to the **gradient descent** algorithm (multiple linear reg. version)
+- (repeat)
+  - $w_j = w_j - \alpha\frac{d}{dw_j}J(\vec{w},b)$
+  - $b = b - \alpha\frac{d}{db}J(\vec{w},b)$ 
 
 In Python:
 ```
@@ -183,10 +189,48 @@ d = np.array([0.3, 0.2, ... 0.4])
 a = 0.1 # alpha, learning rate
 w = w - a * d
 ```
+- $\vec{w} = (w_1 \ w_2 ... w_n)$
+- $\vec{d} = (d_1 \ d_2 ... d_n)$ (partial deriv. of the cost function with respect to $b$ and $w$)
 
-    
+### The Normal Equation
+Only works for linear regression - solves for $w,b$ *without* iterations
 
+**Disadvantages**
+- Does not generalize other learning algorithms
+- Slow when the number of features is large (> 10,000)
 
+**What you need to know**
+- The normal equation may be used in machine learning libraries that implement linear regression
+
+### Feature Scaling
+Rescaling features (assume $\vec{x_1}$ and $\vec{x_2}$) to be more comparable to eachother. This leads the contour plot of $J(\vec{w}, b)$ to be less tall and skinny but rather to be more circular. This allows the path to find the global minimum more directly.\
+
+*In other words*, it is a technique to make gradient descent run much faster.
+
+Ways to feature scale:
+- Divide the entire feature range by the maximum:
+  - Given the range $300 \le x_1 \le 2000$, $x_{1, scaled} = \frac{x_1}{2000}$
+  - Thus, the scaled range would be $0.15 \le x_1 \le 1$
+  - The same will be done to $x_2$
+- Mean Normalization:
+  - Find the average of each feature e.g., ($x_1$) as $\mu_{1}$
+  - Given the range $300 \le x_1 \le 2000$, $\mu_{1} = 600$, $x_{1, scaled} = \frac{x_1-\mu_1}{max-min} = \frac{x_1-600}{2000-300}$
+  - Thus, the scaled range would be $-0.18 \le x_1 \le 0.82$
+  - The same will be done to $x_2$
+- Z-Score Normalization:
+  - Find standard deviation $\sigma$ and the average of each feature e.g., ($x_1$) as $\mu_{1}$
+  - Given the range $300 \le x_1 \le 2000$, $\mu_{1} = 600, \sigma_1 = 450$, $x_{1, scaled} = \frac{x_1-\mu_1}{\sigma_1} = \frac{x_1-600}{650}$
+  - Thus, the scaled range would be $-0.67 \le x_1 \le 3.1$
+  - The same will be done to $x_2$
+
+Tips for feature scaling:
+- Aim for range $-1 \le x_j \le 1$ for each feature $x_j$
+  - Scalar multiples of these are fine as well e.g., $-3 \le x_j \le 3$, **as long as they are less than 10 and greater than 0.1**
+  - Something like $-1000 \le x_1 \le 1000$ (too large &#8594; rescale)
+  - Something like $0.001 \le x_1 \le 0.001$ (too small &#8594; rescale)
+- When in doubt, just feature rescale
+
+### Checking Gradient Descent for Convergence
 
 
 
