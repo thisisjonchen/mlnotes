@@ -15,6 +15,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.15 [The Normal Equation](#the-normal-equation)
       * 3.16 [Feature Scaling](#feature-scaling)
       * 3.17 [Checking Gradient Convergence](#checking-gradient-descent-for-convergence)
+      * 3.18 [Choosing Learning Rate](#choosing-the-learning-rate)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -231,7 +232,26 @@ Tips for feature scaling:
 - When in doubt, just feature rescale
 
 ### Checking Gradient Descent for Convergence
+Objective: $min_{w,b}J(\vec{w},b)$\
+We can check the learning curve by plotting # of iterations (x-axis) with $J(\vec{w},b)$
+- $J(\vec{w},b)$ should **decrease** after every iteration
+- If the cost function does not decrease, then the alpha chosen was not viable
+- The # of iterations will vary from application to application
 
+Automatic Convergence Test:
+- Let $\epsilon$ be $10^{-3}$
+- If $J(\vec{w},b)$ decreases by $\le \epsilon$ in *one iteration*, declare **convergence**
+- However, finding the right $\epsilon$ can be hard. Therefore, using the graph can be a more reliable method for determining convergence (look if $J(\vec{w},b)$ flattens out)
+
+### Choosing the Learning Rate
+If the graph of # of iterations (x-axis) with $J(\vec{w},b)$ does not decrease for every iteration, then there are two possible errors:
+- Bug in code
+- Learning rate $\alpha$ is **too large** (too small will just make # of iterations larger)
+
+How to tell if it is a bug or a learning rate problem: set learning rate $\alpha$ to a very small number. If $J$ still does not decrease on every iteration, then it is a sign that there is a bug.
+
+Values of $\alpha$ to try (Try to find the largest learning rate where $J$ still decreases on every iteration):\
+$... 0.001 \quad 0.01 \quad 0.1 \quad 1 ...$\
 
 
 
