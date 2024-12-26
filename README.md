@@ -16,6 +16,8 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.16 [Feature Scaling](#feature-scaling)
       * 3.17 [Checking Gradient Convergence](#checking-gradient-descent-for-convergence)
       * 3.18 [Choosing Learning Rate](#choosing-the-learning-rate)
+      * 3.19 [Feature Engineering](#feature-engineering)
+   * 3.2 [Polynomial Regression](#polynomial-regression)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -24,6 +26,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
 - Libraries
   - NumPy, scientific computing + lin algebra in Python
   - Matplotlib, plotting data
+  - SciKit Learn, open source machine learning
 
 
 # What is Machine Learning?
@@ -251,11 +254,24 @@ If the graph of # of iterations (x-axis) with $J(\vec{w},b)$ does not decrease f
 How to tell if it is a bug or a learning rate problem: set learning rate $\alpha$ to a very small number. If $J$ still does not decrease on every iteration, then it is a sign that there is a bug.
 
 Values of $\alpha$ to try (Try to find the largest learning rate where $J$ still decreases on every iteration):\
-$... 0.001 \quad 0.01 \quad 0.1 \quad 1 ...$\
+$... 0.001 \quad 0.01 \quad 0.1 \quad 1 ...$
+
+### Feature Engineering
+`(DEF)` **Feature Engineering**: Using intuition to design new features by transforming or combining original features.
+
+Why?
+The choice of features can have a **huge impact** on a learning algorithm's performance. Thus, choosing the right features is critical to making an algorithm work well.
+
+Example: Predicting the price of a house
+- Assume we have and equation $f(x) = w_1x_1 + w_2x_2 + b$, where $x_1$ is the frontage width and $x_2$ is the depth.
+- While this is fine, we can refine this by taking the $x_3$ area = frontage * depth. The resulting equation could look like $f(x) = w_1x_1 + w_2x_2 + w_3x_3 + b$
+- Note that we did *not* remove features but added one to the equation
 
 
+## Polynomial Regression
+Using the ideas of multiple linear regression + feature engineering, we can develop a new algorithm called polynomial regression.
 
-
+**Important**: As the features are being raised to some power, *feature scaling* becomes increasingly more important. We can take the feature $x$ to any power, including but not limited to $\sqrt{x}$ or $x^{3}$
 
 
 
