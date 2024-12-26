@@ -27,6 +27,8 @@ My notes from Andrew Ng's "Machine Learning Specialization"
   - NumPy, scientific computing + lin algebra in Python
   - Matplotlib, plotting data
   - SciKit Learn, open source machine learning
+    - sklearn.linear_model.SGDRegressor: gradient descent regression model (performs best with normalized features)
+    - sklearn.preprocessing.StandardScaler: performs z-score normalization
 
 
 # What is Machine Learning?
