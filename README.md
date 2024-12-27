@@ -17,7 +17,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.17 [Checking Gradient Convergence](#checking-gradient-descent-for-convergence)
       * 3.18 [Choosing Learning Rate](#choosing-the-learning-rate)
       * 3.19 [Feature Engineering](#feature-engineering)
-   * 3.2 [Polynomial Regression](#polynomial-regression)
+   * 3.2 [Logistic Regression](#logistic-regression)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -269,12 +269,26 @@ Example: Predicting the price of a house
 - While this is fine, we can refine this by taking the $x_3$ area = frontage * depth. The resulting equation could look like $f(x) = w_1x_1 + w_2x_2 + w_3x_3 + b$
 - Note that we did *not* remove features but added one to the equation
 
-
-## Polynomial Regression
+**Polynomial Regression**\
 Using the ideas of multiple linear regression + feature engineering, we can develop a new algorithm called polynomial regression.
 
 **Important**: As the features are being raised to some power, *feature scaling* becomes increasingly more important. We can take the feature $x$ to any power, including but not limited to $\sqrt{x}$ or $x^{3}$
 
+
+## Logistic Regression
+**Motivation**: Since linear regression is not so good for *classification*-related problems, a logistic regression algorithm is widely used today. While "logistic regression" contains the word "regression", it is used more for classification.
+
+Why is linear regression bad for classification? This is because any single outlier may skew the linear regression model to where it may falsely identify a category (misclassification).
+
+*NOTE*: Classes and categories are often used interchangeably here.
+
+`(DEF)` **Binary Classification**: Output $y$ can only be one of two values (e.g., true or false; yes or no; 0 or 1...)
+
+`(DEF)` **Negative Class**: Those that connotate "false" or "absence" != bad
+
+`(DEF)` **Positive Class**: Those that connotate "true" or "presence" != good
+
+`(DEF)` **Decision Boundary**: A "line" that separates classes/categories.
 
 
 
