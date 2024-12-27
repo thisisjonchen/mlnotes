@@ -278,6 +278,9 @@ Using the ideas of multiple linear regression + feature engineering, we can deve
 ## Logistic Regression
 **Motivation**: Since linear regression is not so good for *classification*-related problems, a logistic regression algorithm is widely used today. While "logistic regression" contains the word "regression", it is used more for classification.
 
+Example of a classification task: Decide if an animal is a cat or not a cat\
+Example of a regression task: Estimate the weight of a cat based on its height
+
 Why is linear regression bad for classification? This is because any single outlier may skew the linear regression model to where it may falsely identify a category (misclassification).
 
 *NOTE*: Classes and categories are often used interchangeably here.
