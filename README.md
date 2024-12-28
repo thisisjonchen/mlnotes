@@ -18,6 +18,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.18 [Choosing Learning Rate](#choosing-the-learning-rate)
       * 3.19 [Feature Engineering](#feature-engineering)
    * 3.2 [Logistic Regression](#logistic-regression)
+      * 3.21 [Sigmoid Function](#sigmoid-function)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -275,6 +276,8 @@ Using the ideas of multiple linear regression + feature engineering, we can deve
 **Important**: As the features are being raised to some power, *feature scaling* becomes increasingly more important. We can take the feature $x$ to any power, including but not limited to $\sqrt{x}$ or $x^{3}$
 
 
+
+
 ## Logistic Regression
 **Motivation**: Since linear regression is not so good for *classification*-related problems, a logistic regression algorithm is widely used today. While "logistic regression" contains the word "regression", it is used more for classification.
 
@@ -293,10 +296,25 @@ Why is linear regression bad for classification? This is because any single outl
 
 `(DEF)` **Decision Boundary**: A "line" that separates classes/categories.
 
+### Sigmoid Function
+Also referred to as a "logistic function", it looks like an "S" on a 2D graph. Outputs between 0 and 1: 
 
+`(EQUATION)` $g(z)=\frac{1}{1+e^{-z}}$ where $0 < g(z) < 1$
+- Notice if z = big positive number, the fraction becomes 1. If z = big negative number, the fraction becomes 0.
 
+If we set $z = \vec{w} \cdot \vec{x} + b$, then we can get $g(\vec{w} \cdot \vec{x} + b)$
 
+This becomes our logistic regression model:
+`(EQUATION)` $g(\vec{w} \cdot \vec{x} + b) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}}$
 
+In essence, it helps **determine the "probability" that class is 1**
+Example: 
+- $x$ is "tumor size"
+- $y$ is 0 (not malignant) or 1 (malignant)
+- $f(\vec{x})$ = 0.7 means that there is a 70% chance that $y$ is 1
+
+Notation used in research example: $f_{\vec{w}, b}(\vec{x}) = P(y=1 | \vec{x};\vec{w},b)$
+- Translation: Probability that $y$ is 1, given input $\vec{x}$, parameters $\vec{w}, b$
 
 
 
