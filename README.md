@@ -8,7 +8,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
 2. [What is Machine Learning?](#what-is-machine-learning)
     * 2.1 [Supervised Learning](#supervised-learning)
     * 2.2 [Unsupervised Learning](#unsupervised-learning)
-3. [Supervised Learning: Classification and Regression](#supervised-learning-classification-and-regression)
+3. [Supervised Learning: Regression and Classification](#supervised-learning-regression-and-classification)
     * 3.1 [Linear Regression](#linear-regression)
       * 3.11 [Cost Function](#cost-function)
       * 3.12 [Gradient Descent](#gradient-descent)
@@ -24,6 +24,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.22 [Decision Boundary](#decision-boundary)
       * 3.23 [Cost Function for Logistic Regression](#cost-function-for-logistic-regression)
       * 3.24 [Gradient Descent for Logistic Regression](#gradient-descent-for-logistic-regression)
+   * 3.3 [Overfitting](#overfitting)
 
 # Tools
 - Language: Python
@@ -85,7 +86,7 @@ Key characteristic: **Finds something interesting (patterns, structures, cluster
 `(DEF)` **Dimensionality Reduction**: Compress data using fewer numbers
 
 
-# Supervised Learning: Classification and Regression
+# Supervised Learning: Regression and Classification
 ## Linear Regression
 `(DEF)` **Linear Regression**: Fits a best-fitting, straight (linear) line to your data
 
@@ -391,10 +392,25 @@ The partial derivatives also remain the same:
 
 However, the *only* change remains in the definition of $f(\vec{x})$, where $f_{\vec{w}, b}(\vec{x}) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}}$
 
-Other techniques that can be also applied:
+Other techniques that can also be applied:
 - Learning curve adjustments
 - Feature scaling
 - Vectorization
+
+## Overfitting
+Both linear and logistic regression can work well for many tasks, but sometimes, in an application, the algorithm(s) can run into a problem called overfitting, which can cause it to perform poorly.
+
+What does fitting mean? This refers in context to the best fit line. If we use a linear line on a training set of data points where a quadratic line may have been better, then the linear line does not fit the training set very well (underfit - high bias).
+
+Another extreme scenario would be using some curve that may fit the training set *perfectly* where a simpler curve would suffice (to the point where the line is "wiggly"), and the cost is 0 on all points. If we use this model on an extraneous example, then it could predict the output completely wrong (overfitting - high variance).
+
+`(DEF)` **Underfitting (High Bias)**: Does not fit the training set that well as if the learning algorithm has some sort of strong preconception
+
+`(DEF)` **Generalization (Just Right)**: Fits training set pretty well (best fit)
+
+`(DEF)` **Overfitting (High Variance)**: Fits the training set extremely well, but new examples can result in highly variable predictions
+
+
 
 
 
