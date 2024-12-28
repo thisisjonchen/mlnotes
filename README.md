@@ -21,6 +21,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.21 [The Sigmoid Function](#the-sigmoid-function)
       * 3.22 [Decision Boundary](#decision-boundary)
       * 3.23 [Cost Function for Logistic Regression](#cost-function-for-logistic-regression)
+      * 3.24 [Gradient Descent for Logistic Regression](#gradient-descent-for-logistic-regression)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -361,10 +362,24 @@ A cost function for logistic regression can be defined as such:
 Of course, this is *not* the only cost function. This cost function is derived from **maximum likelihood estimation**.
 
 
+### Gradient Descent for Logistic Regression
+Just like the gradient decent for linear regression, the process remains the same:\
+`(EQUATION/ASSIGNMENT)` $tmp_w = w-\alpha\frac{d}{dw}J(w,b)$\
+`(EQUATION/ASSIGNMENT)` $tmp_b = b-\alpha\frac{d}{db}J(w,b)$\
+`(ASSIGNMENT)` $w = tmp_w$\
+`(ASSIGNMENT)` $b = tmp_b$
+- Repeat until convergence (simultaneous updates)
 
+The partial derivatives also remain the same:
+- $\frac{d}{d\vec{w}}J(\vec{w},b) = \frac{1}{m} \sum_{i=1}^{m} (f_{\vec{w},b}(x^{(i)})-y^{(i)})x^{(i)}$
+- $\frac{d}{d\vec{w}}J(\vec{w},b) = \frac{1}{m} \sum_{i=1}^{m} (f_{\vec{w},b}(x^{(i)})-y^{(i)})$
 
+However, the *only* change remains in the definition of $f(\vec{x})$, where $f_{\vec{w}, b}(\vec{x}) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}}$
 
-
+Other techniques that can be also applied:
+- Learning curve adjustments
+- Feature scaling
+- Vectorization
 
 
 
