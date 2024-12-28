@@ -19,6 +19,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.19 [Feature Engineering](#feature-engineering)
    * 3.2 [Logistic Regression](#logistic-regression)
       * 3.21 [Sigmoid Function](#sigmoid-function)
+      * 3.22 [Decision Boundary](#decision-boundary)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -307,7 +308,8 @@ If we set $z = \vec{w} \cdot \vec{x} + b$, then we can get $g(\vec{w} \cdot \vec
 This becomes our logistic regression model:
 `(EQUATION)` $g(\vec{w} \cdot \vec{x} + b) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}}$
 
-In essence, it helps **determine the "probability" that class is 1**\
+In essence, it helps **determine the "probability" that class is 1**
+
 Example: 
 - $x$ is "tumor size"
 - $y$ is 0 (not malignant) or 1 (malignant)
@@ -316,7 +318,24 @@ Example:
 Notation used in research example: $f_{\vec{w}, b}(\vec{x}) = P(y=1 | \vec{x};\vec{w},b)$
 - Translation: Probability that $y$ is 1, given input $\vec{x}$, parameters $\vec{w}, b$
 
+### Decision Boundary
+Now given the probability, how do we decide at which probability would classify the input as 0 or 1?
 
+A common choice is to choose 0.5 as the threshold: Is $f_{\vec{w}, b} \ge 0.5$?
+- Yes: $\hat{y} = 1$
+- No: $\hat{y} = 0$
+- *NOTE*: With the thresholds, they do not always have to be 0.5, but it is usually better to choose a lower threshold (circumstances matter) and risk a false positive than a misclassification.
+
+To find the decision boundary, we take $z = \vec{w} \cdot \vec{x} + b = 0$ and solve to get the $x$'s on one side and a constant on the other. For more than one feature $x$, this would create a line separating $y=1$ and $y=0$ "clusters".
+
+This can also be applied to *non-linear* decision boundaries where we apply polynomial regression to logistic regression.
+
+Non-linear Decision Boundary Example:
+- Set $z = w_1x_1^2 + w_2x_2^2 + b$, where $w_1,w_2=1, b=-1$
+- Thus $f(\vec{x}) = g(w_1x_1^2 + w_2x_2^2 + b)$, where $z=x_1^2+x_2^2=1$
+- $x_1^2+x_2^2=1$ is conveniently a circle where inside the circle, $y = 0$, and outside, $y = 1$
+
+  
 
 
 
