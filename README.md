@@ -341,10 +341,10 @@ Compared to the *squared error* cost function we have been using for linear regr
 
 A cost function for logistic regression can be defined as such:
 - Recall the squared error cost function: $J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} \left( f_{w,b}(x^{(i)}) - y^{(i)} \right)^2$
-- `(EQUATION)` **Logistic Cost Function**: $J(w, b) = \frac{1}{m} \sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)}))$
+- `(EQUATION)` **Logistic Cost Function**: $J(w, b) = \frac{1}{m} \sum_{i=1}^{m} [L(f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)}))]$
 - `(DEF)` **Logistic Loss Function**: $L(f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)}))$
-  - Equals $-log(f_{\vec{w},b}(\vec{x}^{(i)}))$ if $y^{(i)} = 1$
-  - Equals $-log(f_{\vec{w},b}(1 - \vec{x}^{(i)}))$ if $y^{(i)} = 0$
+  - Equals $-\log(f_{\vec{w},b}(\vec{x}^{(i)}))$ if $y^{(i)} = 1$
+  - Equals $-\log(f_{\vec{w},b}(1 - \vec{x}^{(i)}))$ if $y^{(i)} = 0$
   - Loss is lowest when $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ predicts close to true label $y^{(i)}$
     - If $y^{(i)} = 1$...
       - As $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ &#8594; 1, then loss &#8594; 0 (Good!)
@@ -352,6 +352,13 @@ A cost function for logistic regression can be defined as such:
     - Conversely, if $y^{(i)} = 0$...
       -  As $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ &#8594; 0, then loss &#8594; 0 (Good!)
       -  As $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ &#8594; 1, then loss &#8594; $\infty$ (bad)
+
+`(EQUATION)` **Simplified Loss Function**: $L(f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})) = -y^{(i)}\log(f_{\vec{w},b}(\vec{x}^{(i)})) -(1-y^{(i)})\log(f_{\vec{w},b}(1 - \vec{x}^{(i)}))$
+- Is completely equivalent to our previous loss function
+
+`(EQUATION)` **Logistic Cost Function Using the Simplified Loss Function**: $J(w, b) = -\frac{1}{m} \sum_{i=1}^{m} [-y^{(i)}\log(f_{\vec{w},b}(\vec{x}^{(i)})) -(1-y^{(i)})\log(f_{\vec{w},b}(1 - \vec{x}^{(i)}))]$
+
+Of course, this is *not* the only cost function. This cost function is derived from **maximum likelihood estimation**.
 
 
 
