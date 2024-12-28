@@ -307,7 +307,7 @@ If we set $z = \vec{w} \cdot \vec{x} + b$, then we can get $g(\vec{w} \cdot \vec
 This becomes our logistic regression model:
 `(EQUATION)` $g(\vec{w} \cdot \vec{x} + b) = \frac{1}{1+e^{-(\vec{w} \cdot \vec{x} + b)}}$
 
-In essence, it helps **determine the "probability" that class is 1**
+In essence, it helps **determine the "probability" that class is 1**\
 Example: 
 - $x$ is "tumor size"
 - $y$ is 0 (not malignant) or 1 (malignant)
