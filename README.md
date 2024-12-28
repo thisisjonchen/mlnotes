@@ -6,7 +6,9 @@ My notes from Andrew Ng's "Machine Learning Specialization"
 ## Table of Contents
 1. [Tools](#tools)
 2. [What is Machine Learning?](#what-is-machine-learning)
-3. [Supervised Learning](#supervised-learning)
+    * 2.1 [Supervised Learning](#supervised-learning)
+    * 2.2 [Unsupervised Learning](#unsupervised-learning)
+3. [Supervised Learning: Classification and Regression](#supervised-learning-classification-and-regression)
     * 3.1 [Linear Regression](#linear-regression)
       * 3.11 [Cost Function](#cost-function)
       * 3.12 [Gradient Descent](#gradient-descent)
@@ -22,7 +24,6 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.22 [Decision Boundary](#decision-boundary)
       * 3.23 [Cost Function for Logistic Regression](#cost-function-for-logistic-regression)
       * 3.24 [Gradient Descent for Logistic Regression](#gradient-descent-for-logistic-regression)
-5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
 - Language: Python
@@ -33,6 +34,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
   - SciKit Learn, open source machine learning
     - sklearn.linear_model.SGDRegressor: gradient descent regression model (performs best with normalized features)
     - sklearn.preprocessing.StandardScaler: performs z-score normalization
+    - sklearn.linear_model: contains LogisticRegression + LinearRegression
 
 
 # What is Machine Learning?
@@ -45,7 +47,7 @@ Machine Learning Algorithms:
 - Reinforcement Learning
 
 
-# Supervised Learning
+## Supervised Learning
 `(DEF)` **Supervised Learning**: Learning via input (x) to output (y) mappings.\
 Key characteristic: **Learns from being given examples and the "right answers"**
 
@@ -59,7 +61,7 @@ Some examples Andrew provided:
 |  ad, user info | click? (0/1)  |  online advertising |
 | image, radar info | position of other cars | self-driving car |
 
-### Major Types of Supervised Learning
+***Major Types of Supervised Learning***
 `(DEF)` **Regression**: Predict a number from infinitely many possible outputs
 - Ex: Housing Market Prices (Sq. Feet to Market Value)
 - Graphing technique utilizes a best-fitting line (linear, logarithmic, etc.)
@@ -70,7 +72,20 @@ Some examples Andrew provided:
 - Terminology: Classes/Categories are often used interchangeably with the output
 - Graphing technique utilizes a boundary line depending on input(s), separating one class/category from another
 
+## Unsupervised Learning
+`(DEF)` **Unsupervised Learning**: Learning and structuring from data that only comes with inputs (x), but not output labels (y).\
+Key characteristic: **Finds something interesting (patterns, structures, clusters, etc.) in unlabeled data -- we don't tell it what's right and wrong**
 
+***Major Types of Unsupervised Learning***
+`(DEF)` **Clustering**: Groups similar data points together
+- Ex: Google News (matching headlines into a recommendation list)
+
+`(DEF)` **Anomaly Detection**: Finds unusual data points
+
+`(DEF)` **Dimensionality Reduction**: Compress data using fewer numbers
+
+
+# Supervised Learning: Classification and Regression
 ## Linear Regression
 `(DEF)` **Linear Regression**: Fits a best-fitting, straight (linear) line to your data
 
@@ -381,18 +396,5 @@ Other techniques that can be also applied:
 - Feature scaling
 - Vectorization
 
-
-
-# Unsupervised Learning
-`(DEF)` **Unsupervised Learning**: Learning and structuring from data that only comes with inputs (x), but not output labels (y).\
-Key characteristic: **Finds something interesting (patterns, structures, clusters, etc.) in unlabeled data -- we don't tell it what's right and wrong**
-
-### Major Types of Unsupervised Learning
-`(DEF)` **Clustering**: Groups similar data points together
-- Ex: Google News (matching headlines into a recommendation list)
-
-`(DEF)` **Anomaly Detection**: Finds unusual data points
-
-`(DEF)` **Dimensionality Reduction**: Compress data using fewer numbers
 
 
