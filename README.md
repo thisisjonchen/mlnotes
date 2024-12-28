@@ -18,8 +18,9 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.18 [Choosing Learning Rate](#choosing-the-learning-rate)
       * 3.19 [Feature Engineering](#feature-engineering)
    * 3.2 [Logistic Regression](#logistic-regression)
-      * 3.21 [Sigmoid Function](#sigmoid-function)
+      * 3.21 [The Sigmoid Function](#the-sigmoid-function)
       * 3.22 [Decision Boundary](#decision-boundary)
+      * 3.23 [Cost Function for Logistic Regression](#cost-function-for-logistic-regression)
 5. [Unsupervised Learning](#unsupervised-learning)
 
 # Tools
@@ -297,7 +298,7 @@ Why is linear regression bad for classification? This is because any single outl
 
 `(DEF)` **Decision Boundary**: A "line" that separates classes/categories.
 
-### Sigmoid Function
+### The Sigmoid Function
 Also referred to as a "logistic function", it looks like an "S" on a 2D graph. Outputs between 0 and 1: 
 
 `(EQUATION)` $g(z)=\frac{1}{1+e^{-z}}$ where $0 < g(z) < 1$
@@ -319,7 +320,7 @@ Notation used in research example: $f_{\vec{w}, b}(\vec{x}) = P(y=1 | \vec{x};\v
 - Translation: Probability that $y$ is 1, given input $\vec{x}$, parameters $\vec{w}, b$
 
 ### Decision Boundary
-Now given the probability, how do we decide at which probability would classify the input as 0 or 1?
+Now, given the probability, how do we decide at which probability would classify the input as 0 or 1?
 
 A common choice is to choose 0.5 as the threshold: Is $f_{\vec{w}, b} \ge 0.5$?
 - Yes: $\hat{y} = 1$
@@ -335,7 +336,21 @@ Non-linear Decision Boundary Example:
 - Thus $f(\vec{x}) = g(w_1x_1^2 + w_2x_2^2 + b)$, where $z=x_1^2+x_2^2=1$
 - $x_1^2+x_2^2=1$ is conveniently a circle where inside the circle, $y = 0$, and outside, $y = 1$
 
-  
+### Cost Function for Logistic Regression
+Compared to the *squared error* cost function we have been using for linear regression, in which its graph would result in a **convex** (bowl) shape, if we apply that to logistic regression, the graph would be **non-convex** (wiggly), meaning that there would be "valleys" that would disrupt our gradient descent algorithm.
+
+A cost function for logistic regression can be defined as such:
+- Recall the squared error cost function: $J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} \left( f_{w,b}(x^{(i)}) - y^{(i)} \right)^2$
+- `(DEF)` **Logistic Loss Function**: $L(f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)}))$
+  - Equals $-log(f_{\vec{w},b}(\vec{x}^{(i)}))$ if $y^{(i)} = 1$
+  - Equals $-log(f_{\vec{w},b}(1 - \vec{x}^{(i)}))$ if $y^{(i)} = 0$
+  - Loss is lowest when $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ predicts close to true label $y^{(i)}$
+    - If $y^{(i)} = 1$...
+      - As $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ &#8594; 1, then loss &#8594; 0 (Good!)
+      - As $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ &#8594; 0, then loss &#8594; $\infty$ (bad)
+    - Conversely, if $y^{(i)} = 0$...
+      -  As $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ &#8594; 0, then loss &#8594; 0 (Good!)
+      -  As $f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)})$ &#8594; 1, then loss &#8594; $\infty$ (bad)
 
 
 
