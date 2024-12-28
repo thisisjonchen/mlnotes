@@ -341,6 +341,7 @@ Compared to the *squared error* cost function we have been using for linear regr
 
 A cost function for logistic regression can be defined as such:
 - Recall the squared error cost function: $J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} \left( f_{w,b}(x^{(i)}) - y^{(i)} \right)^2$
+- `(EQUATION)` **Logistic Cost Function**: $J(w, b) = \frac{1}{m} \sum_{i=1}^{m} L(f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)}))$
 - `(DEF)` **Logistic Loss Function**: $L(f_{\vec{w},b}(\vec{x}^{(i)}, y^{(i)}))$
   - Equals $-log(f_{\vec{w},b}(\vec{x}^{(i)}))$ if $y^{(i)} = 1$
   - Equals $-log(f_{\vec{w},b}(1 - \vec{x}^{(i)}))$ if $y^{(i)} = 0$
