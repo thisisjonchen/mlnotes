@@ -27,6 +27,8 @@ My notes from Andrew Ng's "Machine Learning Specialization"
    * 3.3 [Overfitting](#overfitting)
       * 3.31 [Addressing Overfitting](#addressing-overfitting)
       * 3.32 [Regularization](#regularization)
+4. [Advanced Learning Algorithms](#advanced-learning-algorithms)
+   
 
 # Tools
 - Language: Python
@@ -39,7 +41,6 @@ My notes from Andrew Ng's "Machine Learning Specialization"
     - sklearn.preprocessing.StandardScaler: performs z-score normalization
     - sklearn.linear_model: contains LogisticRegression + LinearRegression
 
-
 # What is Machine Learning?
 Arthur Samuel, a pioneer in CS + AI in his time, defined machine learning as "...[the] field of study that gives computers the ability to learn without being explicitly programmed" (1959). He helped evolve AI by writing the first checkers-playing game that learned from thousands of games against itself.
 
@@ -48,7 +49,6 @@ Machine Learning Algorithms:
 - Unsupervised Learning
 - Recommender Systems
 - Reinforcement Learning
-
 
 ## Supervised Learning
 `(DEF)` **Supervised Learning**: Learning via input (x) to output (y) mappings.\
@@ -86,7 +86,6 @@ Key characteristic: **Finds something interesting (patterns, structures, cluster
 `(DEF)` **Anomaly Detection**: Finds unusual data points
 
 `(DEF)` **Dimensionality Reduction**: Compress data using fewer numbers
-
 
 # Supervised Learning: Regression and Classification
 ## Linear Regression
@@ -296,9 +295,6 @@ Using the ideas of multiple linear regression + feature engineering, we can deve
 
 **Important**: As the features are being raised to some power, *feature scaling* becomes increasingly more important. We can take the feature $x$ to any power, including but not limited to $\sqrt{x}$ or $x^{3}$
 
-
-
-
 ## Logistic Regression
 **Motivation**: Since linear regression is not so good for *classification*-related problems, a logistic regression algorithm is widely used today. While "logistic regression" contains the word "regression", it is used more for classification.
 
@@ -379,7 +375,6 @@ A cost function for logistic regression can be defined as such:
 
 Of course, this is *not* the only cost function. This cost function is derived from **maximum likelihood estimation**.
 
-
 ### Gradient Descent for Logistic Regression
 Just like the gradient decent for linear regression, the process remains the same:\
 `(EQUATION/ASSIGNMENT)` $tmp_w = w-\alpha\frac{d}{dw}J(w,b)$\
@@ -451,3 +446,10 @@ Regularizing Logistic Regression:
 
 
 
+## Advanced Learning Algorithms
+This section will touch on:
+- Neural Networks
+  - Inference (prediction)
+  - Training
+- Practical advice for building ML systems
+- Decision Trees
