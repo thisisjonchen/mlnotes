@@ -28,6 +28,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.31 [Addressing Overfitting](#addressing-overfitting)
       * 3.32 [Regularization](#regularization)
 4. [Advanced Learning Algorithms](#advanced-learning-algorithms)
+   * 4.1 [Neural Networks](#neural-networks)
    
 
 # Tools
@@ -446,10 +447,57 @@ Regularizing Logistic Regression:
 
 
 
-## Advanced Learning Algorithms
+# Advanced Learning Algorithms
 This section will touch on:
-- Neural Networks
+- Neural Networks (Deep Learning)
   - Inference (prediction)
   - Training
 - Practical advice for building ML systems
 - Decision Trees
+
+## Neural Networks
+Origins: Ambition to develop algorithms that try to mimic the brain, but in modern NNs, we are shifting away from the idea of mimicking biological neurons
+- Also known as **deep learning**
+- Used in various applications today, from speech to images (CV) to text (NLP) and more
+
+Why neural networks?
+- As the amount of data increased in a wide range of applications, traditional AI like linear regression and logistic regression failed to scale up in performance, increasingly.
+- A small neural network trained on that same dataset as traditional AI would see some performance gains -- even more so as we scale up to medium to large-sized neural networks
+  - The "size" of a neural network depends on the number of artificial "neurons" it has
+
+Example: **Demand Prediction**
+- `(DEF)` **Activation**: $a = f(x) = \frac{1}{1+e^{-wx+b}}$
+  - Imagine this like a single neuron in the brain; this accepts an input $x$ and outputs $a$
+  - Notice that the function is the same as logistic regression
+  - Example: Take $x$ as the price, $a$ being the probability of being a top seller (0 or 1)
+
+Now, let's expand the number of features to price, shipping cost, marketing, and material to determine the probability of being a top seller.
+
+We can "combine" some of these features into one neuron or several neurons in a **layer**:
+- `(DEF)` **Layer**: Grouping of neurons that take as input the same or similar features and that, in turn, outputs a few numbers *together*
+  - Can have multiple or a singular neuron
+  - We can create the first layer as such:
+    - Price, Shipping Cost &#8594; Neuron (Affordability)
+    - Marketing &#8594; Neuron (Awareness)
+    - Price, Material &#8594; Neuron (Perceived Quality)
+  - Then, these feed into a second layer, which contains only a singular neuron:
+    - Affordability, Awareness, Perceived Quality &#8594; Neuron (Probability of Being a Top Seller)
+- `(DEF)` **Input Layer ($\vec{x}$)**: The "pre"-first layer containing all the inputs/features we are plugging into the neural network
+  - In the example, "Price", "Shipping Cost", "Marketing", and "Material" would all be in the input layer
+- `(DEF)` **Hidden Layer ($\vec{a}$)**: Intermediary layers between input + output
+  - In the example, this would include the layer containing "Affordability" and "Awareness"
+- `(DEF)` **Output Layer ($a$)**: The final layer that outputs our prediction
+  - In the example, the second layer would be the output layer
+- `(DEF)` **"Activations"**: Refers to the output from a neuron
+  - In the example, "Affordability" and "Awareness" would be activations from the first layer
+  - "Probability of Being a Top Seller" would be the activation from the final neuron
+ 
+In reality, all neurons in one layer would be able to access **all** features from the previous layer
+- For example, the neuron "Affordability" would take all inputs of "Price", "Shipping Cost", "Marketing", and "Material"
+- We also do NOT define features or neurons in the hidden layer -- the neural network determines what it wants to use in the hidden layer(s), which is what makes it so powerful
+
+Process:\
+Input Layer ($\vec{x}$) &#8594; Hidden Layer(s) ($\vec{a}$) &#8594; Output Layer ($a$)
+
+
+
