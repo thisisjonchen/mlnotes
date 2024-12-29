@@ -515,14 +515,14 @@ How to convert pictures to features?
   - How to roll up a matrix? One way is to do L &#8594; R, down one row, then go from R &#8594; L until you are done with the entire matrix
  
 A possible process may look like so for facial recognition:\
-Input Picture $(\vec{x})$ &#8594; HL 1 &#8594; HL 2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of being person "XYZ"
+Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of being person "XYZ"
 - HL 1 finds certain lines (looking small window)
 - HL 2 groups these lines into certain facial features (looking at a bigger window)
 - HL 3 aggregates these facial features into different faces (looking at even bigger window)
 - The Output Layer tries to determine the match probability of identity
 
 A possible process may look like so for car identification:\
-Input Picture $(\vec{x})$ &#8594; HL 1 &#8594; HL 2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of Car Detected
+Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of Car Detected
 - HL 1 finds certain lines (looking small window)
 - HL 2 groups these lines into certain car features (looking at a bigger window)
 - HL 3 aggregates these car features into different cars (looking at even bigger window)
