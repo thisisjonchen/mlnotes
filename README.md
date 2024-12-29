@@ -25,6 +25,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.23 [Cost Function for Logistic Regression](#cost-function-for-logistic-regression)
       * 3.24 [Gradient Descent for Logistic Regression](#gradient-descent-for-logistic-regression)
    * 3.3 [Overfitting](#overfitting)
+      * 3.31 [Addressing Overfitting](#addressing-overfitting)
 
 # Tools
 - Language: Python
@@ -410,7 +411,17 @@ Another extreme scenario would be using some curve that may fit the training set
 
 `(DEF)` **Overfitting (High Variance)**: Fits the training set extremely well, but new examples can result in highly variable predictions
 
+### Addressing Overfitting
+How can we address overfitting?
 
+Some options:
+- Collect more training examples (the training algo will fit a curve that is "less wiggly" over time)
+- Use fewer features
+  - If too many features + insufficient training data, it may result in overfit
+  - As such, select the most relevant features (**feature selection**)
+    - A disadvantage with feature selection is that useful features could be lost, if all features are indeed useful
+- `(DEF)` **Regularization**: Reduces the size of parameters $w_j$
+  - Gently reduces the impact of some features without removing them completely
 
 
 
