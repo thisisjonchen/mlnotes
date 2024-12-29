@@ -486,6 +486,7 @@ We can "combine" some of these features into one neuron or several neurons in a 
   - In the example, "Price", "Shipping Cost", "Marketing", and "Material" would all be in the input layer
 - `(DEF)` **Hidden Layer ($\vec{a}$)**: Intermediary layers between input + output
   - In the example, this would include the layer containing "Affordability" and "Awareness"
+  - There could be **more than 1** hidden layer, where the number of neurons could vary to be larger than features or smaller than the features
 - `(DEF)` **Output Layer ($a$)**: The final layer that outputs our prediction
   - In the example, the second layer would be the output layer
 - `(DEF)` **"Activations"**: Refers to the output from a neuron
@@ -499,5 +500,8 @@ In reality, all neurons in one layer would be able to access **all** features fr
 Process:\
 Input Layer ($\vec{x}$) &#8594; Hidden Layer(s) ($\vec{a}$) &#8594; Output Layer ($a$)
 
+`(DEF)` **Multilayer Perceptron**: Refers to neural networks with multiple hidden layers, often used in literature
 
+Architecting a Neural Network:
+- The question: How many hidden layers and units do we need?
 
