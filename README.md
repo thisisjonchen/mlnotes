@@ -29,6 +29,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.32 [Regularization](#regularization)
 4. [Advanced Learning Algorithms](#advanced-learning-algorithms)
    * 4.1 [Neural Networks](#neural-networks)
+      * 4.11 [Recognizing Images](#recognizing-images)
    
 
 # Tools
@@ -498,10 +499,31 @@ In reality, all neurons in one layer would be able to access **all** features fr
 - We also do NOT define features or neurons in the hidden layer -- the neural network determines what it wants to use in the hidden layer(s), which is what makes it so powerful
 
 Process:\
-Input Layer ($\vec{x}$) &#8594; Hidden Layer(s) ($\vec{a}$) &#8594; Output Layer ($a$)
+Input Layer ($\vec{x}$) &#8594; Hidden Layer(s) ($\vec{a}$) &#8594; Output Layer ($a$) &#8594; Probability of Being a Top Seller
 
 `(DEF)` **Multilayer Perceptron**: Refers to neural networks with multiple hidden layers, often used in literature
 
-Architecting a Neural Network:
-- The question: How many hidden layers and units do we need?
+**The question with architecting a Neural Network**: How many hidden layers and units do we need?
 
+
+### Recognizing Images
+One application of a neural network is in **computer vision** (CV), which takes as an input a picture and outputs what you may want to know, like maybe the identity of a profile picture.
+
+How to convert pictures to features?
+- The picture, if 1000px x 1000px, is actually a 1000 x 1000 matrix of varying pixel intensity values which range from 0-255
+- If we were to "roll" up these values into a singular vector $\vec{x}$, then it would contain *1 million pixels* intensity values
+  - How to roll up a matrix? One way is to do L &#8594; R, down one row, then go from R &#8594; L until you are done with the entire matrix
+ 
+A possible process may look like so for facial recognition:\
+Input Picture $(\vec{x})$ &#8594; HL 1 &#8594; HL 2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of being person "XYZ"
+- HL 1 finds certain lines (looking small window)
+- HL 2 groups these lines into certain facial features (looking at a bigger window)
+- HL 3 aggregates these facial features into different faces (looking at even bigger window)
+- The Output Layer tries to determine the match probability of identity
+
+A possible process may look like so for car identification:\
+Input Picture $(\vec{x})$ &#8594; HL 1 &#8594; HL 2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of Car Detected
+- HL 1 finds certain lines (looking small window)
+- HL 2 groups these lines into certain car features (looking at a bigger window)
+- HL 3 aggregates these car features into different cars (looking at even bigger window)
+- The Output Layer tries to determine the match probability of identity
