@@ -92,7 +92,7 @@ Key characteristic: **Finds something interesting (patterns, structures, cluster
 ## Linear Regression
 `(DEF)` **Linear Regression**: Fits a best-fitting, straight (linear) line to your data
 
-`(DEF)` **Univariate Linear Regression**: Fancy name for linear regression with one variable (single feature x)
+`(DEF)` **Univariate Linear Regression**: Fancy name for linear regression with one variable (single  x)
 
 `(DEF)` **Training Set**: Data used to train the model
 - Notation:
@@ -231,7 +231,7 @@ Only works for linear regression - solves for $w,b$ *without* iterations
 - The normal equation may be used in machine learning libraries that implement linear regression
 
 ### Feature Scaling
-Rescaling features (assume $\vec{x_1}$ and $\vec{x_2}$) to be more comparable to eachother. This leads the contour plot of $J(\vec{w}, b)$ to be less tall and skinny but rather to be more circular. This allows the path to find the global minimum more directly.\
+Rescaling features (assume $\vec{x_1}$ and $\vec{x_2}$) to be more comparable to eachother. This leads the contour plot of $J(\vec{w}, b)$ to be less tall and skinny but rather to be more circular. This allows the path to find the global minimum more directly.
 
 *In other words*, it is a technique to make gradient descent run much faster.
 
