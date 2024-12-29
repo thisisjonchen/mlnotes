@@ -26,6 +26,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 3.24 [Gradient Descent for Logistic Regression](#gradient-descent-for-logistic-regression)
    * 3.3 [Overfitting](#overfitting)
       * 3.31 [Addressing Overfitting](#addressing-overfitting)
+      * 3.32 [Regularization](#regularization)
 
 # Tools
 - Language: Python
@@ -422,6 +423,17 @@ Some options:
     - A disadvantage with feature selection is that useful features could be lost, if all features are indeed useful
 - `(DEF)` **Regularization**: Reduces the size of parameters $w_j$
   - Gently reduces the impact of some features without removing them completely
+
+### Regularization
+As stated in its definition, we reduce the size of parameters $w_j$ to move toward a simpler model that is less likely to overfit.
+
+If we don't know what term to penalize, we can penalize *all* of them a bit. Let's use start by regularizing the cost function &#8594; $J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} \left( f_{w,b}(x^{(i)}) - y^{(i)} \right)^2 + \frac{\lambda}{2m} \sum_{j=1}^n w_j^2$
+- The symbol $\lambda$ is called the regularization parameter, where $\lambda > 0$
+- $\frac{\lambda}{2m} \sum_{j=1}^n w_j^2$ is called the **regularization term**, which keeps $w_j$ small
+- Increasing $\lambda$ will tend to decrease the size of parameters $w_j$, while decreasing it will increase the size of parameters $w_j$
+- We also divide $\lambda$ by $2m$ to make it easier to choose a good value for $\lambda$, as it is scaled the same as the cost function as the training set grows
+- The inclusion of parameter $b$ with the $\lambda$ makes little difference, thus it is excluded
+
 
 
 
