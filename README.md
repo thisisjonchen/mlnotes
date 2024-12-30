@@ -548,4 +548,5 @@ The superscript notation continues into the individual scalar activations from e
 For a subsequent hidden layers after the first, the $\vec{x}$ becomes the *previous* hidden layer's activations
 - Ex: $a_1^{[3]} = g(\vec{w}_1^{[3]} \cdot \vec{a}^{[2]} + b_1^{[3]})$
 
-A general equation for each activation of a neuron (the **Activation Function**) is: `(EQUATION)` $a_j^{[l]} = g(\vec{w}_j^{[l]} \cdot \vec{a}^{[l-1]} + b_j^{[l]})$ with the $g(z)$ sigmoid
+A general equation for each activation of a neuron (the **Activation Function**) is:\
+`(EQUATION)` $a_j^{[l]} = g(\vec{w}_j^{[l]} \cdot \vec{a}^{[l-1]} + b_j^{[l]})$ with the $g(z)$ sigmoid
