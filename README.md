@@ -81,7 +81,8 @@ Some examples Andrew provided:
 `(DEF)` **Unsupervised Learning**: Learning and structuring from data that only comes with inputs (x), but not output labels (y).\
 Key characteristic: **Finds something interesting (patterns, structures, clusters, etc.) in unlabeled data -- we don't tell it what's right and wrong**
 
-***Major Types of Unsupervised Learning***
+***Major Types of Unsupervised Learning***:
+
 `(DEF)` **Clustering**: Groups similar data points together
 - Ex: Google News (matching headlines into a recommendation list)
 
