@@ -485,7 +485,7 @@ We can "combine" some of these features into one neuron or several neurons in a 
     - Price, Material &#8594; Neuron (Perceived Quality)
   - Then, these feed into a second layer, which contains only a singular neuron:
     - Affordability, Awareness, Perceived Quality &#8594; Neuron (Probability of Being a Top Seller)
-- `(DEF)` **Input Layer ($\vec{x}$)**: The "pre"-first layer containing all the inputs/features we are plugging into the neural network
+- `(DEF)` **Input Layer ($\vec{x}$)**: Layer 0 containing all the inputs/features we are plugging into the neural network
   - In the example, "Price", "Shipping Cost", "Marketing", and "Material" would all be in the input layer
 - `(DEF)` **Hidden Layer ($\vec{a}$)**: Intermediary layers between input + output
   - In the example, this would include the layer containing "Affordability" and "Awareness"
@@ -533,8 +533,17 @@ Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Lay
 ### Neural Network Model
 The fundamental building block of most modern neural networks is a **layer of neurons**
 - Every layer inputs a vector of numbers and applies a bunch of logistic regression units to it, and then outputs another vector of numbers (activations) that will be the input into subsequent layers until we the final/output layer's prediction of the NN that we then can then threshold
+- The *number of layers* includes all hidden layers + output layer, excluding the input layer, and is indexed from 1 (where the input layer is 0)
 
 A neural network layer is comprised of many neurons, each with its own weight $w$ and bias $b$. These parameters are considered in their respective activations $g(z).
 - By convention, the activations per layer are denoted by $a^{[i]}$, where $i$ is the index of the particular layer.
 - $a^{[1]}$ means the activations from layer 1, $a^{[2]}$ means the activations from layer 2, etc.
 - To further differentiate neurons' parameters from different layers, we could use the superscript $[i]$ again, where $w_j^{[i]}$ and $b_j^{[i]}$
+
+The superscript notation continues into the individual scalar activations from each neuron $a$:
+```math
+\vec{a}^{[1]} = \begin{bmatrix} a_1^{[1]} \\ a_2^{[1]} \\ a_3^{[1]} \end{bmatrix}
+```
+
+For a hidden layer, the $\vec{x}$ becomes the *previous* hidden layer's activations
+- Ex: $a_1^{[3]} = g(\vec{w}_1^{[3]} \cdot \vec{a}^{[2]} + b_1^{[3]})$
