@@ -467,7 +467,7 @@ Why neural networks?
   - The "size" of a neural network depends on the number of artificial "neurons" it has
 
 Example: **Demand Prediction**
-- `(DEF)` **Activation**: $a = f(x) = \frac{1}{1+e^{-wx+b}}$
+- `(DEF)` **Activation**: $a = g(z) = \frac{1}{1+e^{-\vec{w} \cdot \vec{x} +b}}$
   - Imagine this like a single neuron in the brain; this accepts an input $x$ and outputs $a$
   - Notice that the function is the same as logistic regression
   - Example: Take $x$ as the price, $a$ being the probability of being a top seller (0 or 1)
@@ -516,14 +516,14 @@ How to convert pictures to features?
  
 A possible process may look like so for facial recognition:\
 Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of being person "XYZ"
-- HL 1 finds certain lines (looking small window)
+- HL 1 finds certain lines (looking at a small window)
 - HL 2 groups these lines into certain facial features (looking at a bigger window)
-- HL 3 aggregates these facial features into different faces (looking at even bigger window)
+- HL 3 aggregates these facial features into different faces (looking at an even bigger window)
 - The Output Layer tries to determine the match probability of identity
 
 A possible process may look like so for car identification:\
 Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of Car Detected
-- HL 1 finds certain lines (looking small window)
+- HL 1 finds certain lines (looking at a small window)
 - HL 2 groups these lines into certain car features (looking at a bigger window)
-- HL 3 aggregates these car features into different cars (looking at even bigger window)
+- HL 3 aggregates these car features into different cars (looking at an even bigger window)
 - The Output Layer tries to determine the match probability of identity
