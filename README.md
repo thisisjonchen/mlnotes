@@ -30,6 +30,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
 4. [Advanced Learning Algorithms](#advanced-learning-algorithms)
    * 4.1 [Neural Networks](#neural-networks)
       * 4.11 [Recognizing Images](#recognizing-images)
+      * 4.12 [Neural Network Model](#neural-network-model)
    
 
 # Tools
@@ -527,4 +528,13 @@ Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Lay
 - HL 1 finds certain lines (looking at a small window)
 - HL 2 groups these lines into certain car features (looking at a bigger window)
 - HL 3 aggregates these car features into different cars (looking at an even bigger window)
-- The Output Layer tries to determine the match probability of identity
+- The Output Layer tries to determine the match probability of the car
+
+### Neural Network Model
+The fundamental building block of most modern neural networks is a **layer of neurons**
+- Every layer inputs a vector of numbers and applies a bunch of logistic regression units to it, and then outputs another vector of numbers (activations) that will be the input into subsequent layers until we the final/output layer's prediction of the NN that we then can then threshold
+
+A neural network layer is comprised of many neurons, each with its own weight $w$ and bias $b$. These parameters are considered in their respective activations $g(z).
+- By convention, the activations per layer are denoted by $a^{[i]}$, where $i$ is the index of the particular layer.
+- $a^{[1]}$ means the activations from layer 1, $a^{[2]}$ means the activations from layer 2, etc.
+- To further differentiate neurons' parameters from different layers, we could use the superscript $[i]$ again, where $w_j^{[i]}$ and $b_j^{[i]}$
