@@ -40,10 +40,13 @@ My notes from Andrew Ng's "Machine Learning Specialization"
 - Libraries
   - NumPy, scientific computing + lin algebra in Python
   - Matplotlib, plotting data
+  - TensorFlow, machine learning package 
+  - keras (integrated into TF 2.0), creates a simple, layer-centric interface to TF
   - SciKit Learn, open source machine learning
     - sklearn.linear_model.SGDRegressor: gradient descent regression model (performs best with normalized features)
     - sklearn.preprocessing.StandardScaler: performs z-score normalization
     - sklearn.linear_model: contains LogisticRegression + LinearRegression
+
 
 # What is Machine Learning?
 Arthur Samuel, a pioneer in CS + AI in his time, defined machine learning as "...[the] field of study that gives computers the ability to learn without being explicitly programmed" (1959). He helped evolve AI by writing the first checkers-playing game that learned from thousands of games against itself.
