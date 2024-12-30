@@ -31,6 +31,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
    * 4.1 [Neural Networks](#neural-networks)
       * 4.11 [Recognizing Images](#recognizing-images)
       * 4.12 [Neural Network Model](#neural-network-model)
+      * 4.13 [Inference: Forward Propogation](#inference-forward-propagation)
    
 
 # Tools
@@ -550,3 +551,13 @@ For a subsequent hidden layers after the first, the $\vec{x}$ becomes the *previ
 
 A general equation for each activation of a neuron (the **Activation Function**) is:\
 `(EQUATION)` $a_j^{[l]} = g(\vec{w}_j^{[l]} \cdot \vec{a}^{[l-1]} + b_j^{[l]})$ with the $g(z)$ sigmoid
+
+### Inference: Forward Propagation
+`(DEF)` **Inference**: Using a trained model to make predictions or classifications on new, unseen data
+
+A popular example of inference is handwritten digit recognition.
+
+`(DEF)` **Forward Propagation**: The process of moving forward from Input Layer &#8594; HL1 &#8594; HL2 &#8594; HL... &#8594; Output Layer from left to right
+
+
+
