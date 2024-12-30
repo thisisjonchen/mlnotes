@@ -545,5 +545,5 @@ The superscript notation continues into the individual scalar activations from e
 \vec{a}^{[1]} = \begin{bmatrix} a_1^{[1]} \\ a_2^{[1]} \\ a_3^{[1]} \end{bmatrix}
 ```
 
-For a hidden layer, the $\vec{x}$ becomes the *previous* hidden layer's activations
+For a subsequent hidden layers after the first, the $\vec{x}$ becomes the *previous* hidden layer's activations
 - Ex: $a_1^{[3]} = g(\vec{w}_1^{[3]} \cdot \vec{a}^{[2]} + b_1^{[3]})$
