@@ -8,6 +8,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
 2. [What is Machine Learning?](#what-is-machine-learning)
     * 2.1 [Supervised Learning](#supervised-learning)
     * 2.2 [Unsupervised Learning](#unsupervised-learning)
+    * 2.3 [Andrew's Thoughts on AGI](#andrews-thoughts-on-agi)
 3. [Supervised Learning: Regression and Classification](#supervised-learning-regression-and-classification)
     * 3.1 [Linear Regression](#linear-regression)
       * 3.11 [Cost Function](#cost-function)
@@ -94,6 +95,32 @@ Key characteristic: **Finds something interesting (patterns, structures, cluster
 `(DEF)` **Anomaly Detection**: Finds unusual data points
 
 `(DEF)` **Dimensionality Reduction**: Compress data using fewer numbers
+
+## Andrew's Thoughts on AGI
+Andrew provided his thoughts on AGI in Part 2 of MLS in "Advanced Learning Algorithms". I wanted to memorialize them here and take inspiration for my growing worldview on AI and, more specifically, artificial general intelligence (AGI).
+
+***"...I think that the path to get there is not clear and could be very difficult. I don't know whether it would take us mere decades and whether we'll see breakthroughs within our lifetimes or it if it may take centuries or even longer to get there."*** - Andrew Ng
+
+
+AI includes two very different things: artificial narrow intelligence (ANI) and artificial general intelligence (AGI)
+
+ANI made tremendous progress in recent decades with examples like smart speakers (Siri, Alexa), self-driving cars, etc. - specific applications of intelligence
+
+AGI would be doing anything a human can, but obviously, we are not there yet.
+
+Can we mimic the human brain? No... we have (almost) no idea how the brain works. Every few years, new breakthroughs fundamentally change the way how we perceive the brain. 
+
+But can we see some AGI breakthroughs in our lifetimes? There are glimmers of hope.
+
+**The "one learning algorithm" hypothesis**
+Many parts of the brain can adjust depending on what data it is given to function accordingly.
+
+Andrew provides an example of "rewiring" the brain where a part of it (ex, the somatosensory cortex, or the part that handles touch receptors) is instead fed data from a different sensor (ex, eyes with images), the part of the brain (in this case, the somatosensory cortex) learns to function differently (the somatosensory cortex learns to see)
+
+Another is "seeing with your tongue", wherein a grid with varying voltages is applied to a tongue. By mapping a grayscale image to the voltage grid, one can "see" with their tongue even if they are blind
+
+What if we can translate these to a computer? Multimodal developments are already happening... but Andrew stresses to avoid overhyping. No one knows what will happen, but with hard work and time, AGI can happen eventually.
+
 
 # Supervised Learning: Regression and Classification
 ## Linear Regression
