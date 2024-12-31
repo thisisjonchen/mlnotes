@@ -31,7 +31,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
    * 4.1 [Neural Networks](#neural-networks)
       * 4.11 [Recognizing Images](#recognizing-images)
       * 4.12 [Neural Network Model](#neural-network-model)
-      * 4.13 [Inference: Forward Propogation](#inference-forward-propagation)
+      * 4.13 [TensorFlow Implementation](#tensorflow-implementation)
    
 
 # Tools
@@ -555,12 +555,53 @@ For a subsequent hidden layers after the first, the $\vec{x}$ becomes the *previ
 A general equation for each activation of a neuron (the **Activation Function**) is:\
 `(EQUATION)` $a_j^{[l]} = g(\vec{w}_j^{[l]} \cdot \vec{a}^{[l-1]} + b_j^{[l]})$ with the $g(z)$ sigmoid
 
-### Inference: Forward Propagation
 `(DEF)` **Inference**: Using a trained model to make predictions or classifications on new, unseen data
 
 A popular example of inference is handwritten digit recognition.
 
 `(DEF)` **Forward Propagation**: The process of moving forward from Input Layer &#8594; HL1 &#8594; HL2 &#8594; HL... &#8594; Output Layer from left to right
 
+### TensorFlow Implementation
+`(DEF)` **Tensor**: Think of it as a matrix
+With TensorFlow + NumPy, we can build these layers:\
+Ex: x &#8594; HL1 (3 Neurons) &#8594; Output Layer &#8594; Prediction w/ Threshold
+```
+x = np.array([200.0, 17.0])
+layer_1 = Dense(units=3, activation="sigmoid") # Dense is another name for a layer, units = num. of neurons
+a1 = layer_1(x) # apply layer_1 to vector x, where a1 is the activations
+### OUTPUT tf.Tensor([[0.2 0.7 0.3]], shape=(1, 3), dtype=float32)
+# Translation: 1 x 3 matrix (shape) with type float
+# Can use a1.numpy() to convert to numpy matrix
 
+layer_2 = Dense(units=1, activation="sigmoid")
+a2 = layer_2(a1) # apply layer_2 to the vector a1 activations from HL1
+### OUTPUT tf.Tensor([[0.8]], shape=(1, 1), dtype=float32)
+# Translation: 1 x1 matrix (shape) with type float
+# The number 0.8 is the activation/prediction from the output layer
+
+# apply threshold (given 0.5)
+if a2 >= 0.5:
+   yhat = 1
+else:
+   yhat = 0
+```
+
+Note about NumPy Arrays:
+- In `np.array([[]])`, every [] is a row, separated by commas. Inside [], each number belongs to a specific column
+- *NOTE* It is **double square** brackets (1 set to enclose everything, another for the rows)
+
+For example, `np.array([[1, 2]])` would be a row matrix:
+```math
+\begin{bmatrix} 1 & 2 \end{bmatrix}
+```
+
+Can also be represented as `np.array([[1], [2]])` as a column matrix:
+```math
+\begin{bmatrix} 1 \\ 2 \end{bmatrix}
+```
+
+A 2D matrix with `np.array([1, 2], [4, 5])` looks like this:
+```math
+\begin{bmatrix} 1 & 2 \\ 4 & 5 \end{bmatrix}
+```
 
