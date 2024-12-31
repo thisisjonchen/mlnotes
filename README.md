@@ -590,7 +590,7 @@ Note about NumPy Arrays:
 - In `np.array([[]])`, every [] is a row, separated by commas. Inside [], each number belongs to a specific column
 - *NOTE* It is **double square** brackets (1 set to enclose everything, another for the rows)
 
-For example, `np.array([[1, 2]])` would be a row matrix:
+For example, `np.array([[1, 2]])` would be a row matrix (**Will be more commonly used for applications like describing features**):
 ```math
 \begin{bmatrix} 1 & 2 \end{bmatrix}
 ```
