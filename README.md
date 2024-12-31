@@ -605,3 +605,26 @@ A 2D matrix with `np.array([1, 2], [4, 5])` looks like this:
 \begin{bmatrix} 1 & 2 \\ 4 & 5 \end{bmatrix}
 ```
 
+Structuring a Neural Network with TensorFlow:
+```
+layer_1 = Dense(units=3, activation="sigmoid") # Don't need to explicitly reference 
+layer_2 = Dense(units=1, activation="sigmoid") # Don't need to explicitly reference
+
+model = Sequential([Dense(units=3, activation="sigmoid"),
+                    Dense(units=1, activation="sigmoid")])
+# sequentially strings together these two layers to build a NN
+# by convention, we don't use layer declarations, just use Dense() directly
+
+model.compile(...)
+
+x = np.array([200.0, 17.0],
+             [120.0, 5.0],
+             [425.0, 20.0],
+             [212.0, 18.0]) # 4 x 2 matrix
+y = np.array([1,0,0,1]) # targets
+
+model.fit(x,y) # tells TF to sequentially string the layers and train it on x, y
+
+model.predict(x_new) # outputs a new prediction based on a new dataset
+```
+
