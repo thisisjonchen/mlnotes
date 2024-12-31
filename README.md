@@ -462,6 +462,7 @@ This section will touch on:
 - Practical advice for building ML systems
 - Decision Trees
 
+
 ## Neural Networks
 Origins: Ambition to develop algorithms that try to mimic the brain, but in modern NNs, we are shifting away from the idea of mimicking biological neurons
 - Also known as **deep learning**
@@ -471,6 +472,7 @@ Why neural networks?
 - As the amount of data increased in a wide range of applications, traditional AI like linear regression and logistic regression failed to scale up in performance, increasingly.
 - A small neural network trained on that same dataset as traditional AI would see some performance gains -- even more so as we scale up to medium to large-sized neural networks
   - The "size" of a neural network depends on the number of artificial "neurons" it has
+- ***NOTE***: Weights + Biases are automatically determined during the training process and will eventually be updated iteratively through a process called backpropagation, which minimizes the loss function using optimization w/ algos like gradient descent (will be discussed more later)
 
 Example: **Demand Prediction**
 - `(DEF)` **Activation**: $a = g(z) = \frac{1}{1+e^{-\vec{w} \cdot \vec{x} +b}}$
