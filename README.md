@@ -35,6 +35,8 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.13 [TensorFlow Implementation](#tensorflow-implementation)
       * 4.14 [Training Using TensorFlow](#training-using-tensorflow)
       * 4.15 [Activation Functions](#activation-functions)
+      * 4.16 [Multiclass Classification](#multiclass-classification)
+      * 4.17 [Multi-label Classification](#multi-label-classification)
    
 
 # Tools
@@ -731,3 +733,81 @@ In reality, **ReLU** is the most common. Why?
 - If we used Linear AF on all HL but Sigmoid on Output Layer, then it will be equivalent to logistic regression
 - Thus, **do not use linear activations in hidden layers (suggested: ReLU)**
 
+
+### Multiclass Classification
+`(DEF)` **Multiclass Classification**: Refers to classfication problems where you can have more than just two output labels (not just 0/1 like binary)
+- The "handwriting digit" example is a good start - classifying not just 0 or 1, but digits from 0-9
+- For predictions, the notation still looks like $P(y=n | \vec{x}$ for some $n$, but instead of $n = 0/1$, it can be anything
+
+`(DEF)` **Softmax**: A generalization of logistic regression but with $N$ possible outputs
+- `(EQUATION)` $z_j = \vec{w}_j \cdot \vec{x} + b_j$ where $j = 1..., N$
+- `(EQUATION)` $a_j = \frac{e^{z_j}}{\sum^{N}_{k=1} e^{z_k}} = P(y= j | \vec{x})$
+- *NOTE*: $a_1 + a_2 + ... + a_N = 1$ (100%). Also, with only two outputs, Softmax reduces down to logistic regression but with different parameters
+- `(EQUATION)` $loss(a_1,...,a_N, y) = -\log(a_N) if y = N$
+
+The Softmax will replace the Output Layer as a ***Softmax Output Layer*** with the number of neurons (units) being equal to the number of classifications you wish to have
+
+Example Code (not the most optimal version):
+```
+import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+
+# Step 1: Specify the Model
+model = Sequential([Dense(units=25, activation="relu"),
+                    Dense(units=15, activation="relu"),
+                    Dense(units=1, activation="softmax")])
+
+# Step 2: Specify the Loss + Cost
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+model.compile(loss=SparseCategoricalCrossentropy()) # Note "SparseCategoricalCrossentropy"
+
+# Step 3: Train model
+model.fit(X,Y, epochs=100)
+```
+
+The reason why the above is *not the best* is because of numerical roundoff errors
+
+A More Numerically Accurate Implementation of Softmax:
+```
+import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+
+# Step 1: Specify the Model
+model = Sequential([Dense(units=25, activation="relu"),
+                    Dense(units=15, activation="relu"),
+                    Dense(units=1, activation="linear")]) # note linear now, NOT softmax
+
+# Step 2: Specify the Loss + Cost
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+model.compile(loss=SparseCategoricalCrossentropy(from_logits=True)) # notice "from_logits"
+
+# Step 3: Train model
+model.fit(X,Y, epochs=100)
+
+# Step 4: Predict
+logits = model(X) # no longer outputting a, but rather z (intermediate val)
+f_x = tf.nn.softmax(logits)
+```
+
+`(DEF)` **Logits**: An intermediate value $z$ where TensorFlow can rearrage terms to make an algorithm be more numerically accurate, at the cost of being less readable due to "magic"
+
+We can also use the parameter `from_logits=True` in our logistic regression algorithm to make it more numerically accurate, but is not totally needed.
+
+### Multi-Label Classifcation
+While seemingly like multiclass classification where we have one output and multiple labels (like instead of 0/1, we can have 0-9), multi-label classifcation refers to just multiple labels (outputs).
+
+Street Image Example:
+- Is there a car? Yes (1)
+- Is there a bus? No (0)
+- Is there a pedestrian? Yes (1)
+- Thus, the target $y$ would be a column matrix/vector
+```math
+y = \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+```
+
+There are two neural network architectures that may be used here:
+1. Train three neural networks, one for each output of car, bus, and pedestrian
+2. Train one neural network with three outputs to simultaneously detect car, bus, and pedestrian
+   - The output layer here will have three neurons instead of one (using Sigmoid AF)
