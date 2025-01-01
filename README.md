@@ -33,6 +33,8 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.11 [Recognizing Images](#recognizing-images)
       * 4.12 [Neural Network Model](#neural-network-model)
       * 4.13 [TensorFlow Implementation](#tensorflow-implementation)
+      * 4.14 [Training Using TensorFlow](#training-using-tensorflow)
+      * 4.15 [Activation Functions](#activation-functions)
    
 
 # Tools
@@ -634,7 +636,7 @@ A 2D matrix with `np.array([1, 2], [4, 5])` looks like this:
 \begin{bmatrix} 1 & 2 \\ 4 & 5 \end{bmatrix}
 ```
 
-Structuring a Neural Network with TensorFlow:
+Structuring a inference with a Neural Network using TensorFlow:
 ```
 layer_1 = Dense(units=3, activation="sigmoid") # Don't need to explicitly reference 
 layer_2 = Dense(units=1, activation="sigmoid") # Don't need to explicitly reference
@@ -656,4 +658,76 @@ model.fit(x,y) # tells TF to sequentially string the layers and train it on x, y
 
 model.predict(x_new) # outputs a new prediction based on a new dataset
 ```
+
+### Training Using TensorFlow
+Given a set of $(X,Y)$ examples, how to build and train this in code?\
+`(DEF)` **Epochs**: Number of steps in gradient descent
+
+Example Code:
+```
+import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+
+# Step 1:  Specifies model telling TF how to compute for the inference
+model = Sequential([Dense(units=25, activation="sigmoid"),
+                    Dense(units=15, activation="sigmoid"),
+                    Dense(units=1, activation="sigmoid")])
+
+# Step 2: Compiles the model using a specific loss function
+from tensorflow.keras.losses import BinaryCrossentropy
+model.compile(loss=BinaryCrossentropy()) # example loss function "binary cross entropy"
+
+# Step 3: Trains the model
+model.fit(X,Y, epochs=100)
+```
+
+**Model Training Step Parallels between Traditional + Neural Networks (TF)**:
+1. Define Model: Specify how to compute output given input $x$ and parameters $w,b$
+   - Logistic Regression (TRAD)
+     - z = np.dot(w,x) + b
+     - f_x = 1/(1+np.exp(-z))
+   - model = Sequential([Dense(...), \
+                    Dense(...),\
+                    Dense(...)])  (TF)
+2. Specify Loss and Cost Functions
+   - Logistic Loss (TRAD)
+     - loss = -y * np.log(f_x) - (1-y) * np.log(1-f_x)
+   - model.compile(loss=BinaryCrossentropy())  (TF)
+3. Train on data to minimize the cost $J(\vec{w}, b)$
+   - w = w - alpha * dj_dw  (TRAD)
+   - b = b - alpha * dj_db (TRAD)
+   - model.fit(X,Y, epochs=100) (TF - .fit() uses **Backpropagation**)
+       
+`(DEF)` **Binary Cross-entropy**: Also known as logistic loss... binary re-emphasizes either 0 or 1 classification
+
+*NOTE*: Binary cross-entropy is, of course, not the only loss function. For regression-related problems, we could use `MeanSquaredError()`, also imported from tensorflow.keras.losses
+
+### Activation Functions
+So far, we have been using the *Sigmoid* function ($g(z) = \frac{1}{1+e^{-z}}$ as our activation function in most of our applications, and it is indeed commonly used particularly in classification applications since $0 < g(z) < 1$.
+
+However, there are more and their usages depend on various applications:
+- `(DEF/EQUATION)` **ReLU (Rectified Linear Unit)**: $g(z) = max(0, z)$
+   - *NOTE*: $g(z)$ can never be 0 here, but $g(z)$ can be $+\infty$ if $z$ was
+- `(DEF/EQUATION)` **Linear Activation Function**: $g(z) = z$
+   - As if $g$ was never there at all
+
+To recap, these three are the most commonly used: Sigmoid, ReLU, and Linear AF\
+The next question is: how to choose an activation function to use?
+
+**For Binary Classification (y = 0/1)**: Use Sigmoid
+
+**For Regression (y = +/-)**: Use Linear AF
+
+**For Regression (y >= 0)**: Use ReLU 
+
+In reality, **ReLU** is the most common. Why?
+- Faster to compute and learn
+- $\frac{d}{dw}J(W,B) \approx 0$ when $g(z)$ is flat, which is when $y<0$ for ReLU... speeds up gradient descent
+- Use almost *all the time* for hidden layers
+
+**Why do we need activation functions?**
+- If we, for example, used all Linear AF for our activation functions (incl. HL + Ouput Layer), this would be no different than linear regression (defeats the purpose of a NN)
+- If we used Linear AF on all HL but Sigmoid on Output Layer, then it will be equivalent to logistic regression
+- Thus, **do not use linear activations in hidden layers (suggested: ReLU)**
 
