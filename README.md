@@ -101,7 +101,7 @@ Key characteristic: **Finds something interesting (patterns, structures, cluster
 ## Andrew's Thoughts on AGI
 Andrew provided his thoughts on AGI in Part 2 of MLS in "Advanced Learning Algorithms". I wanted to memorialize them here and take inspiration for my growing worldview on AI and, more specifically, artificial general intelligence (AGI).
 
-***"...I think that the path to get there is not clear and could be very difficult. I don't know whether it would take us mere decades and whether we'll see breakthroughs within our lifetimes or it if it may take centuries or even longer to get there."*** - Andrew Ng
+> "...I think that the path to get there is not clear and could be very difficult. I don't know whether it would take us mere decades and whether we'll see breakthroughs within our lifetimes or it if it may take centuries or even longer to get there." - Andrew Ng
 
 
 AI includes two very different things: artificial narrow intelligence (ANI) and artificial general intelligence (AGI)
