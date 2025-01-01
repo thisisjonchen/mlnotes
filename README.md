@@ -36,7 +36,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.14 [Training Using TensorFlow](#training-using-tensorflow)
       * 4.15 [Activation Functions](#activation-functions)
       * 4.16 [Multiclass Classification](#multiclass-classification)
-      * 4.17 [Multi-label Classification](#multi-label-classification)
+      * 4.17 [Multi-Label Classification](#multi-label-classification)
    
 
 # Tools
@@ -795,7 +795,7 @@ f_x = tf.nn.softmax(logits)
 
 We can also use the parameter `from_logits=True` in our logistic regression algorithm to make it more numerically accurate, but is not totally needed.
 
-### Multi-Label Classifcation
+### Multi-Label Classification
 While seemingly like multiclass classification where we have one output and multiple labels (like instead of 0/1, we can have 0-9), multi-label classifcation refers to just multiple labels (outputs).
 
 Street Image Example:
