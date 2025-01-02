@@ -37,6 +37,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.15 [Activation Functions](#activation-functions)
       * 4.16 [Multiclass Classification](#multiclass-classification)
       * 4.17 [Multi-Label Classification](#multi-label-classification)
+      * 4.18 [Advanced Optimization](#advanced-optimization)
    
 
 # Tools
@@ -811,3 +812,43 @@ There are two neural network architectures that may be used here:
 1. Train three neural networks, one for each output of car, bus, and pedestrian
 2. Train one neural network with three outputs to simultaneously detect car, bus, and pedestrian
    - The output layer here will have three neurons instead of one (using Sigmoid AF)
+  
+### Advanced Optimization
+Recall the learning rate $\alpha$, which is our learning rate. The learning rate before was always up to you, but there are some cons if the $\alpha$ is too large.
+
+There are some algorithms that can dynamically adjust the learning rate (start large then decrease as we approach the minimum) like the **Adam** algorithm
+
+`(DEF)` **Adaptive Moment Estimation (Adam)**: If $w_j$ (or $b$) keeps moving in the same direction, increase $a_j$, else if $w_j$ (or $b$) keeps oscillating, reduce $a$
+
+Example Code:
+```
+import tensorflow as tf
+from tensorflow.keras import Sequential
+from tensorflow.keras.layers import Dense
+
+# Step 1: Specify the Model
+model = Sequential([Dense(units=25, activation="relu"),
+                    Dense(units=15, activation="relu"),
+                    Dense(units=1, activation="linear")])
+
+# Step 2: Specify the Loss + Cost
+from tensorflow.keras.losses import SparseCategoricalCrossentropy
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+              loss=SparseCategoricalCrossentropy(from_logits=True))
+
+# Step 3: Train model
+model.fit(X,Y, epochs=100)
+```
+
+In reality, most practitioners use the Adam algorithm rather than the optional gradient descent algorithm.
+
+There are also additional layer types other than the dense layer (where each neuron output is a function of *all* the activation outputs of the previous layer).
+
+Another type of layer often used are ***Convolutional Layers***.
+
+`(DEF)` **Convoultional Layer**: Each neuron only looks at *part* of the previous layer's outputs
+- Allows for faster computation
+- Need less traning data (less prone to overfitting)
+- Multiple convoulutional layers contribute to a **Convoulutional Neural Network** (CNN)
+  - Allows for flexibility in window size and opportunity for greater efficiency than NNs with dense layers
+
