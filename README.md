@@ -38,6 +38,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.16 [Multiclass Classification](#multiclass-classification)
       * 4.17 [Multi-Label Classification](#multi-label-classification)
       * 4.18 [Advanced Optimization](#advanced-optimization)
+      * 4.19 [Backpropagation](#backpropagation)
    
 
 # Tools
@@ -852,3 +853,12 @@ Another type of layer often used are ***Convolutional Layers***.
 - Multiple convoulutional layers contribute to a **Convoulutional Neural Network** (CNN)
   - Allows for flexibility in window size and opportunity for greater efficiency than NNs with dense layers
 
+### Backpropagation
+`(DEF)` **Backpropagation**: A technique that utilizes gradient descent algorithms to more efficiently calculate derivatives as a right-to-left calculation (in relation to a computation graph)
+- Also called "autodiff"
+
+The process is that after forward propagation (left-to-right) to compute the cost function, back propagation (right-to-left) is used for the derivative calculation.
+
+In terms of computational complexity, it would take roughly $N+P$ steps rather than $N \times P$ steps to compute derivates, thus it would make a significant difference in larger neural networks.
+
+Backpropagation is already built into most deep learning algorithms/machine learning frameworks.
