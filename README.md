@@ -929,12 +929,12 @@ Recall our concepts of **High Bias (Underfit)** and **High Variance (Overfit)**.
 For high bias (underfit):
 - $J_{train}$ is high
 - $J_{cv}$ is high
-- Relatively, $J_{train} \approx $J_{cv}$
+- Relatively, $J_{train} \approx J_{cv}$
 
 For high variance (overfit):
 - $J_{train}$ is low
 - $J_{cv}$ is high
-- Relatively, $J_{train} << $J_{cv}$
+- Relatively, $J_{train} << J_{cv}$
 
 Both high bias + variance:
 - $J_{train}$ is high
@@ -944,7 +944,7 @@ If "just right":
 - $J_{train}$ is low
 - $J_{cv}$ is low
 
-Comparing $J_{train}, $J_{cv}$ with the degree of polynomial $d$, while $J_{train}$ will go down as the $d$ increases, $J_{cv}$ has a minimum, but has a point where it will increase again (upward bowl). 
+Comparing $J_{train}, J_{cv}$ with the degree of polynomial $d$, while $J_{train}$ will go down as the $d$ increases, $J_{cv}$ has a minimum, but has a point where it will increase again (upward bowl). 
 
 How does bias and variance work with **regularization** ($\lambda$)?
 - Very large $\lambda$ = High bias (underfit), where $f_{\vec{w}, b}(\vec{x}) \approx b$ (e.g. $\lambda = 10,000$)
