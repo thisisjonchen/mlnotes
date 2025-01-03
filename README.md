@@ -954,7 +954,7 @@ How does bias and variance work with **regularization** ($\lambda$)?
 
 Thus, how can we choose a good $\lambda$? Approach it like the 60/20/20 technique with a polynomial degree, starting from $\lambda = 0, 0.01, ....$ and **doubling the previous** to minimize $J_{cv}$. The notation $(w^{<d>}, b^{<d>})$ depends on just the order $d$ you go (ex: 1. $\lambda = 0.01$) rather than the actual $\lambda$ value as the $d$.
 
-Comparing $J_{train}, $J_{cv}$ with the regulation parameter $\lambda$, while $J_{train}$ will go up as $\lambda$ increases, $J_{cv}$ has a minimum, but has a point where it will increase again (upward bowl). 
+Comparing $J_{train}, J_{cv}$ with the regulation parameter $\lambda$, while $J_{train}$ will go up as $\lambda$ increases, $J_{cv}$ has a minimum, but has a point where it will increase again (upward bowl). 
 
 But now, from what perspective do we assume $J_{train}$ and $J_{cv}$ to be high? First, we need a **baseline level of performance**
 - Large gap between baseline performance (error) and training error: high variance (overfit)
