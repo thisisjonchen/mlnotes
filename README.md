@@ -39,6 +39,9 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.17 [Multi-Label Classification](#multi-label-classification)
       * 4.18 [Advanced Optimization](#advanced-optimization)
       * 4.19 [Backpropagation](#backpropagation)
+   * 4.2 [Advice for Applying ML](#advice-for-applying-ml)
+      * 4.21 [Debugging](#debugging)
+      * 4.22 [Evaluation](#evaluation)
    
 
 # Tools
@@ -841,24 +844,54 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
 model.fit(X,Y, epochs=100)
 ```
 
-In reality, most practitioners use the Adam algorithm rather than the optional gradient descent algorithm.
+Most practitioners use the Adam algorithm rather than the optional gradient descent algorithm.
 
 There are also additional layer types other than the dense layer (where each neuron output is a function of *all* the activation outputs of the previous layer).
 
-Another type of layer often used are ***Convolutional Layers***.
+Another type of layer often used is ***Convolutional Layers***.
 
-`(DEF)` **Convoultional Layer**: Each neuron only looks at *part* of the previous layer's outputs
+`(DEF)` **Convolutional Layer**: Each neuron only looks at *part* of the previous layer's outputs
 - Allows for faster computation
-- Need less traning data (less prone to overfitting)
-- Multiple convoulutional layers contribute to a **Convoulutional Neural Network** (CNN)
+- Need less training data (less prone to overfitting)
+- Multiple convolutional layers contribute to a **Convolutional Neural Network** (CNN)
   - Allows for flexibility in window size and opportunity for greater efficiency than NNs with dense layers
 
 ### Backpropagation
 `(DEF)` **Backpropagation**: A technique that utilizes gradient descent algorithms to more efficiently calculate derivatives as a right-to-left calculation (in relation to a computation graph)
 - Also called "autodiff"
 
-The process is that after forward propagation (left-to-right) to compute the cost function, back propagation (right-to-left) is used for the derivative calculation.
+The process is that after forward propagation (left-to-right) to compute the cost function, backpropagation (right-to-left) is used for the derivative calculation.
 
 In terms of computational complexity, it would take roughly $N+P$ steps rather than $N \times P$ steps to compute derivates, thus it would make a significant difference in larger neural networks.
 
 Backpropagation is already built into most deep learning algorithms/machine learning frameworks.
+
+## Advice for Applying ML
+> "I've seen teams sometimes, say, six months to build a machine learning system, that I think a more skilled team could have taken or done in just a couple of weeks. The efficiency of how quickly you can get a machine learning system to work well will depend to a large part of how well you can repeatedly make good decisions about what to do next in the course of a machine learning project." - Andrew Ng
+
+### Debugging
+Say we implemented a regularized linear regression model on housing prices, but it makes unacceptably large prediction errors. What can we try next?
+- Get more training examples
+- Try smaller sets of features
+- Try getting additional features
+- Try adding polynomial features($x_1^2, x_1^3, x_1x_2, etc$)
+- Try increasing/decreasing the regularization term $\lambda$
+
+Many of these steps can take lots of time, like getting more training examples.
+
+`(DEF)` **(Machine Learning) Diagnostic**: A test that you run to gain insight into what is/isn't working with a learning algorithm, to gain guidance into improving its performance
+- Can take time to implement, but doing so can be a very good use of your time
+
+### Evaluation
+How can one evaluate a model's performance? Evaluating a model's performance properly may lead to debugging, as it may perform worse than expected.
+
+**The 70/30 Technique**: splitting the dataset into two subsets
+1. 70% can be used for training the data ($x^{m_{train}}, y^{m_{train}}$ where $m_{train}$ = # of training examples)
+2. 30% can be used for testing the data ($x_{test}^{m_{train}}, y_{test}^{m_{train}}$ where $m_{test}$ = # of training examples)
+
+These can be subbed into the cost function $J(\vec{w}, b)$ to determine performance.
+- If $J_{train}(\vec{w}, b)$ is low, but $J_{test}(\vec{w}, b)$ is high, then that may indicate that the performance on the training set is good, the performance on general/test set is not as good (overfitting)
+- For classification problems,  $J_{train}(\vec{w}, b)$ and $J_{test}(\vec{w}, b)$ indicates the fraction of their respective sets that has been misclassified
+
+
+
