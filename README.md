@@ -553,19 +553,19 @@ Input Layer ($\vec{x}$) &#8594; Hidden Layer(s) ($\vec{a}$) &#8594; Output Layer
 ### Recognizing Images
 One application of a neural network is in **computer vision** (CV), which takes as an input a picture and outputs what you may want to know, like maybe the identity of a profile picture.
 
-How to convert pictures to features?
-- The picture, if 1000px x 1000px, is actually a 1000 x 1000 matrix of varying pixel intensity values which range from 0-255
+How do you convert pictures to features?
+- The picture, if 1000px x 1000px, is actually a 1000 x 1000 matrix of varying pixel intensity values, which range from 0-255
 - If we were to "roll" up these values into a singular vector $\vec{x}$, then it would contain *1 million pixels* intensity values
   - How to roll up a matrix? One way is to do L &#8594; R, down one row, then go from R &#8594; L until you are done with the entire matrix
  
-A possible process may look like so for facial recognition:\
+A possible process may look like this for facial recognition:\
 Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of being person "XYZ"
 - HL 1 finds certain lines (looking at a small window)
 - HL 2 groups these lines into certain facial features (looking at a bigger window)
 - HL 3 aggregates these facial features into different faces (looking at an even bigger window)
 - The Output Layer tries to determine the match probability of identity
 
-A possible process may look like so for car identification:\
+A possible process may look like this for car identification:\
 Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Layer &#8594; Probability of Car Detected
 - HL 1 finds certain lines (looking at a small window)
 - HL 2 groups these lines into certain car features (looking at a bigger window)
@@ -574,10 +574,10 @@ Input Picture $(\vec{x})$ &#8594; HL1 &#8594; HL2 &#8594; HL3 &#8594; Output Lay
 
 ### Neural Network Model
 The fundamental building block of most modern neural networks is a **layer of neurons**
-- Every layer inputs a vector of numbers and applies a bunch of logistic regression units to it, and then outputs another vector of numbers (activations) that will be the input into subsequent layers until we the final/output layer's prediction of the NN that we then can then threshold
+- Every layer inputs a vector of numbers and applies a bunch of logistic regression units to it, and then outputs another vector of numbers (activations) that will be the input into subsequent layers until the final/output layer's prediction of the NN that we then can then threshold
 - The *number of layers* includes all hidden layers + output layer, excluding the input layer, and is indexed from 1 (where the input layer is 0)
 
-A neural network layer is comprised of many neurons, each with its own weight $w$ and bias $b$. These parameters are considered in their respective activations $g(z).
+A neural network layer comprises many neurons, each with its own weight $w$ and bias $b$. These parameters are considered in their respective activations $g(z).
 - By convention, the activations per layer are denoted by $a^{[i]}$, where $i$ is the index of the particular layer.
 - $a^{[1]}$ means the activations from layer 1, $a^{[2]}$ means the activations from layer 2, etc.
 - To further differentiate neurons' parameters from different layers, we could use the superscript $[i]$ again, where $w_j^{[i]}$ and $b_j^{[i]}$
@@ -886,12 +886,35 @@ Many of these steps can take lots of time, like getting more training examples.
 How can one evaluate a model's performance? Evaluating a model's performance properly may lead to debugging, as it may perform worse than expected.
 
 **The 70/30 Technique**: splitting the dataset into two subsets
-1. 70% can be used for training the data ($x^{m_{train}}, y^{m_{train}}$ where $m_{train}$ = # of training examples)
-2. 30% can be used for testing the data ($x_{test}^{m_{test}}, y_{test}^{m_{test}}$ where $m_{test}$ = # of training examples)
+1. 70% can be used for training the data (($x^{m_{train}}, y^{m_{train}}$) where $m_{train}$ = # of training examples)
+2. 30% can be used for testing the data (($x_{test}^{m_{test}}, y_{test}^{m_{test}}$) where $m_{test}$ = # of training examples)
 
-These can be subbed into the cost function $J(\vec{w}, b)$ to determine performance.
+To determine performance, these can be subbed into the cost function $J(\vec{w}, b)$.
 - If $J_{train}(\vec{w}, b)$ is low, but $J_{test}(\vec{w}, b)$ is high, then that may indicate that the performance on the training set is good, the performance on general/test set is not as good (overfitting)
 - For classification problems,  $J_{train}(\vec{w}, b)$ and $J_{test}(\vec{w}, b)$ indicates the fraction of their respective sets that has been misclassified
 
+However, note that once $\vec{w}, b$ are fit to the training set, the training error $J_{train}(\vec{w}, b)$ is likely lower than the *actual generalization error*. 
 
+In other words, $J_{test}(\vec{w}, b)$ will be a better estimate of how well the model will generalize to new data compared to $J_{train}(\vec{w}, b)$. However, this may also lead to some over-optimistic generalizations on just the test set alone (same problem we had with $J_{train}(\vec{w}, b)$ before). How can we improve upon this?
 
+Further Refinement **60/20/20: Training/Cross-Validation/Test Sets**:
+1. 60% can be used for training the data (($x^{m_{train}}, y^{m_{train}}$) where $m_{train}$ = # of training examples)
+2. 20% can be used for cross-validating the data (($x_{cv}^{m_{cv}}, y_{cv}^{m_{cv}}$) where $m_{cv}$ = # of training examples)
+3. 20% can be used for testing the data (($x_{test}^{m_{test}}, y_{test}^{m_{test}}$) where $m_{test}$ = # of training examples)
+
+`(DEF)` **Cross-Validation**: Extra dataset to check the validity of different models
+- Also commonly called the validation set, development set, and dev set
+
+**Model Selection Procedure**:
+1. Train the model using the training dataset
+2. Test different models with varying degrees $d$ using the cross-validation set and choosing the degree with the lowest cost $J_{cv}(w^{<d>}, b^{<d>})$
+3. Estimate the generalization error using the test dataset with the chosen degree: $J_{test}(w^{<d>}, b^{<d>})$
+
+The above was intended for linear regression but also works for choosing a neural network architecture.
+
+**Model Selection Procedure - NN Architecture**:
+1. Train the NN using the training dataset
+2. Test different $d$ NNs using the cross-validation set and choosing the NN with the lowest cost $J_{cv}(w^{<d>}, b^{<d>})$
+3. Estimate the generalization error using the test dataset with the chosen degree: $J_{test}(w^{<d>}, b^{<d>})$
+
+When making decisions regarding your training algorithm, utilize the **training and cv** datasets only. Do not touch the test dataset until you've created one model as your ***final model*** to ensure that the test set is fair and not an overly optimistic estimate of how well a model may generalize new data.
