@@ -880,7 +880,7 @@ Say we implemented a regularized linear regression model on housing prices, but 
 - Try adding polynomial features($x_1^2, x_1^3, x_1x_2, etc$)
 - Try increasing/decreasing the regularization term $\lambda$
 
-Many of these steps can take lots of time, like getting more training examples.
+Many of these steps can take lots of time, like getting more training examples. How do we know what to do?
 
 `(DEF)` **(Machine Learning) Diagnostic**: A test that you run to gain insight into what is/isn't working with a learning algorithm, to gain guidance into improving its performance
 - Can take time to implement, but doing so can be a very good use of your time
@@ -990,5 +990,13 @@ If a learning algorithm has *high variance*:
   - However, this means more $m$ = good!
   - If a learning algorithm suffers from high variance, getting more training data is likely to help
 
+Back to our example with housing predictions: Say we implemented a regularized linear regression model on housing prices, but it makes unacceptably large prediction errors. What can we try next? Which will be used if either high variance vs. high bias?
+- Get more training examples (fixes high variance)
+- Try smaller sets of features (fixes high variance)
+- Try getting additional features (fixes high bias)
+- Try adding polynomial features($x_1^2, x_1^3, x_1x_2, etc$) (fixes high bias)
+- Try increasing/decreasing the regularization term $\lambda$
+  - Increase (fixes high variance)
+  - Decrease (fixes high bias)
 
 
