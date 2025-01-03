@@ -42,6 +42,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
    * 4.2 [Advice for Applying ML](#advice-for-applying-ml)
       * 4.21 [Debugging](#debugging)
       * 4.22 [Evaluation](#evaluation)
+      * 4.23 [Bias and Variance](#bias-and-variance)
    
 
 # Tools
@@ -918,3 +919,54 @@ The above was intended for linear regression but also works for choosing a neura
 3. Estimate the generalization error using the test dataset with the chosen degree: $J_{test}(w^{<d>}, b^{<d>})$
 
 When making decisions regarding your training algorithm, utilize the **training and cv** datasets only. Do not touch the test dataset until you've created one model as your ***final model*** to ensure that the test set is fair and not an overly optimistic estimate of how well a model may generalize new data.
+
+
+### Bias and Variance
+Recall our concepts of **High Bias (Underfit)** and **High Variance (Overfit)**. How might they relate to the costs $J_{train}, J_{cv}$?
+
+($<<$: Much less than)
+
+For high bias (underfit):
+- $J_{train}$ is high
+- $J_{cv}$ is high
+- Relatively, $J_{train} \approx $J_{cv}$
+
+For high variance (overfit):
+- $J_{train}$ is low
+- $J_{cv}$ is high
+- Relatively, $J_{train} << $J_{cv}$
+
+Both high bias + variance:
+- $J_{train}$ is high
+- Relatively, $J_{train} << J_{cv}$
+
+If "just right":
+- $J_{train}$ is low
+- $J_{cv}$ is low
+
+Comparing $J_{train}, $J_{cv}$ with the degree of polynomial $d$, while $J_{train}$ will go down as the $d$ increases, $J_{cv}$ has a minimum, but has a point where it will increase again (upward bowl). 
+
+How does bias and variance work with **regularization** ($\lambda$)?
+- Very large $\lambda$ = High bias (underfit), where $f_{\vec{w}, b}(\vec{x}) \approx b$ (e.g. $\lambda = 10,000$)
+- Very small $\lambda$ = High variance (overfit) (e.g. $\lambda = 0$)
+
+Thus, how can we choose a good $\lambda$? Approach it like the 60/20/20 technique with a polynomial degree, starting from $\lambda = 0, 0.01, ....$ and **doubling the previous** to minimize $J_{cv}$. The notation $(w^{<d>}, b^{<d>})$ depends on just the order $d$ you go (ex: 1. $\lambda = 0.01$) rather than the actual $\lambda$ value as the $d$.
+
+Comparing $J_{train}, $J_{cv}$ with the regulation parameter $\lambda$, while $J_{train}$ will go up as $\lambda$ increases, $J_{cv}$ has a minimum, but has a point where it will increase again (upward bowl). 
+
+But now, from what perspective do we assume $J_{train}$ and $J_{cv}$ to be high? First, we need a **baseline level of performance**
+- Large gap between baseline performance (error) and training error: high variance (overfit)
+- Large gap between training error and cross-validation error: high bias (underfit)
+
+Speech Recognition Example:
+- Training error $J_{train}$: 10.8%
+- Cross Validation error $J_{cv}$: 14.8%
+- Just looking at these two, we may assume high bias from the baseline of 0%, right?
+  - However, if we factor in human-level performance (10.6%), we can't assume the learning algorithm to be much better than that
+  - Thus, if we consider 10.6% as the baseline, $J_{train}$ is only +0.2% higher. The difference between $J_{train}$ and $J_{cv}$ remains the same (+4%).
+  - Now, we may consider this to be a variance problem rather than a bias problem
+ 
+In establishing a baseline level of performance, the question is: "What is the level of error you can *reasonably* hope to get to?"
+- Human-level performance
+- Competing algorithms performance
+- Guess based on experience
