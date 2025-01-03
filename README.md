@@ -998,5 +998,6 @@ Back to our example with housing predictions: Say we implemented a regularized l
 - Try increasing/decreasing the regularization term $\lambda$
   - Increase (fixes high variance)
   - Decrease (fixes high bias)
-
+ 
+If you have high bias, your training set is not the problem - your model is. As such, don't randomly throw away training examples.
 
