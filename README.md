@@ -887,7 +887,7 @@ How can one evaluate a model's performance? Evaluating a model's performance pro
 
 **The 70/30 Technique**: splitting the dataset into two subsets
 1. 70% can be used for training the data ($x^{m_{train}}, y^{m_{train}}$ where $m_{train}$ = # of training examples)
-2. 30% can be used for testing the data ($x_{test}^{m_{train}}, y_{test}^{m_{train}}$ where $m_{test}$ = # of training examples)
+2. 30% can be used for testing the data ($x_{test}^{m_{test}}, y_{test}^{m_{test}}$ where $m_{test}$ = # of training examples)
 
 These can be subbed into the cost function $J(\vec{w}, b)$ to determine performance.
 - If $J_{train}(\vec{w}, b)$ is low, but $J_{test}(\vec{w}, b)$ is high, then that may indicate that the performance on the training set is good, the performance on general/test set is not as good (overfitting)
