@@ -43,6 +43,8 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.21 [Debugging](#debugging)
       * 4.22 [Evaluation](#evaluation)
       * 4.23 [Bias and Variance](#bias-and-variance)
+      * 4.24 [Learning Curves](#learning-curves)
+        
    
 
 # Tools
@@ -970,3 +972,23 @@ In establishing a baseline level of performance, the question is: "What is the l
 - Human-level performance
 - Competing algorithms performance
 - Guess based on experience
+
+
+### Learning Curves
+Learning curves are a way to help you understand how your learning algorithm is doing as a function of the training set $m$ vs. error $J$ (both $J_{train}$ and $J_{cv}$). 
+
+If a learning algorithm has *high bias*:
+- The CV error $J_{cv}$ will decrease then plateau
+- The training error $J_{train}$ will increase then plateau beneath the CV error
+- Both will be relatively higher than the human-level performance, regardless of $m$ **no matter how big $m$ is**
+   - If a learning algo suffers from high bias, getting more training data will (by itself) not help much
+ 
+If a learning algorithm has *high variance*:
+- The CV error $J_{cv}$ will be much larger than $J_{train}$, decreasing then plateauing as $m$ increases
+- The training error $J_{train} will increase then plateau
+- The "point of plateau" is the human-level performance, which acts like a horizontal asymptote between the two errors
+  - However, this means more $m$ = good!
+  - If a learning algorithm suffers from high variance, getting more training data is likely to help
+
+
+
