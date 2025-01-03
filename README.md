@@ -985,7 +985,7 @@ If a learning algorithm has *high bias*:
  
 If a learning algorithm has *high variance*:
 - The CV error $J_{cv}$ will be much larger than $J_{train}$, decreasing then plateauing as $m$ increases
-- The training error $J_{train} will increase then plateau
+- The training error $J_{train}$ will increase then plateau
 - The "point of plateau" is the human-level performance, which acts like a horizontal asymptote between the two errors
   - However, this means more $m$ = good!
   - If a learning algorithm suffers from high variance, getting more training data is likely to help
