@@ -1083,3 +1083,11 @@ Approaches to developing AI:
 
 `(DEF)` **Supervised Pretraining**: Training a model on a very large dataset (possibly not a related topic, but a similar application) with the intention of then fine-tuning it to a specific topic
 - Downloading a pre-trained model is one way to get a jumpstart on your desired application and topic area
+- Use the same input type (images, audio, text, etc.)
+
+To apply transfer learning:
+1. Download NN parameters pre-trained on a large data with the same input type (e.g., images, audio, text) as your application (or train your own)
+2. Further train (fine-tune) the network on your own data
+
+*Especially* helpful if you lack the resources/availability to get large datasets pertaining to your application if the downloaded NN parameters are relatively similar
+- Examples of popular transfer learning applications are GPT-3, BERTs, ImageNet, etc.
