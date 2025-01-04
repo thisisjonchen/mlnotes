@@ -1001,3 +1001,20 @@ Back to our example with housing predictions: Say we implemented a regularized l
  
 If you have high bias, your training set is not the problem - your model is. As such, don't randomly throw away training examples.
 
+**Bias and Variance in Neural Networks**:\
+Large neural networks are usually low-bias machines
+
+Simple Process for evaluating bias and variance in neural networks:
+- **Does it do well on the training set?** (1)
+  - If not ($J_{train}$ is relatively high),  expand the neural network (add more HL or hidden units) until it does well on the training set (achieves comparable to human-level+ performance)
+  - **If so, does it do well on the cross-validation set?** (2)
+    - If not ($J_{cv}$ is high), add more data and go back to step (1)
+    - ***If so, done!***
+
+Understandably, the solutions to (1) and (2) may be hard:
+1. GPUs and AI accelerators are speeding this process up, but as NNs get super large, they will get significantly harder to compute
+2. Data may be limited due to the nature of the data
+
+A large neural network will usually do as well or better than a smaller one so long as regularization is chosen appropriately (less risk of overfitting than traditional AI). However, they do become more computationally expensive.
+
+To regularize, we add the parameter `kernel_regularizer=(...)` to `Dense(...)` layer.
