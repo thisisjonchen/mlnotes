@@ -46,6 +46,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.24 [Learning Curves](#learning-curves)
       * 4.25 [Iterative ML Development Loop](#iterative-ml-development-loop)
       * 4.26 [Data Engineering](#data-engineering)
+      * 4.27 [Full Cycle of an ML Project](#full-cycle-of-an-ml-project)
      
         
    
@@ -1091,3 +1092,21 @@ To apply transfer learning:
 
 *Especially* helpful if you lack the resources/availability to get large datasets pertaining to your application if the downloaded NN parameters are relatively similar
 - Examples of popular transfer learning applications are GPT-3, BERTs, ImageNet, etc.
+
+### Full Cycle of an ML Project
+1. Define Project Scope
+2. Define and Collect Data 
+3. Train and Perform Error Analysis (*Iterative Improvement with (2) ♻️)
+4. Deploy, Monitor, and Maintain System (May need to go back to (2), (3) if needed)
+
+Example Deployment Structure:
+- Mobile app (sends API call ($x$) to Inference Server, e.g., audio clip)
+- Inference Server (returns Inference ($\hat{y}$) to Mobile App, e.g., text transcript)
+  - Contains ML Model
+ 
+Software engineering may be needed (**Machine Learning Operations** (MLOps)):
+- Ensure reliable and efficient predictions
+- Scaling
+- Logging
+- System monitoring (new data?)
+- Model updates
