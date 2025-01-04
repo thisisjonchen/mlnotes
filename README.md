@@ -25,9 +25,8 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 3.22 [Decision Boundary](#decision-boundary)
       * 3.23 [Cost Function for Logistic Regression](#cost-function-for-logistic-regression)
       * 3.24 [Gradient Descent for Logistic Regression](#gradient-descent-for-logistic-regression)
-   * 3.3 [Overfitting](#overfitting)
-      * 3.31 [Addressing Overfitting](#addressing-overfitting)
-      * 3.32 [Regularization](#regularization)
+      * 3.25 [Overfitting](#overfitting)
+      * 3.26 [Regularization](#regularization)
 4. [Advanced Learning Algorithms](#advanced-learning-algorithms)
    * 4.1 [Neural Networks](#neural-networks)
       * 4.11 [Recognizing Images](#recognizing-images)
@@ -446,7 +445,7 @@ Other techniques that can also be applied:
 - Feature scaling
 - Vectorization
 
-## Overfitting
+### Overfitting
 Both linear and logistic regression can work well for many tasks, but sometimes, in an application, the algorithm(s) can run into a problem called overfitting, which can cause it to perform poorly.
 
 What does fitting mean? This refers in context to the best fit line. If we use a linear line on a training set of data points where a quadratic line may have been better, then the linear line does not fit the training set very well (underfit - high bias).
@@ -459,7 +458,6 @@ Another extreme scenario would be using some curve that may fit the training set
 
 `(DEF)` **Overfitting (High Variance)**: Fits the training set extremely well, but new examples can result in highly variable predictions
 
-### Addressing Overfitting
 How can we address overfitting?
 
 Some options:
