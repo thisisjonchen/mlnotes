@@ -44,6 +44,7 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.22 [Evaluation](#evaluation)
       * 4.23 [Bias and Variance](#bias-and-variance)
       * 4.24 [Learning Curves](#learning-curves)
+      * 4.25 [Iterative ML Development Loop](#iterative-ml-development-loop)
         
    
 
@@ -1018,3 +1019,27 @@ Understandably, the solutions to (1) and (2) may be hard:
 A large neural network will usually do as well or better than a smaller one so long as regularization is chosen appropriately (less risk of overfitting than traditional AI). However, they do become more computationally expensive.
 
 To regularize, we add the parameter `kernel_regularizer=(...)` to `Dense(...)` layer.
+
+### Iterative ML Development Loop
+*Start*
+- Choose architecture (model, data, etc.)
+- Train model
+- Diagnostics (bias, variance, and error analysis)
+*Repeat*
+
+**Example Development Process** - Building an Email Spam Classifier:
+1. Choose Architecture
+   - Supervised learning
+     - $\vec{x}$ = features of email
+       - Features: list the top 10,000 words of the email to compute $x_1,x_2,...,x_{10,000)$
+     - $y$ = spam (1) or not spam (0)
+2. Train model
+   - Can use either logistic regression or a neural network to predict $y$ given features $x$
+3. Diagnostics
+   - How do you try to reduce the error in your spam classifier?
+      - Collect more data (e.g., Spam "Honeypot")
+      - Develop sophisticated features based on email routing (from the email header)
+      - Design algorithms to detect misspellings
+4. Repeat if needed
+
+Choosing a ***more promising direction*** can speed up your project many times over than if you chose the wrong path.
