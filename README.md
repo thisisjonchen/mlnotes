@@ -1031,7 +1031,7 @@ To regularize, we add the parameter `kernel_regularizer=(...)` to `Dense(...)` l
 1. Choose Architecture
    - Supervised learning
      - $\vec{x}$ = features of email
-       - Features: list the top 10,000 words of the email to compute $x_1,x_2,...,x_{10,000)$
+       - Features: list the top 10,000 words of the email to compute $x_1,x_2,...,x_{10,000}$
      - $y$ = spam (1) or not spam (0)
 2. Train model
    - Can use either logistic regression or a neural network to predict $y$ given features $x$
