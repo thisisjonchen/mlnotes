@@ -1136,3 +1136,43 @@ Possible Guidelines to Maintain Fairness & Ethics
   - Real-life scenario: All self-driving car companies developed mitigation plans for if a car gets into an accident
  
 ### Skewed Datasets
+When working on a machine learning application (particularly classification), the ratio of positive to negative can be very far off from 50:50. In these cases, usual error metrics like accuracy do not work well.
+
+Example - Rare Disease Classification:
+- Assume $y=1$ if disease is present, $y=0$ otherwise
+- If our training error $J_{train}$ is 1% (99% correct diagnoses), but only 0.5% of patients have the disease, then a simple `print("y=0")` will be more effective since it has an "error" of 0.5% (99.5% correct diagnoses). *A simple print statement outperformed a learning algorithm!*
+- However, as stated before, if the dataset is skewed, then the accuracy may not be a reliable error metric. Instead we can use another error metric **pair**: Precision/Recall
+
+To setup for precision/recall, we need to seperate the data and predictions into 4 categories:
+1. True Positive (Actual = 1, Predicted = 1)
+2. False Positive (Actual = 0, Predicted = 0)
+3. False Negative (Actual = 1, Predicted = 0)
+4. True Negative (Actual = 0, Predicted = 0)
+
+`(DEF)` **Precision**: Proportion of positive predictions that are actually correct; accuracy of positive predicitons
+- `(EQUATION)` $P = \frac{\textrm{True Positives}}{\textrm{Total Predicted Positive}}$
+- Example: Of all patients where we predicted $y=1$, what fraction actually have the rare disease?
+
+`(DEF)` **Recall**: Proportion of actual positive cases that are correctly identified by the model; how well the model finds relevant instances in a dataset
+- `(EQUATION)` $R = \frac{\textrm{True Positives}}{\textrm{Total Actual Positive}}$
+- Example: Of all patients that actually have the rare disease, what fraction did we correctly detect as having it?
+
+A learning algorithm with both low precision and low recall is not a useful algorithm.
+
+However, it sometimes may not be possible to get high precision and high recall -- there may be a trade-off. This depends on our **classifiaction threshold**.
+
+Suppose still the exmaple of rare diseases and $f(\vec{x})$ is the prediction:
+- If the threshold was set at 0.9 (we want to predict $y=1$ if we are very confident)
+  - ***Higher precision, lower recall***
+-If the threshold was set at 0.3 (we want to avoid missing too many cases of rare diseases, when in doubt predict $y=1$):
+ - ***Lower precision, higher recall***
+
+Thresholds are usually up to *you* and depend on the nature of an application.
+
+Luckily, there is one more useful metric that may help us: The F1 score
+
+`(DEF)` **F1 Score**: Combines precision ($P$) and recall ($R$) into a single score
+- `(EQUATION)` $F_1 = 2 \frac{PR}{P+R}$
+- Also called the harmonic mean
+
+
