@@ -47,6 +47,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.25 [Iterative ML Development Loop](#iterative-ml-development-loop)
       * 4.26 [Data Engineering](#data-engineering)
       * 4.27 [Full Cycle of an ML Project](#full-cycle-of-an-ml-project)
+      * 4.28 [Fairness, Bias, and Ethics](#fairness-bias-and-ethics)
      
         
    
@@ -1110,3 +1111,27 @@ Software engineering may be needed (**Machine Learning Operations** (MLOps)):
 - Logging
 - System monitoring (new data?)
 - Model updates
+
+### Fairness, Bias, and Ethics
+Machine learning algorithms today affect ***billions of people***. As such, it is necessary to approach designing machine learning systems with fairness and ethics in mind.
+
+In the past, there were times when ML systems discriminated/biased against various groups:
+- Hiring tool that discriminates against women
+- Facial recognition system matching dark-skinned individuals to criminal mugshots
+- Biased bank loan approvals
+- Toxic effect of reinforcing negative stereotypes
+
+There also have been adverse/negative use cases:
+- Deepfakes
+- Spreading toxic/incendiary speech through optimizing for engagement
+- Generating fake content for commercial and political purposes
+- Using ML to build products, commit fraud, etc.
+  - Spam vs. Anti-Spam; Fraud vs. Anti-Fraud
+
+Possible Guidelines to Maintain Fairness & Ethics
+- Get a diverse team to brainstorm things that might go wrong with emphasis on possible harm to vulnerable groups
+- Carry out a literature search on standards/guidelines for your industry
+- Audit systems against possible harm before deployment
+- Develop a mitigation plan (if applicable), and after deployment, monitor for possible harm
+  - Simple mitigation: rollback to a previous model where it was reasonably fair
+  - Real-life scenario: All self-driving car companies developed mitigation plans for if a car gets into an accident
