@@ -47,6 +47,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.26 [Data Engineering](#data-engineering)
       * 4.27 [Full Cycle of an ML Project](#full-cycle-of-an-ml-project)
       * 4.28 [Fairness, Bias, and Ethics](#fairness-bias-and-ethics)
+      * 4.29 [Skewed Datasets](#skewed-datasets)
      
         
    
@@ -1133,3 +1134,5 @@ Possible Guidelines to Maintain Fairness & Ethics
 - Develop a mitigation plan (if applicable), and after deployment, monitor for possible harm
   - Simple mitigation: rollback to a previous model where it was reasonably fair
   - Real-life scenario: All self-driving car companies developed mitigation plans for if a car gets into an accident
+ 
+### Skewed Datasets
