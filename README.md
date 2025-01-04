@@ -1,7 +1,7 @@
 # Machine Learning Notes 📝
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/thisisjonchen/mlnotes/main?display_timestamp=author&style=for-the-badge)
 
-My notes from Andrew Ng's "Machine Learning Specialization" 
+My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
 
 ## Table of Contents
 1. [Tools](#tools)
@@ -45,6 +45,8 @@ My notes from Andrew Ng's "Machine Learning Specialization"
       * 4.23 [Bias and Variance](#bias-and-variance)
       * 4.24 [Learning Curves](#learning-curves)
       * 4.25 [Iterative ML Development Loop](#iterative-ml-development-loop)
+      * 4.26 [Data Engineering](#data-engineering)
+     
         
    
 
@@ -1050,6 +1052,7 @@ Choosing a ***more promising direction*** can speed up your project many times o
 - These error categories may be overlapping and not mutually exclusive
 - For large misclassified examples, just get a small subset (~100+) to examine
 
+### Data Engineering
 Some tips/techniques on **engineering the data used by your system**:
 - **Adding Data**: Rather than adding more data on everything, add more data on the types where error analysis has indicated it might help
   - E.g., with the email spam classifier, go to *unlabeled* data and find more examples of say, Pharma-related spam if it came up often in error analysis
@@ -1057,16 +1060,26 @@ Some tips/techniques on **engineering the data used by your system**:
 - `(DEF)` **Data Augmentation**: modifying an *existing* training example to create a new training example
   - Typically used in audio and image classification
     - In image text recognition, it may involve rotations, distortions, etc. (like what you see in captchas)
-    - In speech recognition, it may involve adding noise (e.g., background, bad connection/quality, etc.)
+    - Speech recognition may involve adding noise (e.g., background, bad connection/quality, etc.)
   - However, usually **does not help** to add purely random/meaningless noise to your data
 - `(DEF)` **Data Synthesis**: synthetically generate realistic data
   - Often used in computer vision tasks and less for other applications
     - An example is photo-to-text
       - Real data may involve real-world photos
       - Synthetic data may involve typing in a text editor with different fonts
-     
-`(DEF)` **Conventional Model-Centric Approach**: AI = ***Code (algorithm/model)*** + Data
-- Significant emphasis on the code
 
-`(DEF)` **Data-Centric Approach**: AI = Code (algorithm/model) + ***Data***
-- More emphasis on data engineering and collection
+Approaches to developing AI:
+- `(DEF)` **Conventional Model-Centric Approach**: AI = ***Code (algorithm/model)*** + Data
+   - Significant emphasis on the code
+- `(DEF)` **Data-Centric Approach**: AI = Code (algorithm/model) + ***Data***
+   - More emphasis on data engineering and collection
+
+`(DEF)` **Transfer Learning**: Using models and data from a different task
+- Let's use the example of the handwritten digits classification 0-9 and an image classification NN with 1,000 classes/output units
+  - Since the image classification NN has already been trained, we could *re-use* some of its parameters $w, b$ (hidden layers only; output layer is excluded due to size difference) on the digits classification
+  - We have two options:
+     1. only train output layer parameters
+     2. train all parameters
+
+`(DEF)` **Supervised Pretraining**: Training a model on a very large dataset (possibly not a related topic, but a similar application) with the intention of then fine-tuning it to a specific topic
+- Downloading a pre-trained model is one way to get a jumpstart on your desired application and topic area
