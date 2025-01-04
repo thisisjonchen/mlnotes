@@ -1165,7 +1165,7 @@ Suppose still the exmaple of rare diseases and $f(\vec{x})$ is the prediction:
 - If the threshold was set at 0.9 (we want to predict $y=1$ if we are very confident)
   - ***Higher precision, lower recall***
 - If the threshold was set at 0.3 (we want to avoid missing too many cases of rare diseases, when in doubt predict $y=1$):
- - ***Lower precision, higher recall***
+   - ***Lower precision, higher recall***
 
 Thresholds are usually up to *you* and depend on the nature of an application.
 
