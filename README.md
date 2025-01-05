@@ -48,6 +48,10 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.27 [Full Cycle of an ML Project](#full-cycle-of-an-ml-project)
       * 4.28 [Fairness, Bias, and Ethics](#fairness-bias-and-ethics)
       * 4.29 [Skewed Datasets](#skewed-datasets)
+   * 4.3 [Decision Trees](#decision-trees)
+      * 4.31 [Decision Tree Model](#decision-tree-model)
+      * 4.32 [Learning Process](#learning-process)
+      
      
         
    
@@ -1175,4 +1179,21 @@ Luckily, there is one more useful metric that may help us: The F1 score
 - `(EQUATION)` $F_1 = 2 \frac{PR}{P+R}$
 - Also called the harmonic mean
 
+
+## Decision Trees
+Decision trees are one of the learning algorithms that is very powerful, widely used in many applicaitons and even often win in machine learning competitions. Despite this, they lack attention from academia and is not so popular when compared to its counterpart, neural networks.
+
+### Decision Tree Model
+The "tree" refers to one similar to a binary tree in computer science (not a biological tree in nature). 
+
+The structure is hard to illustrate in words [click here to see illustration](https://miro.medium.com/v2/resize:fit:1400/0*bBSGR61xG55j0fPP.png), but each root has a feature with various options to traverse downward (with a binary classification, the an example root may be "ear shape" and if "pointy", go left, else if "floppy", go right). The children roots are  **not the specific options**, but a new decision classfication (e.g., face shape, whiskers, etc.).
+
+The shapes around each feature has a meaning and may be seperated into two categories: decision nodes (ovals) and leaf nodes (rectangles).
+
+`(DEF)` **Decision Nodes**: All other nodes other than the leaf nodes. At each decision node, there are options to cause you to decide either to go left or right down the tree.
+- The root node (very top) is also a decision node
+
+`(DEF)` **Leaf Nodes**: The nodes at the very outside edges of the tree. These make a prediction.
+
+### Learning Process
 
