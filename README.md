@@ -1145,30 +1145,30 @@ When working on a machine learning application (particularly classification), th
 Example - Rare Disease Classification:
 - Assume $y=1$ if disease is present, $y=0$ otherwise
 - If our training error $J_{train}$ is 1% (99% correct diagnoses), but only 0.5% of patients have the disease, then a simple `print("y=0")` will be more effective since it has an "error" of 0.5% (99.5% correct diagnoses). *A simple print statement outperformed a learning algorithm!*
-- However, as stated before, if the dataset is skewed, then the accuracy may not be a reliable error metric. Instead we can use another error metric **pair**: Precision/Recall
+- However, as stated before, if the dataset is skewed, the accuracy may not be a reliable error metric. Instead, we can use another error metric **pair**: Precision/Recall
 
-To setup for precision/recall, we need to seperate the data and predictions into 4 categories:
+To setup for precision/recall, we need to separate the data and predictions into 4 categories:
 1. True Positive (Actual = 1, Predicted = 1)
 2. False Positive (Actual = 0, Predicted = 0)
 3. False Negative (Actual = 1, Predicted = 0)
 4. True Negative (Actual = 0, Predicted = 0)
 
-`(DEF)` **Precision**: Proportion of positive predictions that are actually correct; accuracy of positive predicitons
+`(DEF)` **Precision**: Proportion of positive predictions that are actually correct; accuracy of positive predictions
 - `(EQUATION)` $P = \frac{\textrm{True Positives}}{\textrm{Total Predicted Positive}}$
 - Example: Of all patients where we predicted $y=1$, what fraction actually have the rare disease?
 
-`(DEF)` **Recall**: Proportion of actual positive cases that are correctly identified by the model; how well the model finds relevant instances in a dataset
+`(DEF)` **Recall**: Proportion of actual positive cases that the model correctly identifies; how well the model finds relevant instances in a dataset
 - `(EQUATION)` $R = \frac{\textrm{True Positives}}{\textrm{Total Actual Positive}}$
 - Example: Of all patients that actually have the rare disease, what fraction did we correctly detect as having it?
 
 A learning algorithm with both low precision and low recall is not a useful algorithm.
 
-However, it sometimes may not be possible to get high precision and high recall -- there may be a trade-off. This depends on our **classifiaction threshold**.
+However, getting high precision and high recall may not be possible -- there may be a trade-off. This depends on our **classification threshold**.
 
-Suppose still the exmaple of rare diseases and $f(\vec{x})$ is the prediction:
+Suppose still the example of rare diseases and $f(\vec{x})$ is the prediction:
 - If the threshold was set at 0.9 (we want to predict $y=1$ if we are very confident)
   - ***Higher precision, lower recall***
-- If the threshold was set at 0.3 (we want to avoid missing too many cases of rare diseases, when in doubt predict $y=1$):
+- If the threshold was set at 0.3 (we want to avoid missing too many cases of rare diseases when in doubt, predict $y=1$):
    - ***Lower precision, higher recall***
 
 Thresholds are usually up to *you* and depend on the nature of an application.
@@ -1181,14 +1181,14 @@ Luckily, there is one more useful metric that may help us: The F1 score
 
 
 ## Decision Trees
-Decision trees are one of the learning algorithms that is very powerful, widely used in many applicaitons and even often win in machine learning competitions. Despite this, they lack attention from academia and is not so popular when compared to its counterpart, neural networks.
+Decision trees are one of the learning algorithms that are very powerful, widely used in many applications, and even often win in machine learning competitions. Despite this, they lack attention from academia and are not so popular compared to their counterparts, neural networks.
 
 ### Decision Tree Model
 The "tree" refers to one similar to a binary tree in computer science (not a biological tree in nature). 
 
-The structure is hard to illustrate in words [click here to see illustration](https://miro.medium.com/v2/resize:fit:1400/0*bBSGR61xG55j0fPP.png), but each root has a feature with various options to traverse downward (with a binary classification, the an example root may be "ear shape" and if "pointy", go left, else if "floppy", go right). The children roots are  **not the specific options**, but a new decision classfication (e.g., face shape, whiskers, etc.).
+The structure is hard to illustrate in words [click here to see illustration](https://miro.medium.com/v2/resize:fit:1400/0*bBSGR61xG55j0fPP.png), but each root has a feature with various options to traverse downward (with binary classification, the example root may be "ear shape" and if "pointy", go left, else if "floppy", go right). The children's roots are **not the specific options**, but a new decision classification (e.g., face shape, whiskers, etc.).
 
-The shapes around each feature has a meaning and may be seperated into two categories: decision nodes (ovals) and leaf nodes (rectangles).
+The shapes around each feature have a meaning and may be separated into two categories: decision nodes (ovals) and leaf nodes (rectangles).
 
 `(DEF)` **Decision Nodes**: All other nodes other than the leaf nodes. At each decision node, there are options to cause you to decide either to go left or right down the tree.
 - The root node (very top) is also a decision node
@@ -1196,4 +1196,10 @@ The shapes around each feature has a meaning and may be seperated into two categ
 `(DEF)` **Leaf Nodes**: The nodes at the very outside edges of the tree. These make a prediction.
 
 ### Learning Process
-
+With decision trees, there are some decisions we need to consider on our own:
+1. How to choose what feature to split on at each node to maximize purity (or minimize impurity)
+2. When do you stop splitting? (Splitting too much runs the risk of overfitting)
+   - When a node is 100% one class
+   - When splitting a node will result in the tree exceeding a maximum (user-set) depth
+   - When improvements in purity score are below a threshold
+   - When the number of examples in a node is below a threshold
