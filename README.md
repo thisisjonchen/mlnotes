@@ -1203,3 +1203,24 @@ With decision trees, there are some decisions we need to consider on our own:
    - When splitting a node will result in the tree exceeding a maximum (user-set) depth
    - When improvements in purity score are below a threshold
    - When the number of examples in a node is below a threshold
+  
+`(DEF)` **Entropy**: A measure of *impurity*
+- Commonly with the notation $H(p_1)$, where $p_1$ = fraction of positive examples according to the classification output criteria (e.g., cat or not cat)
+- If $p_1$ is the fraction of positive examples, $p_0$ is the fraction of negative examples and is $p_0 = 1 - p_1$
+- `(EQUATION)` $H(p_1) = -p_1\log_2(p_1)-(1-p_1)\log_2(1-p_1)$
+   - *NOTE*: It is possible to get $0\log(0)$ if $p_1 = 1$, and it is known that $\log(0) = - \infty$. However, just assume that this term equals $0$.
+- $0 \le H(p_1) \le 1$, where $1$ is the highest entropy (impurity)
+
+`(DEF)` **Information Gain**: Reduction of entropy
+- `(EQUATION)` $w^{side} = \frac{\textrm{num of entries on a side}}{\textrm{num of total entries}}$
+- `(EQUATION)` Reduction = $H(p_1^{\textrm{root}}) - (w^{\textrm{left}} H(p_1^{\textrm{left}}) + w^{\textrm{right}} H(p_1^{\textrm{right}}))$
+
+**Decision Tree Learning Process**:
+1. Start with all examples at the root node
+2. Calculate information gain for all possible features and pick the one with **highest information gain**
+3. Split the dataset according to the selected feature and create left/right branches of the tree
+4. Keep repeating the splitting process until the stopping criteria (1 or more) are met (**recursive splitting**):
+   - When a node is 100% one class
+   - When splitting a node will result in the tree exceeding a maximum (user-set) depth
+   - When improvements in purity score are below a threshold
+   - When the number of examples in a node is below a threshold
