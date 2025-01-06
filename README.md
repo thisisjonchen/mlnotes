@@ -1238,7 +1238,7 @@ One-hot encoding can also be applied to neural networks/logistic regression.
 **Continuous Valued Features**:\
 In many applications, there are features where there is no binary classification, such as weight. How can we represent them in decision trees? Just as before: splitting. 
 
-We allow the learning algorithm to find the best threshold to split for the highest information gain.
+The recommended way to find the best split for a feature is to choose $(n-1)$ mid-points between $n$ examples as possible splits and find the split that gives the highest information gain.
 
 ### Regression Trees
 Rather than taking decision trees as classification algorithms where they make a binary guess of yes (1) or no (0), we can also generalize decision trees to be regression algorithms that can predict a number.
