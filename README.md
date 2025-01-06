@@ -1250,4 +1250,4 @@ Rather than focusing on reducing entropy, we will instead try to reduce the weig
   - $x_i$ = the value of one observation
   - $\bar{x}$ = the mean value of all observations
   - $n$ = the number of observations
-- `(EQUATION)` Weighted Variance Reduction = $V(\textrm{root}) - (w^{\textrm{left}} \times V(\textrm{left}) + w^{\textrm{right}} \times V(\textrm{right}))$
+- `(EQUATION)` Weighted Variance Reduction = $V(\textrm{root}) - (w^{\textrm{left}} V(\textrm{left}) + w^{\textrm{right}} V(\textrm{right}))$
