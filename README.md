@@ -813,12 +813,12 @@ logits = model(X) # no longer outputting a, but rather z (intermediate val)
 f_x = tf.nn.softmax(logits)
 ```
 
-`(DEF)` **Logits**: An intermediate value $z$ where TensorFlow can rearrage terms to make an algorithm be more numerically accurate, at the cost of being less readable due to "magic"
+`(DEF)` **Logits**: An intermediate value $z$ where TensorFlow can rearrange terms to make an algorithm more numerically accurate, at the cost of being less readable due to "magic"
 
-We can also use the parameter `from_logits=True` in our logistic regression algorithm to make it more numerically accurate, but is not totally needed.
+We can also use the parameter `from_logits=True` in our logistic regression algorithm to make it more numerically accurate, but it is not totally needed.
 
 ### Multi-Label Classification
-While seemingly like multiclass classification where we have one output and multiple labels (like instead of 0/1, we can have 0-9), multi-label classifcation refers to just multiple labels (outputs).
+While seemingly like multiclass classification where we have one output and multiple labels (like instead of 0/1, we can have 0-9), multi-label classification refers to just multiple labels (outputs).
 
 Street Image Example:
 - Is there a car? Yes (1)
@@ -1214,7 +1214,7 @@ With decision trees, there are some decisions we need to consider on our own:
 - Commonly with the notation $H(p_1)$, where $p_1$ = fraction of positive examples according to the classification output criteria (e.g., cat or not cat)
 - If $p_1$ is the fraction of positive examples, $p_0$ is the fraction of negative examples and is $p_0 = 1 - p_1$
 - `(EQUATION)` $H(p_1) = -p_1\log_2(p_1)-(1-p_1)\log_2(1-p_1)$
-   - *NOTE*: It is possible to get $0\log(0)$ if $p_1 = 1$, and it is known that $\log(0) = - \infty$. However, just assume that this term equals $0$.
+   - *NOTE*: It is possible to get $0\log(0)$ if $p_1 = 1$ or $p_1 = 0$, and it is known that $\log(0) = - \infty$. However, just assume that this term equals $0$.
 - $0 \le H(p_1) \le 1$, where $1$ is the highest entropy (impurity)
 
 `(DEF)` **Information Gain**: Reduction of entropy
