@@ -53,7 +53,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.32 [Learning Process](#learning-process)
       * 4.33 [One-Hot Encoding](#one-hot-encoding)
       * 4.34 [Regression Trees](#regression-trees)
-     
+      * 4.35 [Tree Ensembles](#tree-ensembles)
         
    
 
@@ -1251,3 +1251,19 @@ Rather than focusing on reducing entropy, we will instead try to reduce the weig
   - $\bar{x}$ = the mean value of all observations
   - $n$ = the number of observations
 - `(EQUATION)` Weighted Variance Reduction = $V(\textrm{root}) - (w^{\textrm{left}} V(\textrm{left}) + w^{\textrm{right}} V(\textrm{right}))$
+
+### Tree Ensembles
+A single decision tree can be highly sensitive to small changes in data. One solution to make the algorithm less sensitive is building many decision trees (a tree ensemble).
+
+`(DEF)` **Tree Ensemble**: A collection of different decision trees
+- Q: How can we split features into different decision trees?
+  - A: By changing the root feature.
+  - *NOTE*: decision nodes can reuse features from different trees in the ensemble
+- Each tree makes a binary inference (prediction 0/1) based on classification (e.g., cat or not cat) as a "vote"
+  The majority wins, so there is always an odd number of trees in an ensemble
+
+To build a tree ensemble, a technique called **sampling with replacement** is required:
+- Imagine putting some colored tokens in a bag, shaking it, and taking one out (also noting what color it was). That is sampling. The "with replacement" part refers to returning the token to the bag for the next iteration.
+  - Why is "with replacement" important? Without replacement, the new training set will always be identical to the original training set
+- This is needed because it will help construct multiple random training sets that are all slightly different from the original training set 
+
