@@ -55,6 +55,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.34 [Regression Trees](#regression-trees)
       * 4.35 [Tree Ensembles](#tree-ensembles)
       * 4.36 [XGBoost](#xgboost)
+      * 4.37 [When to Use Decision Trees](#when-to-use-decision-trees)
         
    
 
@@ -1295,3 +1296,18 @@ There are many different ways to build decision trees and decision tree ensemble
 - Recall our Bagged Decision Tree algorithm. We are going to tweak it slightly under "Use sampling with replacement to create a new training set of size $m$"
 - The methodology is similar, but instead of picking from all examples with equal (1/$m$) probability, make it more likely to pick misclassified examples from *previously trained trees*
   - Looks at what we are not doing "quite well at" and tries to build future decision trees to be better at that misclassification problem
+ 
+### When to Use Decision Trees
+Decision Trees and Tree Ensembles:
+- Works well on tabular (structured/spreadsheet) data
+- Not recommended for unstructured data (images, audio, or text)
+- Fast to train
+- Small decision trees may be human-interpretable
+- Most of the time, use XGBoost
+
+Neural Networks:
+-  Works well on all types of data, including tabular (structured) and unstructured data
+-  May be slower than a decision tree
+-  Works with transfer learning
+-  When building a system of multiple models working together, it might be easier to string together multiple neural networks
+
