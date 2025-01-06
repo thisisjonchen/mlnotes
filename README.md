@@ -54,6 +54,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.33 [One-Hot Encoding](#one-hot-encoding)
       * 4.34 [Regression Trees](#regression-trees)
       * 4.35 [Tree Ensembles](#tree-ensembles)
+      * 4.36 [XGBoost](#xgboost)
         
    
 
@@ -1259,11 +1260,38 @@ A single decision tree can be highly sensitive to small changes in data. One sol
 - Q: How can we split features into different decision trees?
   - A: By changing the root feature.
   - *NOTE*: decision nodes can reuse features from different trees in the ensemble
-- Each tree makes a binary inference (prediction 0/1) based on classification (e.g., cat or not cat) as a "vote"
-  The majority wins, so there is always an odd number of trees in an ensemble
+- Each tree makes a binary inference (prediction 0/1) based on classification (e.g., cat or not cat) as a "vote". The majority wins, so an ensemble always has an odd number of trees.
 
 To build a tree ensemble, a technique called **sampling with replacement** is required:
 - Imagine putting some colored tokens in a bag, shaking it, and taking one out (also noting what color it was). That is sampling. The "with replacement" part refers to returning the token to the bag for the next iteration.
   - Why is "with replacement" important? Without replacement, the new training set will always be identical to the original training set
 - This is needed because it will help construct multiple random training sets that are all slightly different from the original training set 
 
+There are many tree ensemble algorithms, and they work much better than a single decision tree. 
+
+One way of generating a tree sample (Bagged Decision Tree):
+- Assume a training set of size $m$
+- For $b = 1$ to $B$:
+  - Use sampling with replacement to create a new training set of size $m$
+  - Train a decision tree on the new dataset
+  - Setting $B$ to a large number never hurts performance, but beyond a certain point, you end up with diminishing returns and do not get much larger when $B \approx 100+$. Many recommend 64 to 128 as the maximum.
+ 
+We can improve upon this with the **Random Forest Algorithm**:
+- When choosing a feature to split at each node, if $n$ features are available, pick a random subset of $k < n$ features and allow the algorithm to choose only from that subset of features.
+- A common choice is to set $k = \sqrt{n}$
+
+### XGBoost
+There are many different ways to build decision trees and decision tree ensembles, but by far, the most commonly used implementation of decision trees/ensembles is with an open-source algorithm called **XGBoost**.
+
+`(DEF)` **XGBoost**: Stands for Extreme Gradient Boosting; a scalable gradient-boosted decision tree machine learning library
+- Fast, efficient implementation
+- Good choice of default splitting criteria and criteria for when to stop splitting
+- Built-in regularization to prevent overfitting
+- Highly competitive algorithm for ML competitions (e.g., Kaggle)
+- `from xgboost import XGBClassifier()` for classification
+- `from xgboost import XGBRegressor()` for regression
+
+**Boosted Trees Intuition**:
+- Recall our Bagged Decision Tree algorithm. We are going to tweak it slightly under "Use sampling with replacement to create a new training set of size $m$"
+- The methodology is similar, but instead of picking from all examples with equal (1/$m$) probability, make it more likely to pick misclassified examples from *previously trained trees*
+  - Looks at what we are not doing "quite well at" and tries to build future decision trees to be better at that misclassification problem
