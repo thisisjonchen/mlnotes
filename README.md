@@ -51,7 +51,8 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
    * 4.3 [Decision Trees](#decision-trees)
       * 4.31 [Decision Tree Model](#decision-tree-model)
       * 4.32 [Learning Process](#learning-process)
-      
+      * 4.33 [One-Hot Encoding](#one-hot-encoding)
+      * 4.34 [Regression Trees](#regression-trees)
      
         
    
@@ -1173,7 +1174,7 @@ Suppose still the example of rare diseases and $f(\vec{x})$ is the prediction:
 
 Thresholds are usually up to *you* and depend on the nature of an application.
 
-Luckily, there is one more useful metric that may help us: The F1 score
+Luckily, there is one more useful metric that may help us: **The F1 score**
 
 `(DEF)` **F1 Score**: Combines precision ($P$) and recall ($R$) into a single score
 - `(EQUATION)` $F_1 = 2 \frac{PR}{P+R}$
@@ -1224,3 +1225,29 @@ With decision trees, there are some decisions we need to consider on our own:
    - When splitting a node will result in the tree exceeding a maximum (user-set) depth
    - When improvements in purity score are below a threshold
    - When the number of examples in a node is below a threshold
+
+### One-Hot Encoding
+Rather than classifying with just one feature in the decision nodes, we can split that one feature into three or more specific features. This allows for more than two options for a decision.
+- E.g., Ear Shape (Pointy/Oval) &#8594; Pointy Ears (0/1), Floppy Ears (0/1), Oval Ears (0/1)
+- If a categorical feature *can* take on $k$ values, create $k$ binary features (0/1 valued)
+
+The table becomes a bit more detailed, too, which you can view [here](https://global.discourse-cdn.com/dlai/original/3X/f/0/f0c2c26af0a928152acf23e771de087ac0ecd0bb.jpeg). Note in each row only one column has a hot (1) feature.
+
+One-hot encoding can also be applied to neural networks/logistic regression.
+
+**Continuous Valued Features**:\
+In many applications, there are features where there is no binary classification, such as weight. How can we represent them in decision trees? Just as before: splitting. 
+
+We allow the learning algorithm to find the best threshold to split for the highest information gain.
+
+### Regression Trees
+Rather than taking decision trees as classification algorithms where they make a binary guess of yes (1) or no (0), we can also generalize decision trees to be regression algorithms that can predict a number.
+
+Rather than focusing on reducing entropy, we will instead try to reduce the weighted **variance** of values $Y$ at each subset. 
+
+`(DEF)` **Variance**: How wide a set of numbers is
+- `(EQUATION)` $V(\textrm{node}) = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}$
+  - $x_i$ = the value of one observation
+  - $\bar{x}$ = the mean value of all observations
+  - $n$ = the number of observations
+- `(EQUATION)` Weighted Variance Reduction = $V(\textrm{root}) - (w^{\textrm{left}} \times V(\textrm{left}) + w^{\textrm{right}} \times V(\textrm{right}))$
