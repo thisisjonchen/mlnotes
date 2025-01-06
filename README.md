@@ -71,7 +71,10 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
     - sklearn.linear_model.SGDRegressor: gradient descent regression model (performs best with normalized features)
     - sklearn.preprocessing.StandardScaler: performs z-score normalization
     - sklearn.linear_model: contains LogisticRegression + LinearRegression
-
+  - XGBoost, decision tree library
+    - `from xgboost import XGBClassifier()` for classification
+    - `from xgboost import XGBRegressor()` for regression
+  - Pandas, data analysis and manipulation
 
 # What is Machine Learning?
 Arthur Samuel, a pioneer in CS + AI in his time, defined machine learning as "...[the] field of study that gives computers the ability to learn without being explicitly programmed" (1959). He helped evolve AI by writing the first checkers-playing game that learned from thousands of games against itself.
