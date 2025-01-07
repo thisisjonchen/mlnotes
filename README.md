@@ -1334,9 +1334,11 @@ Recall that unsupervised learning is learning and structuring from data that onl
 - Applications of clustering: Grouping similar news, market segmentation (identifying various groups), DNA genetic traits data, etc.
 
 **K-Means Clustering Algorithm**:
-- Preparation: Randomly initialize $K$ cluster centroids ($\mu_1, \mu_2, ..., \mu_K$) on an unlabeled training set 
+- Initialization: Randomly initialize $K$ cluster centroids ($\mu_1, \mu_2, ..., \mu_K$) on an unlabeled training set
+   - Choose $K < m$
    - `(DEF)` **Cluster Centroids**: Centers of clusters, initially randomly guessed but will move as more iterations of k-means occur
    - The number of cluster centroids may vary depending on preference (e.g., $K = 3$ for sizes S, M, LG)
+   - Sometimes, the guesses are not the best. We can run the initialization multiple times (maybe ~50 to 1000 times) and compare them using the distortion function (**random initialization**). Select the one with the lowest distortion (cost)
 1. Assign each point to its closest **cluster centroid**
 2. Recompute centroids by taking an average of its group of points
    - If a cluster had zero points (dividing by 0 points for mean would be undefined), then we just eliminate that cluster
@@ -1354,3 +1356,4 @@ In supervised learning, the goal has always been to optimize a cost function wit
 
 `(DEF)` **Distortion Function**: Another name for cost function in clustering
 - `(EQUATION)` $J(c^{(1)}, ..., c^{(m)}, \mu_1, ..., \mu_K) = \frac{1}{m} \sum_{i=1}^{m} || x^{(i)} - \mu_{c^{(i)}} || ^2$
+- As this function is being optimized, it is *guaranteed* to go down or stay the same on each step of k-means. If it goes up, there is likely a bug in the code.
