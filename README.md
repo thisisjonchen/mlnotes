@@ -1337,7 +1337,7 @@ Recall that unsupervised learning is learning and structuring from data that onl
 - Initialization: Randomly initialize $K$ cluster centroids ($\mu_1, \mu_2, ..., \mu_K$) on an unlabeled training set
    - Choose $K < m$
    - `(DEF)` **Cluster Centroids**: Centers of clusters, initially randomly guessed but will move as more iterations of k-means occur
-   - The number of cluster centroids may vary depending on preference (e.g., $K = 3$ for sizes S, M, LG)
+   - The number of clusters and cluster centroids may be ambiguous
    - Sometimes, the guesses are not the best. We can run the initialization multiple times (maybe ~50 to 1000 times) and compare them using the distortion function (**random initialization**). Select the one with the lowest distortion (cost)
 1. Assign each point to its closest **cluster centroid**
 2. Recompute centroids by taking an average of its group of points
@@ -1357,3 +1357,10 @@ In supervised learning, the goal has always been to optimize a cost function wit
 `(DEF)` **Distortion Function**: Another name for cost function in clustering
 - `(EQUATION)` $J(c^{(1)}, ..., c^{(m)}, \mu_1, ..., \mu_K) = \frac{1}{m} \sum_{i=1}^{m} || x^{(i)} - \mu_{c^{(i)}} || ^2$
 - As this function is being optimized, it is *guaranteed* to go down or stay the same on each step of k-means. If it goes up, there is likely a bug in the code.
+
+**Choosing a value of $K$**:
+- `(DEF)` **Elbow Method**: Take the cost function $J$ as a function of $K$ clusters and find where the point decrease of $J$ where it starts plateauing. That point of $K$ should be your answer.
+   - Andrew does not endorse this method
+   - Don't choose $K$ just to minimize cost $J$, since the $J$ always decreases
+- Often, you want to get clusters for some later (downstream) purpose. Evaluate K-means based on how well it performs on that later purpose
+   - E.g., T-Shirt sizes, select $K=3$ for sizes S, M, and LG
