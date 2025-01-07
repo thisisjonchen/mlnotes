@@ -59,6 +59,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
 5. [Beyond Supervised Learning](#beyond-supervised-learning)
    * 5.1 [Unsupervised Learning](#unsupervised-learning)
       * 5.11 [Clustering](#clustering)
+      * 5.12 [Optimization Objective](#optimization-objective)
    
 
 # Tools
@@ -1337,10 +1338,19 @@ Recall that unsupervised learning is learning and structuring from data that onl
    - `(DEF)` **Cluster Centroids**: Centers of clusters, initially randomly guessed but will move as more iterations of k-means occur
    - The number of cluster centroids may vary depending on preference (e.g., $K = 3$ for sizes S, M, LG)
 1. Assign each point to its closest **cluster centroid**
-   - $c^{(i)}$ = index (from 1 to $K$) of cluster centroid closest to $x^{(i)}$
 2. Recompute centroids by taking an average of its group of points
-   - $\mu_k$ = average (mean) of points assigned to cluster $k$
    - If a cluster had zero points (dividing by 0 points for mean would be undefined), then we just eliminate that cluster
 3. Repeat until no points are reassigned (convergence)
 
 K-Means may also be applicable to unlabeled datasets where clusters are not well separated.
+
+### Optimization Objective
+In supervised learning, the goal has always been to optimize a cost function with various algorithms like gradient descent. It turns out that clustering is also optimizing a specific cost function, but it is not with gradient descent.
+
+**K-Means Optimization Objective**:
+- $c^{(i)}$ = index (from 1 to $K$) of cluster centroid closest to $x^{(i)}$
+- $\mu_k$ = cluster centroid $k$
+- $\mu_c^{(i)}$ = cluster centroid  of cluster to which example $x^{(i)}$ has been assigned
+
+`(DEF)` **Distortion Function**: Another name for cost function in clustering
+- `(EQUATION)` $J(c^{(1)}, ..., c^{(m)}, \mu_1, ..., \mu_K) = \frac{1}{m} \sum_{i=1}^{m} || x^{(i)} - \mu_{c^{(i)}} || ^2$
