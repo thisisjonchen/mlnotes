@@ -56,7 +56,9 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.35 [Tree Ensembles](#tree-ensembles)
       * 4.36 [XGBoost](#xgboost)
       * 4.37 [When to Use Decision Trees](#when-to-use-decision-trees)
-        
+5. [Beyond Supervised Learning](#beyond-supervised-learning)
+   * 5.1 [Unsupervised Learning](#unsupervised-learning)
+      * 5.11 [Clustering](#clustering)
    
 
 # Tools
@@ -1314,3 +1316,31 @@ Neural Networks:
 -  Works with transfer learning
 -  When building a system of multiple models working together, it might be easier to string together multiple neural networks
 
+
+# Beyond Supervised Learning
+This section will touch on the following topics:
+- Unsupervised Learning
+  - Clustering
+  - Anomaly Detection
+- Recommender Systems
+- Reinforcement Learning
+
+## Unsupervised Learning
+Recall that unsupervised learning is learning and structuring from data that only comes with inputs (x), not output labels (y). This type of learning is particularly helpful in finding patterns in a data pool (unstructured data) with assistance from an algorithm called **clustering**.
+
+### Clustering
+`(DEF)` **Clustering**: An algorithm that looks at a number of data points and automatically finds data points that are related/similar to each other
+- Applications of clustering: Grouping similar news, market segmentation (identifying various groups), DNA genetic traits data, etc.
+
+**K-Means Clustering Algorithm**:
+- Preparation: Randomly initialize $K$ cluster centroids ($\mu_1, \mu_2, ..., \mu_K$) on an unlabeled training set 
+   - `(DEF)` **Cluster Centroids**: Centers of clusters, initially randomly guessed but will move as more iterations of k-means occur
+   - The number of cluster centroids may vary depending on preference (e.g., $K = 3$ for sizes S, M, LG)
+1. Assign each point to its closest **cluster centroid**
+   - $c^{(i)}$ = index (from 1 to $K$) of cluster centroid closest to $x^{(i)}$
+2. Recompute centroids by taking an average of its group of points
+   - $\mu_k$ = average (mean) of points assigned to cluster $k$
+   - If a cluster had zero points (dividing by 0 points for mean would be undefined), then we just eliminate that cluster
+3. Repeat until no points are reassigned (convergence)
+
+K-Means may also be applicable to unlabeled datasets where clusters are not well separated.
