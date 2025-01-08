@@ -1,7 +1,7 @@
 # Machine Learning Notes 📝
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/thisisjonchen/mlnotes/main?display_timestamp=author&style=for-the-badge)
 
-My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
+My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
 
 ## Table of Contents
 1. [Tools](#tools)
@@ -61,6 +61,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.11 [Clustering](#clustering)
       * 5.12 [Optimization Objective](#optimization-objective)
       * 5.13 [Anomaly Detection](#anomaly-detection)
+      * 5.14 [Anomaly Detection vs. Supervised Learning](#anomaly-detection-vs-supervised-learning)
    
 
 # Tools
@@ -1403,3 +1404,27 @@ Also known as the normal distribution, it will be useful in density estimation
 2. Fit parameters $\mu_1, ... \mu_n, \sigma_1^2, ... \sigma_n^2$ (use equations from gaussian distribution)
 3. Given new example $x$, compute $p(x)$
 4. Flag anomaly if $p(x) < \epsilon$
+
+**The Importance of Real-Number Evaluation**
+- When developing a learning algorithm (choosing features, etc.), making decisions is much easier if we have a way of evaluating our learning algorithm (also called real-number evaluation)
+- Assume we have some labeled data of anomalous and non-anomalous examples (y=1/0)
+- We will be using the supervised learning idea of labeled data with CV and test sets to evaluate our algorithm (only a small portion of anomalies)
+  - The training set will have only normal (non-anomalous) examples and will remain unlabeled
+  - The CV and test sets will include a few anomalous examples but mostly normal examples
+- Use CV set to choose parameter $\epsilon$
+
+### Anomaly Detection vs. Supervised Learning
+Above, we discussed using *some* labeled data in the evaluation of our anomaly detection algorithm. Why not just go for supervised learning?
+
+When to use Anomaly Detection:
+- Very small number of positive examples ( $y=1$ ) (0-20 is common)
+- Large number of negative ( $y=0$ ) examples
+- Many different "types of anomalies; it is hard for any algorithm to learn from positive examples what the anomalies look like
+- Future anomalies may look nothing like any of the previous anomalous examples (unpredictable in the future)
+- Ex: fraud detection, manufacturing (find new previously unseen defects), monitoring machines in data center
+
+When to use Supervised Learning:
+- Large number of positive and negative examples
+- Enough positive examples for the algorithm to get a sense of what positive examples are like
+- Future positive examples likely to be similar to ones in the training set (predictable in the future)
+- Ex: Email spam classification, manufacturing (find previously seen defects), weather prediction, disease classification
