@@ -62,6 +62,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.12 [Optimization Objective](#optimization-objective)
       * 5.13 [Anomaly Detection](#anomaly-detection)
       * 5.14 [Anomaly Detection vs. Supervised Learning](#anomaly-detection-vs-supervised-learning)
+     
    
 
 # Tools
@@ -1412,6 +1413,14 @@ Also known as the normal distribution, it will be useful in density estimation
   - The training set will have only normal (non-anomalous) examples and will remain unlabeled
   - The CV and test sets will include a few anomalous examples but mostly normal examples
 - Use CV set to choose parameter $\epsilon$
+
+**Choosing Features**:
+- Replace highly non-Gaussian features with Gaussian features as our Gaussian probability functions $p(x)$ are more likely to fit and find anomalies with Gaussian features
+  - Some potential functions to try to replace $x$: $log(x), log(x+c), x^{\frac{1}{2}}, x^{\frac{1}{n}}$
+  - $c$ = some random constant (add a small number like 0.0001 if min(x) is 0 for log)
+  - Whatever transformation you apply to the training set, apply also to the CV and test sets as well
+- Q: With anomaly detection, there is a threshold $\epsilon$ for $p(x)$ to separate anomalous and non-anomalous examples, but what if both are large and comparable to one another?
+  - A: Add new features
 
 ### Anomaly Detection vs. Supervised Learning
 Above, we discussed using *some* labeled data in the evaluation of our anomaly detection algorithm. Why not just go for supervised learning?
