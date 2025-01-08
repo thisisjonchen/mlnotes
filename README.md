@@ -61,6 +61,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.11 [Clustering](#clustering)
       * 5.12 [Optimization Objective](#optimization-objective)
       * 5.13 [Anomaly Detection](#anomaly-detection)
+      * 5.14 [Gaussian Distribution](#gaussian-distribution)
    
 
 # Tools
@@ -1372,10 +1373,10 @@ Whereas clustering algorithms group similar events/values, anomaly detection loo
 How can we develop such an algorithm? With a technique called **density estimation**.
 
 **Density Estimation**:
-- Helps determine the proability of $x$ ($p(x)$)being seen in dataset by determining regions of high probability (denser regions of $x$) and low probability (more sparse regions of $x$)
+- Helps determine the proability of $x$ ( $p(x)$ )being seen in dataset by determining regions of high probability (denser regions of $x$) and low probability (more sparse regions of $x$)
 - $\epsilon$ = probability threshold
 - $p(x_{test}) < \epsilon$ = potential anomaly
-- p(x_{test}) \ge \epsilon$ = ok (normal)
+- $p(x_{test}) \ge \epsilon$ = ok (normal)
 
 Example Applications of Anomaly Detection:
 - Fraud detection:
@@ -1385,3 +1386,9 @@ Example Applications of Anomaly Detection:
 - Manufacturing
   - $x^{(i)}$ = features of product $i$ (airplane engines, circuits, phones)
     
+### Gaussian Distribution
+Also known as the normal distribution, will be useful in density estimation
+- Assume $x$ is a number
+- Probability of $x$ is determined by a Gaussian with mean $\mu$ (signfying the central point in the curve) with variance $\sigma^2$
+- Contains a bell-shaped curve, $\sigma$ is the standard deviation
+- `(EQUATION)` $p(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{\frac{-(x-\mu)^2}{2\sigma^2}}$
