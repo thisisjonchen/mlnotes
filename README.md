@@ -1426,7 +1426,7 @@ Also known as the normal distribution, it will be useful in density estimation
 Above, we discussed using *some* labeled data in the evaluation of our anomaly detection algorithm. Why not just go for supervised learning?
 
 When to use Anomaly Detection:
-- Very small number of positive examples ( $y=1$ ) (0-20 is common)
+- Very small number of positive examples/anomalies ( $y=1$ ) (0-20 is common)
 - Large number of negative ( $y=0$ ) examples
 - Many different "types of anomalies; it is hard for any algorithm to learn from positive examples what the anomalies look like
 - Future anomalies may look nothing like any of the previous anomalous examples (unpredictable in the future)
