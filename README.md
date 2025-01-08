@@ -1159,7 +1159,7 @@ Example - Rare Disease Classification:
 
 To setup for precision/recall, we need to separate the data and predictions into 4 categories:
 1. True Positive (Actual = 1, Predicted = 1)
-2. False Positive (Actual = 0, Predicted = 0)
+2. False Positive (Actual = 0, Predicted = 1)
 3. False Negative (Actual = 1, Predicted = 0)
 4. True Negative (Actual = 0, Predicted = 0)
 
