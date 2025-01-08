@@ -61,7 +61,6 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.11 [Clustering](#clustering)
       * 5.12 [Optimization Objective](#optimization-objective)
       * 5.13 [Anomaly Detection](#anomaly-detection)
-      * 5.14 [Gaussian Distribution](#gaussian-distribution)
    
 
 # Tools
@@ -599,7 +598,7 @@ The fundamental building block of most modern neural networks is a **layer of ne
 - Every layer inputs a vector of numbers and applies a bunch of logistic regression units to it, and then outputs another vector of numbers (activations) that will be the input into subsequent layers until the final/output layer's prediction of the NN that we then can then threshold
 - The *number of layers* includes all hidden layers + output layer, excluding the input layer, and is indexed from 1 (where the input layer is 0)
 
-A neural network layer comprises many neurons, each with its own weight $w$ and bias $b$. These parameters are considered in their respective activations $g(z).
+A neural network layer comprises many neurons, each with its own weight $w$ and bias $b$. These parameters are considered in their respective activations $g(z)$.
 - By convention, the activations per layer are denoted by $a^{[i]}$, where $i$ is the index of the particular layer.
 - $a^{[1]}$ means the activations from layer 1, $a^{[2]}$ means the activations from layer 2, etc.
 - To further differentiate neurons' parameters from different layers, we could use the superscript $[i]$ again, where $w_j^{[i]}$ and $b_j^{[i]}$
@@ -1302,7 +1301,7 @@ There are many different ways to build decision trees and decision tree ensemble
 
 **Boosted Trees Intuition**:
 - Recall our Bagged Decision Tree algorithm. We are going to tweak it slightly under "Use sampling with replacement to create a new training set of size $m$"
-- The methodology is similar, but instead of picking from all examples with equal (1/$m$) probability, make it more likely to pick misclassified examples from *previously trained trees*
+- The methodology is similar, but instead of picking from all examples with equal ($\frac{1}{m}$) probability, make it more likely to pick misclassified examples from *previously trained trees*
   - Looks at what we are not doing "quite well at" and tries to build future decision trees to be better at that misclassification problem
  
 ### When to Use Decision Trees
@@ -1368,12 +1367,12 @@ In supervised learning, the goal has always been to optimize a cost function wit
    - E.g., T-Shirt sizes, select $K=3$ for sizes S, M, and LG
  
 ### Anomaly Detection
-Whereas clustering algorithms group similar events/values, anomaly detection looks at an unlabeled dataset of normal events and thereby learns to detect for if there is an unsual or an anonalous event.
+Whereas clustering algorithms group similar events/values, anomaly detection looks at an unlabeled dataset of normal events and thereby learns to detect if there is an unusual or anomalous event.
 
 How can we develop such an algorithm? With a technique called **density estimation**.
 
 **Density Estimation**:
-- Helps determine the proability of $x$ ( $p(x)$ )being seen in dataset by determining regions of high probability (denser regions of $x$) and low probability (more sparse regions of $x$)
+- Helps determine the probability of $x$ ( $p(x)$ )being seen in the dataset by determining regions of high probability (denser regions of $x$) and low probability (more sparse regions of $x$)
 - $\epsilon$ = probability threshold
 - $p(x_{test}) < \epsilon$ = potential anomaly
 - $p(x_{test}) \ge \epsilon$ = ok (normal)
@@ -1386,9 +1385,21 @@ Example Applications of Anomaly Detection:
 - Manufacturing
   - $x^{(i)}$ = features of product $i$ (airplane engines, circuits, phones)
     
-### Gaussian Distribution
-Also known as the normal distribution, will be useful in density estimation
+**Gaussian Distribution**\
+Also known as the normal distribution, it will be useful in density estimation
 - Assume $x$ is a number
-- Probability of $x$ is determined by a Gaussian with mean $\mu$ (signfying the central point in the curve) with variance $\sigma^2$
+- Probability of $x$ is determined by a Gaussian with mean $\mu$ (signifying the central point in the curve) with variance $\sigma^2$
 - Contains a bell-shaped curve, $\sigma$ is the standard deviation
+- Area under the curve always sums up to 1
 - `(EQUATION)` $p(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{\frac{-(x-\mu)^2}{2\sigma^2}}$
+- `(EQUATION)` $\mu = \frac{1}{m} \sum_{i=1}^m x^{(i)}$
+- `(EQUATION)` $\sigma^2 = \frac{1}{m} \sum_{i=1}^{m} (x^{(i)} - \mu)^2$
+
+**Anomaly Detection Algorithm**:
+- Assume training set { $\vec{x}^{(1)}, \vec{x}^{(2)} ,... \vec{x}^{(m)}$ } where each example $x^{(i)}$ has $n$ features
+- `(EQUATION)` $p(\vec{x}) = p(x_1; \mu_1, \sigma_1^2) * p(x_2; \mu_2, \sigma_2^2) * ... p(x_n; \mu_n, \sigma_n^2) = \Pi_{j=1}^n p(x_j ; \mu_j, \sigma_j^2)$
+  - Assumes the features $x_1, x_2, ..., x_m$ are statistically independent but work fine even if they are dependent
+1. Choose $n$ features $x_i$ that you think might be indicative of anomalous examples
+2. Fit parameters $\mu_1, ... \mu_n, \sigma_1^2, ... \sigma_n^2$ (use equations from gaussian distribution)
+3. Given new example $x$, compute $p(x)$
+4. Flag anomaly if $p(x) < \epsilon$
