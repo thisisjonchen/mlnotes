@@ -1376,6 +1376,7 @@ How can we develop such an algorithm? With a technique called **density estimati
 **Density Estimation**:
 - Helps determine the probability of $x$ ( $p(x)$ )being seen in the dataset by determining regions of high probability (denser regions of $x$) and low probability (more sparse regions of $x$)
 - $\epsilon$ = probability threshold
+  - As we decrease $\epsilon$, the algorithm is *less likely* to detect an anomaly
 - $p(x_{test}) < \epsilon$ = potential anomaly
 - $p(x_{test}) \ge \epsilon$ = ok (normal)
 
