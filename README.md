@@ -60,6 +60,7 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
    * 5.1 [Unsupervised Learning](#unsupervised-learning)
       * 5.11 [Clustering](#clustering)
       * 5.12 [Optimization Objective](#optimization-objective)
+      * 5.13 [Anomaly Detection](#anomaly-detection)
    
 
 # Tools
@@ -1364,3 +1365,23 @@ In supervised learning, the goal has always been to optimize a cost function wit
    - Don't choose $K$ just to minimize cost $J$, since the $J$ always decreases
 - Often, you want to get clusters for some later (downstream) purpose. Evaluate K-means based on how well it performs on that later purpose
    - E.g., T-Shirt sizes, select $K=3$ for sizes S, M, and LG
+ 
+### Anomaly Detection
+Whereas clustering algorithms group similar events/values, anomaly detection looks at an unlabeled dataset of normal events and thereby learns to detect for if there is an unsual or an anonalous event.
+
+How can we develop such an algorithm? With a technique called **density estimation**.
+
+**Density Estimation**:
+- Helps determine the proability of $x$ ($p(x)$)being seen in dataset by determining regions of high probability (denser regions of $x$) and low probability (more sparse regions of $x$)
+- $\epsilon$ = probability threshold
+- $p(x_{test}) < \epsilon$ = potential anomaly
+- p(x_{test}) \ge \epsilon$ = ok (normal)
+
+Example Applications of Anomaly Detection:
+- Fraud detection:
+  - $x^{(i)}$ = features of user $i$'s activities (how often logged in, how many pages visited, transactions, etc.)
+  - Model $p(x)$ from data
+  - Identify unusual users by checking which have $p(x) < \epsilon$
+- Manufacturing
+  - $x^{(i)}$ = features of product $i$ (airplane engines, circuits, phones)
+    
