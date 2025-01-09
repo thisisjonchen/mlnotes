@@ -1454,7 +1454,10 @@ Let's use this [table](https://github.com/user-attachments/assets/790b2e92-4500-
 - $n_m$ = no. of movies
 - $y^{(i,j)}$ = rating given by user $j$ on movie $i$ (if defined)
 - $w^{(j)}, b^{(j)}$ = parameters for user $j$
-- $x^{(i)}$ = feature vector for movie $i$
+- $x^{(i)}$ = features for movie $i$
+  - Individual features may be hard to interpret
+  - To find other items related to it, find item $k$ with $x^{(k)}$ similar to $x^{(i)}$
+    - $\sum_{i=1}^n (x_l^{(k)} - x_l^{(i)})^2$
 - For user $j$ and movie $i$, predict rating using linear regression (as there is a simple relationship): $f_{w,b}(x) = w^{(j)} \cdot x^{(i)} + b^{(j)}$
 - $m^{(j)}$ = no. of movies rated by user $j$
 - Goal: to learn $w^{(j)}, b^{(j)}$
@@ -1486,6 +1489,12 @@ If we put the cost function for all parameters and the cost function for all fea
 
 Then, we can perform a gradient descent, where the cost function is now $J(w,b,x)$. Also, we want to minimize three parameters now: $w, b, x$, where we take the partial derivatives, respectively.
 
+**Limitations of Collaborative Filtering**:
+- "Cold Start" problem: How to rank new items that few users have rated? Or show something reasonable to new users who have rated few items?
+- Not able to use side information about users or items, only one (like rating)
+  - Item ex: Genre, movie stars, studio, ...
+  - User: Demographics (age, gender, location), expressed preferences, ...
+
 ### Binary Labels
 Many important applications of recommender systems involve binary labels, not just a rating from 0-5.
 - Example with item recommendation:
@@ -1510,4 +1519,3 @@ From back in supervised learning, we saw that normalizing can help the algorithm
 Using the movie recommendation example from earlier, the normalization process computes the average rating of each movie row and then groups them in a vector $\mu$.
 - Instead of the ratings being 0-5, we *subtract* the vector $\mu$ from each row and their respective elements (some elements, such as originally 0, can be negative... this will be handled in the prediction)
 - For user $j$ on movie $i$, predict $w^{(j)} \cdot x^{(i)} + b^{(j)} + \mu_i$
-
