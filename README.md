@@ -66,6 +66,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.21 [Making Recommendations](#making-recommendations)
       * 5.22 [Collaborative Filtering](#collaborative-filtering)
       * 5.23 [Binary Labels](#binary-labels)
+      * 5.24 [Mean Normalization](#mean-normalization)
    
 
 # Tools
@@ -1502,3 +1503,11 @@ Now, instead of regression, we use binary classification (logistic regression).
 Previously: predict $y^{(i,j)}$ as $w^{(j)} \cdot x^{(i)} + b^{(j)}$
 
 For binary labels, we use the logistic function: predict that the probability of $y^{(i,j)} = 1$ is given by $g(w^{(j)} \cdot x^{(i)} + b^{(j)})$ where $g(z) = \frac{1}{1+e^{-z}}$
+
+### Mean Normalization
+From back in supervised learning, we saw that normalizing can help the algorithm run faster and more efficiently.
+
+Using the movie recommendation example from earlier, the normalization process computes the average rating of each movie row and then groups them in a vector $\mu$.
+- Instead of the ratings being 0-5, we *subtract* the vector $\mu$ from each row and their respective elements (some elements, such as originally 0, can be negative... this will be handled in the prediction)
+- For user $j$ on movie $i$, predict $w^{(j)} \cdot x^{(i)} + b^{(j)} + \mu_i$
+
