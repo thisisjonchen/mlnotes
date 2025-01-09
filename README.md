@@ -62,7 +62,8 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.12 [Optimization Objective](#optimization-objective)
       * 5.13 [Anomaly Detection](#anomaly-detection)
       * 5.14 [Anomaly Detection vs. Supervised Learning](#anomaly-detection-vs-supervised-learning)
-     
+   * 5.2 [Recommender Systems](#recommender-systems)
+      * 5.21 [Making Recommendations](#making-recommendations)
    
 
 # Tools
@@ -1438,3 +1439,26 @@ When to use Supervised Learning:
 - Enough positive examples for the algorithm to get a sense of what positive examples are like
 - Future positive examples likely to be similar to ones in the training set (predictable in the future)
 - Ex: Email spam classification, manufacturing (find previously seen defects), weather prediction, disease classification
+
+
+## Recommender Systems
+Recommender systems are often used in industry applications like Amazon and Netflix but received far less attention in academia. Their impact is undeniable; they are directly responsible for a large fraction of sales in finance and e-commerce today.
+
+### Making Recommendations
+Let's use this [table](https://github.com/user-attachments/assets/790b2e92-4500-484a-8c4c-d45164c858dc) of movie ratings to illustrate recommender systems
+- $r(i,j)$ = 1 if user $j$ has rating movie $i$ (0 otherwise)
+- $n_u$ = no. of users
+- $n_m$ = no. of movies
+- $y^{(i,j)}$ = rating given by user $j$ on movie $i$ (if defined)
+- $w^{(j)}, b^{(j)}$ = parameters for user $j$
+- $x^{(i)}$ = feature vector for movie $i$
+- For user $j$ and movie $i$, predict rating using linear regression (as there is a simple relationship): $f_{w,b}(x) = w^{(j)} \cdot x^{(i)} + b^{(j)}$
+- $m^{(j)}$ = no. of movies rated by user $j$
+- Goal: to learn $w^{(j)}, b^{(j)}$
+- Cost Function with regularization parameter for user $j$, $w^{(j)}, b^{(j)}$, recall: $\frac{1}{2m^{(j)}} \sum_{i:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2m^{(j)}} \sum_{k=1}^n  (w_k^{(j)})^2$
+  - Notice the limiter $i:r(i,j)=1$ under the summation, which limits to user-rated movies only
+
+Cost Function with regularization parameter for **all users and parameters** $w^{(1)}, b^{(1)}, w^{(2)}, b^{(2)}, ..., w^{(n_u)}, b^{(n_u)}$: 
+
+`(EQUATION)` $J(w^{(1)},...,w^{(n)}, b^{(1)}, ..., b^{(n)}) = \frac{1}{2} \sum_{j=1}^{n_u} \sum_{i:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2$
+ 
