@@ -65,6 +65,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
    * 5.2 [Recommender Systems](#recommender-systems)
       * 5.21 [Making Recommendations](#making-recommendations)
       * 5.22 [Collaborative Filtering](#collaborative-filtering)
+      * 5.23 [Binary Labels](#binary-labels)
    
 
 # Tools
@@ -1482,4 +1483,22 @@ If we put the cost function for all parameters and the cost function for all fea
 
 `(EQUATION)` $J(x^{(1)},...,x^{(n)}, w^{(1)},...,w^{(n)}, b^{(1)}, ..., b^{(n)}) = \frac{1}{2} \sum_{(i,j):r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2 + \frac{\lambda}{2} \sum_{i=1}^{n_m} \sum_{k=1}^n (x_k^{(i)})^2$
 
-Then, we can perform a gradient descent, where the cost function is now $J(w,b,x)$. Also, we want to minimize three parameters now: $w, b, x$, where we take the partial derivatives, respectively
+Then, we can perform a gradient descent, where the cost function is now $J(w,b,x)$. Also, we want to minimize three parameters now: $w, b, x$, where we take the partial derivatives, respectively.
+
+### Binary Labels
+Many important applications of recommender systems involve binary labels, not just a rating from 0-5.
+- Example with item recommendation:
+  - Did the user $j$ purchase an item? (0/1/?)
+  - Did the user $j$ like an item? (0/1/?)
+  - Did the user $j$ spend at least 30 secs. with an item? (0/1/?)
+  - Did the user $j$ click on an item? (0/1/?)
+- Meaning of ratings
+  - 1: engaged after being shown
+  - 0: did not engage after being shown
+  - item not yet shown
+ 
+Now, instead of regression, we use binary classification (logistic regression).
+
+Previously: predict $y^{(i,j)}$ as $w^{(j)} \cdot x^{(i)} + b^{(j)}$
+
+For binary labels, we use the logistic function: predict that the probability of $y^{(i,j)} = 1$ is given by $g(w^{(j)} \cdot x^{(i)} + b^{(j)})$ where $g(z) = \frac{1}{1+e^{-z}}$
