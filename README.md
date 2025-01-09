@@ -64,6 +64,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.14 [Anomaly Detection vs. Supervised Learning](#anomaly-detection-vs-supervised-learning)
    * 5.2 [Recommender Systems](#recommender-systems)
       * 5.21 [Making Recommendations](#making-recommendations)
+      * 5.22 [Collaborative Filtering](#collaborative-filtering)
    
 
 # Tools
@@ -1461,4 +1462,24 @@ Let's use this [table](https://github.com/user-attachments/assets/790b2e92-4500-
 Cost Function with regularization parameter for **all users and parameters** $w^{(1)}, b^{(1)}, w^{(2)}, b^{(2)}, ..., w^{(n_u)}, b^{(n_u)}$: 
 
 `(EQUATION)` $J(w^{(1)},...,w^{(n)}, b^{(1)}, ..., b^{(n)}) = \frac{1}{2} \sum_{j=1}^{n_u} \sum_{i:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2$
- 
+
+What if we didn't have the features that describe the items of the movies in sufficient detail (like romance and action)? We can use an algorithm called **Collaborative Filtering**
+
+### Collaborative Filtering
+Using the same example from before, we can predict features $x^{(i)}$ since we have parameters from the *same* users and *same* movies. This allows us to infer feature vectors from data. Typical linear regression can't come up with features from scratch as it relies on predefined, explicit input features.
+
+In short, we can learn the input features!
+
+Given $w^{(1)}, b^{(1)}, w^{(2)}, b^{(2)}, ..., w^{(n_u)}, b^{(n_u)}$, cost function to learn $x^{(i)}$:
+
+`(EQUATION)` $J(x^{(i)} = \frac{1}{2} \sum_{j:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{k=2}^{n} (x_k^{(i)})^2$
+
+Cost function to learn $x^{(1)}, x^{(2)}, ... , x^{(n_m)}$:
+
+`(EQUATION)` $J(x^{(1)},...,x^{(n)}) = \frac{1}{2} \sum_{i=1}^{n_m} \sum_{j:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{i=1}^{n_m} \sum_{k=1}^n (x_k^{(i)})^2$
+
+If we put the cost function for all parameters and the cost function for all features together:
+
+`(EQUATION)` $J(x^{(1)},...,x^{(n)}, w^{(1)},...,w^{(n)}, b^{(1)}, ..., b^{(n)}) = \frac{1}{2} \sum_{(i,j):r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2 + \frac{\lambda}{2} \sum_{i=1}^{n_m} \sum_{k=1}^n (x_k^{(i)})^2$
+
+Then, we can perform a gradient descent, where the cost function is now $J(w,b,x)$. Also, we want to minimize three parameters now: $w, b, x$, where we take the partial derivatives, respectively
