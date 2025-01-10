@@ -68,6 +68,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.23 [Binary Labels](#binary-labels)
       * 5.24 [Mean Normalization](#mean-normalization)
       * 5.25 [Content-Based Filtering](#content-based-filtering)
+      * 5.26 [Principal Component Analysis](#principal-component-analysis)
    
 
 # Tools
@@ -1541,7 +1542,14 @@ How do we compute the $v$ vectors from $x$? One way is to use a **deep learning 
 
 How can you efficiently generate a recommendation from a large set of items? Two steps: **Retrieval & Ranking**
 - `(DEF)` **Retrieval**: Generate a large list of plausible item candidates, then combine retrieved items into list, removing duplicates and items already watched/purchased
-  - e.g., For each of the last 10 movies watched by user, find 10 most similar movies
-  - Retrieving more items results in better performance, but slower recommendations
-  - To analyze/optimize the trade-off, carry out *offline* experiments to see if retrieving additional items results in more relevant recommendations (i.e., $p(y^{(i,j)} = 1$ of items displayed to user are higher)
-- `(DEF)` **Ranking**: Takes the list retrieved and ranks using learned model (NN), then display ranked items to user
+  - e.g., For each of the last 10 movies watched by user, find the 10 most similar movies
+  - Retrieving more items results in better performance but slower recommendations
+  - To analyze/optimize the trade-off, carry out *offline* experiments to see if retrieving additional items results in more relevant recommendations (i.e., $p(y^{(i,j)} = 1$ of items displayed to the user are higher)
+- `(DEF)` **Ranking**: Takes the list retrieved and ranks using the learned model (NN), then display ranked items to the user
+
+
+### Principal Component Analysis
+`(DEF)` **Principal Component Analysis (PCA)**: An unsupervised learning algorithm that is commonly used for visualization, specifically in applications with lots of features (hard to plot, say, 50 features)
+- The goal is to reduce the number of features to 2-3 to graph and visualize
+- To get there, PCA finds a new axis and coordinates from, many features (e.g., car length and height &#8594; size). The axis is not in another dimension, but "overlaid" the graph and coordinates of the original features, confusingly called the "z-axis"
+- Notation also changes, like on axes, we go from original features $x_1, x_2, ..., x_n$ to maybe $z_1, z_2$ after PCA
