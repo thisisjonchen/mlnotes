@@ -69,6 +69,8 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.24 [Mean Normalization](#mean-normalization)
       * 5.25 [Content-Based Filtering](#content-based-filtering)
       * 5.26 [Principal Component Analysis](#principal-component-analysis)
+  * 5.3 [Reinforcement Learning](#reinforcement-learning)
+    
    
 
 # Tools
@@ -1573,4 +1575,18 @@ Now, let's go the other way. How can we find the (approximate) original values o
 2. "Fit" the data to obtain 2 (or 3) new axes (principal components) (we can use sklearn's `fit` to do this automatically. Includes mean normalization)
 3. Optionally examine how much variance is explained by each principal component (using sklearn's `explained_variance_ratio`) 
 4. Transform (project) the data onto new axes
+
+## Reinforcement Learning
+Reinforcement Learning (RL) is not widely applied in commercial applications today but is one of the pillars of machine learning. RL is not classified under supervised learning or unsupervised learning but is its own category.
+- Examples of applications used today: controlling robots, factory optimization, financial (stock) trading, playing games (incl. video games)
+
+The task is to find a **reward** function that maps a state $s$ &#8594; action $a$. What makes RL so powerful is that you have to tell it ***what to do*** rather than how to do it.
+
+Example Scenario with an Autonomous Helicopter:
+- Positive reward: Helicopter flying well (+1)
+- Negative reward: Helicopter flying poorly (-1000)
+
+Why not use supervised learning? For example, when controlling a robot, it is very difficult to obtain a data set of $x$ and the *ideal* action $y$. 
+
+
 
