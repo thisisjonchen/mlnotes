@@ -1539,4 +1539,9 @@ How do we compute the $v$ vectors from $x$? One way is to use a **deep learning 
   - `(EQUATION)` $J = \sum_{(i,j):r(i,j)} (v_u^{(j)} \cdot v_m^{(i)} - y^{(i,j)}) ^2$ + NN regularization term
   - Trains all the parameters of the user and movie networks
 
-
+How can you efficiently generate a recommendation from a large set of items? Two steps: **Retrieval & Ranking**
+- `(DEF)` **Retrieval**: Generate a large list of plausible item candidates, then combine retrieved items into list, removing duplicates and items already watched/purchased
+  - e.g., For each of the last 10 movies watched by user, find 10 most similar movies
+  - Retrieving more items results in better performance, but slower recommendations
+  - To analyze/optimize the trade-off, carry out *offline* experiments to see if retrieving additional items results in more relevant recommendations (i.e., $p(y^{(i,j)} = 1$ of items displayed to user are higher)
+- `(DEF)` **Ranking**: Takes the list retrieved and ranks using learned model (NN), then display ranked items to user
