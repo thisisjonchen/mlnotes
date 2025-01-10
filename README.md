@@ -67,6 +67,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.22 [Collaborative Filtering](#collaborative-filtering)
       * 5.23 [Binary Labels](#binary-labels)
       * 5.24 [Mean Normalization](#mean-normalization)
+      * 5.25 [Content-Based Filtering](#content-based-filtering)
    
 
 # Tools
@@ -1499,7 +1500,7 @@ Then, we can perform a gradient descent, where the cost function is now $J(w,b,x
 Many important applications of recommender systems involve binary labels, not just a rating from 0-5.
 - Example with item recommendation:
   - Did the user $j$ purchase an item? (0/1/?)
-  - Did the user $j$ like an item? (0/1/?)
+   Did the user $j$ like an item? (0/1/?)
   - Did the user $j$ spend at least 30 secs. with an item? (0/1/?)
   - Did the user $j$ click on an item? (0/1/?)
 - Meaning of ratings
@@ -1519,3 +1520,23 @@ From back in supervised learning, we saw that normalizing can help the algorithm
 Using the movie recommendation example from earlier, the normalization process computes the average rating of each movie row and then groups them in a vector $\mu$.
 - Instead of the ratings being 0-5, we *subtract* the vector $\mu$ from each row and their respective elements (some elements, such as originally 0, can be negative... this will be handled in the prediction)
 - For user $j$ on movie $i$, predict $w^{(j)} \cdot x^{(i)} + b^{(j)} + \mu_i$
+
+### Content-Based Filtering
+*Collaborative* filtering may recommend items to you based on ratings of users who gave similar ratings as you. *Content-based* filtering may recommend items to you based on the features of the user and the item to find a good match.
+- Will continue to use $r^{(i,j)} = 1$ to indicate if $j$ has rated item $i$ and $y^{(i,j)}$ as rating given by user $j$, but with more features
+- We denote the feature vectors by $x_u^{(j)}$ for user $j$ and $x_m^{(i)}$ for movie $i$, and these vectors could vary in size in comparison to each other
+
+Predict the rating of user $j$ on movie $i$ as: 
+- `(EQUATION)` $v_u^{(j)} \cdot v_m^{(i)}$ 
+- $v_u^{(j)}$ computed from $x_u^{(j)}$
+- $v_m^{(i)}$  computed from $x_m^{(i)}$
+- Why "computed"? Since we are taking the dot product, both $v$ vectors have to be the same size, whereas their $x$ counterparts could have been different
+- This is like the linear regression algorithm but without the $b$
+
+How do we compute the $v$ vectors from $x$? One way is to use a **deep learning algorithm** (neural networks)
+- The number of units in each HL does not matter, but the output layer must have the same size/dimension
+- Then, we process it through a cost function:
+  - `(EQUATION)` $J = \sum_{(i,j):r(i,j)} (v_u^{(j)} \cdot v_m^{(i)} - y^{(i,j)}) ^2$ + NN regularization term
+  - Trains all the parameters of the user and movie networks
+
+
