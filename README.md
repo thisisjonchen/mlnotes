@@ -1553,3 +1553,24 @@ How can you efficiently generate a recommendation from a large set of items? Two
 - The goal is to reduce the number of features to 2-3 to graph and visualize
 - To get there, PCA finds a new axis and coordinates from, many features (e.g., car length and height &#8594; size). The axis is not in another dimension, but "overlaid" the graph and coordinates of the original features, confusingly called the "z-axis"
 - Notation also changes, like on axes, we go from original features $x_1, x_2, ..., x_n$ to maybe $z_1, z_2$ after PCA
+
+When we choose an axis, we **project** the coordinates onto this new axis ("z-axis")
+- How do we choose an axis? We may draw a "line" to where the variance is *large*(points spread out) to where we are capturing important info from the original data
+- If the *variance* is small (points squished together), then that is an indicator of a bad axis selection
+- When we achieve the max variance possible, then the axis is called the **principal component**
+
+We can have 2-3 of these principal component axes. How so? By drawing the additional axes at a perpendicular (90 deg) angle to the 1st principal component axis.
+
+*NOTE*: PCA is not linear regression. Linear regression attempts to minimize distance in the vertical direction (ground truth y-axis). In contrast, PCA treats the axes equally and tries to minimize distance according to a "z-axis" to maximize variance.
+
+Now, let's go the other way. How can we find the (approximate) original values of $x$ given $z$? With a technique called **reconstruction**.
+
+`(DEF)` **Reconstruction**: Approximates original values of $(x_1,x_2)$ using the "z-axis" vector.
+- We multiply $z$ by the vector containing only vector lengths of $x_1, x_2$
+
+**PCA Algorithm**:
+1. Optional Pre-processing: perform feature scaling
+2. "Fit" the data to obtain 2 (or 3) new axes (principal components) (we can use sklearn's `fit` to do this automatically. Includes mean normalization)
+3. Optionally examine how much variance is explained by each principal component (using sklearn's `explained_variance_ratio`) 
+4. Transform (project) the data onto new axes
+
