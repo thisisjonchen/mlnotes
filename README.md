@@ -69,7 +69,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.24 [Mean Normalization](#mean-normalization)
       * 5.25 [Content-Based Filtering](#content-based-filtering)
       * 5.26 [Principal Component Analysis](#principal-component-analysis)
-  * 5.3 [Reinforcement Learning](#reinforcement-learning)
+   * 5.3 [Reinforcement Learning](#reinforcement-learning)
     
    
 
