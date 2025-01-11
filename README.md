@@ -1593,7 +1593,7 @@ Why not use supervised learning? For example, when controlling a robot, it is ve
 ### Return
 Return refers to cost/benefit: When given a scenario of either walking 1 minute to get $5 vs. walking 30 minutes to get $10, wouldn't the $5 be more convenient?
 
-`(EQUATION)` **Return (R(s))** = $R_1 + \gammaR_2 + \gamma^2 R_3 +...$ (until terminal state)
+`(EQUATION)` **Return (R(s))** = $R_1 + \gamma R_2 + \gamma^2 R_3 +...$ (until terminal state)
 
 `(DEF)` **Discount Factor ( $\gamma$ )**: Usually a number a little less than 1 (like 0.9, 0.99, 0.999)
 - Notice that there is no discount on the first term, meaning full reward if achieved on the first step
