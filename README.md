@@ -1637,3 +1637,5 @@ In stochastic environments, we don't look for the maximum return because the num
 
 `(DEF/EQUATION)` **Expected Return** = $R(s) + \gamma E[max_{a'} Q(s',a')]$
 - $E[]$ is shorthand for average of all future rewards
+
+**Difference between Return and State-Action Value**: Return is simply the best (max) state-action value at each state
