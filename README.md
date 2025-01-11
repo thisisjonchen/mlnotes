@@ -75,6 +75,9 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.33 [State-Action Value Function](#state-action-value-function)
       * 5.34 [Random Environment](#random-environment)
       * 5.35 [Continuous State](#continuous-state)
+      * 5.36 [Deep-Q Reinforcement Learning](#deep-q-reinforcement-learning)
+      * 5.37 [Mini-Batch and Soft Updates](#mini-batch-and-soft-updates)
+      * 5.38 [State of RL](#state-of-rl)
     
    
 
@@ -1552,13 +1555,13 @@ How can you efficiently generate a recommendation from a large set of items? Two
   - e.g., For each of the last 10 movies watched by user, find the 10 most similar movies
   - Retrieving more items results in better performance but slower recommendations
   - To analyze/optimize the trade-off, carry out *offline* experiments to see if retrieving additional items results in more relevant recommendations (i.e., $p(y^{(i,j)} = 1$ of items displayed to the user are higher)
-- `(DEF)` **Ranking**: Takes the list retrieved and ranks using the learned model (NN), then display ranked items to the user
+- `(DEF)` **Ranking**: Takes the list retrieved and ranks using the learned model (NN), then displays ranked items to the user
 
 
 ### Principal Component Analysis
 `(DEF)` **Principal Component Analysis (PCA)**: An unsupervised learning algorithm that is commonly used for visualization, specifically in applications with lots of features (hard to plot, say, 50 features)
 - The goal is to reduce the number of features to 2-3 to graph and visualize
-- To get there, PCA finds a new axis and coordinates from, many features (e.g., car length and height &#8594; size). The axis is not in another dimension, but "overlaid" the graph and coordinates of the original features, confusingly called the "z-axis"
+- To get there, PCA finds a new axis and coordinates from, many features (e.g., car length and height &#8594; size). The axis is not in another dimension but "overlaid" the graph and coordinates of the original features, confusingly called the "z-axis"
 - Notation also changes, like on axes, we go from original features $x_1, x_2, ..., x_n$ to maybe $z_1, z_2$ after PCA
 
 When we choose an axis, we **project** the coordinates onto this new axis ("z-axis")
@@ -1643,6 +1646,64 @@ In stochastic environments, we don't look for the maximum return because the num
 - $E[]$ is shorthand for the average of all future rewards
 
 ### Continuous State
-Compared to discrete state (finite set of numbers), continuous state may involve infinitesimally numbers in a set range. Continuous states may also be vectors that include not just the position states but also velocity, rotation, etc.
+Compared to discrete states (finite sets of numbers), continuous states may involve infinitesimally small numbers in a set range. Continuous states may also be vectors that include not just the position states but also velocity, rotation, etc.
 
+Discrete State Example: 1, 2, 3, 4, 5, 6 in range 0-6
 
+Continuous State Example: 
+```math
+s = \begin{bmatrix} x \\ y \\ \theta \\ x' \\ y' \\ \theta' \end{bmatrix}
+```
+
+### Deep-Q Reinforcement Learning
+The key idea is to train a *neural network* to compute/approximate the state-action value function $Q(s)$ and that, in turn, will let us pick good actions.
+
+The number of HL and their units may be variable, but the output layer will always have one unit. The input $x$ will be a vector containing state $s$ and action $a$, while the output will be the predicted best state-action value.
+
+In essence, in a state $s$, use neural network to compute $Q(s, \textrm{nothing}), Q(s, \textrm{left}), Q(s, \textrm{main}), Q(s, \textrm{right})$. Pick the action $a$ that maximizes $Q(s,a)$
+
+What will be our training set? Since we don't have a policy yet, we can observe a lot of examples of attempting various actions and its rewards $R(S)$ as a form of a tuple $(s^{(n)}, a^{(n)}, R(s)^{(n)}, s'^{(n)})$. This is enough to separate into input $x$ and output $y$ for our training set, where $x = (s^{(n)}, a^{(n)})$ and $y = R(s)^{(n)}, s'^{(n)}$ in the Bellman Equation $R(s'^{(n)})^{(n)} + \gamma max_{a'} Q(s'^{(n)},a')$.
+
+**Full Deep-Q Learning Process**:
+1. Initialize the neural network randomly as a guess of $Q(s,a)$
+2. Repeat:
+   - Take actions, Get $(s, a R(s), s')$
+   - Store (some number, e.g., 10,000) most recent $(s, a, R(s), s')$ tuples (**Replay Buffer**)
+   - Train Neural Network
+     - Create a training set of (some number, e.g., 10,000) using $x = (s^{(n)}, a^{(n)})$ and $y=R(s'^{(n)})^{(n)} + \gamma max_{a'} Q(s'^{(n)},a')$
+     - Train $Q_{new}$ such that $Q_{new}(s,a) \approx y$
+     - Set $Q = Q_{new}$
+    
+**Enhancement to Improve Efficiency**
+- Rather than carrying out inference separately 4 times for $Q(s, \textrm{nothing}), Q(s, \textrm{left}), Q(s, \textrm{main}), Q(s, \textrm{right})$, we could instead train the neural network to output all four of these values *simultaneously*
+- The output layer will now have four units, which still map to $Q(s, \textrm{nothing}), Q(s, \textrm{left}), Q(s, \textrm{main}), Q(s, \textrm{right})$, and we still pick the action $a$ that maximizes $Q(s,a)$. This would only require inference once.
+
+**How do you choose actions while still learning?**:
+- Option 1:
+  - Pick the action $a$ that maximizes $Q(s,a)$
+- Option 2 ( **$\epsilon-greedy policy$** ):
+  - With probability 0.95, pick the action $a$ that maximizes $Q(s,a)$ - **Greedy, "Exploitation"**
+  - With probability 0.95, pick an action $a$ randomly - **"Exploration"**
+
+The **$\epsilon-greedy policy$** allows the neural network to overcome possible pre-conceptions and explore a bit, even though we are greedy most of the time ($\epsilon$ itself refers to the probability of exploration).
+- One modification may be to start $\epsilon$ high, then gradually decrease
+
+### Mini-Batch and Soft Updates
+Mini-batch and Soft Updates are refinements we can make to the RL algorithm (and mini-batches are also applicable to supervised learning applications as well)
+
+`(DEF)` **Mini-Batch**: Pick some subset with $m'$ examples of a large set of $m$ examples, while iteratively moving through the large set of $m$
+- In terms of supervised learning, rather than performing gradient descent on, say, 100,000,000 examples each step, we only perform it on a "mini-batch" (say, 1000) to improve performance. The next iteration may take the next unique 1,000 examples of the 100,000,000
+- On average, not as reliable and much more noisy, but significantly less computationally expensive (we typically use Adam in supervised learning instead as a result)
+- The modification here with regard to Deep-Q applies to "Create a training set", where instead of 10,000, we may choose 1,000
+  
+`(DEF)` **Soft Updates**: Updates a parameter to be the sum of a *small fraction of the new* with the *large majority being the old*. The fraction is expected to add up to 1.
+- Ex: $W = 0.01 W_new + 0.99W$, $B = 0.01 B_new + 0.99B$
+- Without soft update, the parameter updates will be  $W = 1W_new + 0W$, $B = 1B_new + B$
+- The purpose is to make a gradual change to $Q$ or neural network params $W, B$ and cause the RL algorithm to converge more reliability (like the $\alpha$ learning rate)
+
+### State of RL
+Limitations of Reinforcement Learning:
+- Much easier to get to work in a *simulation* than a real robot
+- Far fewer applications than supervised and unsupervised learning
+
+However, there is an exciting research direction with potential for future applications.
