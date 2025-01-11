@@ -1612,7 +1612,7 @@ In essence, there are many ways to get a reward of some sort, whether it be smal
 - Agent $\pi$ &#8594; Action $a$ &#8594; Environment/World &#8594; State $s$, Reward $R$ &#8594; Agent $\pi$
 
 ### State-Action Value Function
-`(DEF)` **State-Action Value Function ( $Q(s,a)$)**: The return if you start in state $s$, take action $a$ (once), then behave *optimally after that*
+`(DEF)` **State-Action Value Function ( $Q(s,a)$ )**: The return if you start in state $s$, take action $a$ (once), then behave *optimally after that*
 - Depending on the number of actions $a$, there are many possible values of $Q(s,a)$
 - The **best** possible return from state $s$ is $\textrm{max}Q(s,a)$, so we choose that action $a$ based off that for our policy $\pi(s)$
 - Also known as **Optimal $Q$** with $Q*(s,a)$ in some literature
