@@ -1629,7 +1629,7 @@ Now, how do we compute these values of $Q(s,a)$? We can do this using the **Bell
 - Split into two parts:
    - `(DEF)` **Immediate Reward**: $R_1$, the reward for starting out in some state, and we do not apply discount $\gamma$ to it
    - The second term $\gamma max_{a'} Q(s',a')$ represents the future reward
-
+   - Sequence may look like $Q(s,a) = R_1 + \gamma R_2 + \gamma^2 R_3 + \gamma^3 R_4 +...$
 ### Random Environment
 In some applications, when you take an action, the outcome is not always completely reliable (in other words, random; stochastic) -- there may be an unaccounted factor.
 
