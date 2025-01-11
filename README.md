@@ -74,6 +74,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.32 [Policy](#policy)
       * 5.33 [State-Action Value Function](#state-action-value-function)
       * 5.34 [Random Environment](#random-environment)
+      * 5.35 [Continuous State](#continuous-state)
     
    
 
@@ -1639,4 +1640,9 @@ In some applications, when you take an action, the outcome is not always complet
 In stochastic environments, we don't look for the maximum return because the number can be random, but the *average* value of the sum of discounted rewards.
 
 `(DEF/EQUATION)` **Expected Return** = $R(s) + \gamma E[max_{a'} Q(s',a')]$
-- $E[]$ is shorthand for average of all future rewards
+- $E[]$ is shorthand for the average of all future rewards
+
+### Continuous State
+Compared to discrete state (finite set of numbers), continuous state may involve infinitesimally numbers in a set range. Continuous states may also be vectors that include not just the position states but also velocity, rotation, etc.
+
+
