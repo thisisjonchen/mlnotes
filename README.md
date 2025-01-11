@@ -1596,8 +1596,10 @@ Return refers to cost/benefit: When given a scenario of either walking 1 minute 
 `(EQUATION)` **Return (R(s))** = $R_1 + \gamma R_2 + \gamma^2 R_3 +...$ (until terminal state)
 
 `(DEF)` **Discount Factor ( $\gamma$ )**: Usually a number a little less than 1 (like 0.9, 0.99, 0.999)
-- Notice that there is no discount on the first term, meaning full reward if achieved on the first step
+- Notice that there is no discount on the first term, meaning full reward if achieved on the first step (as in, it is currently on a reward)
+- The number of steps includes its current state
 - The purpose of the discount factor is to punish additional steps/actions
+
 
 In essence, there are many ways to get a reward of some sort, whether it be small or large. What is a specific set of instructions should we follow? In RL, we can develop a **policy** whose job is to take a state $s$ and map it to some action $a$.
 
