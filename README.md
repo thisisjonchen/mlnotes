@@ -72,6 +72,8 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
    * 5.3 [Reinforcement Learning](#reinforcement-learning)
       * 5.31 [Return](#return)
       * 5.32 [Policy](#policy)
+      * 5.33 [State-Action Value Function](#state-action-value-function)
+      * 5.34 [Random Environment](#random-environment)
     
    
 
@@ -1609,3 +1611,28 @@ In essence, there are many ways to get a reward of some sort, whether it be smal
 `(DEF)` **Markov Decision Process (MDP)**: Future actions only depends on current state, not how we go there
 - Agent $\pi$ &#8594; Action $a$ &#8594; Environment/World &#8594; State $s$, Reward $R$ &#8594; Agent $\pi$
 
+### State-Action Value Function
+`(DEF)` **State-Action Value Function ( $Q(s,a)$)**: The return if you start in state $s$, take action $a$ (once), then behave *optimally after that*
+- Depending on the number of actions $a$, there are many possible values of $Q(s,a)$
+- The **best** possible return from state $s$ is $\textrm{max}Q(s,a)$, so we choose that action $a$ based off that for our policy $\pi(s)$
+- Also known as **Optimal $Q$** with $Q*(s,a)$ in some literature
+
+Now, how do we compute these values of $Q(s,a)$? We can do this using the **Bellman Equation**
+
+`(EQUATION)` **Bellman Equation**: $Q(s,a) = R(s) + \gamma max_{a'} Q(s',a')$
+- $R(s)$: reward of current state
+- $s$: current state
+- $a$: current action
+- $s'$: state you get to after taking action $a$
+- $a'$: action that you take in state $s'$
+- $\gamma$: discount factor
+- Split into two parts:
+   - `(DEF)` **Immediate Reward**: $R_1$, the reward for starting out in some state, and we do not apply discount $\gamma$ to it
+   - The second term $\gamma max_{a'} Q(s',a')$ represents the future reward
+
+### Random Environment
+In some applications, when you take an action, the outcome is not always completely reliable (in other words, random; stochastic) -- there may be an unaccounted factor.
+
+In stochastic environments, we don't look for the maximum return because the number can be random, but the *average* value of the sum of discounted rewards.
+
+`(DEF/EQUATION)` **Expected Return** = $R(s) + \gamma E[max_{a'} Q(s',a')]$
