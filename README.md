@@ -1630,6 +1630,9 @@ Now, how do we compute these values of $Q(s,a)$? We can do this using the **Bell
    - `(DEF)` **Immediate Reward**: $R_1$, the reward for starting out in some state, and we do not apply discount $\gamma$ to it
    - The second term $\gamma max_{a'} Q(s',a')$ represents the future reward
    - Sequence may look like $Q(s,a) = R_1 + \gamma R_2 + \gamma^2 R_3 + \gamma^3 R_4 +...$
+
+**Difference between Return and State-Action Value**: Return is simply the best (max) state-action value at each state
+
 ### Random Environment
 In some applications, when you take an action, the outcome is not always completely reliable (in other words, random; stochastic) -- there may be an unaccounted factor.
 
@@ -1637,5 +1640,3 @@ In stochastic environments, we don't look for the maximum return because the num
 
 `(DEF/EQUATION)` **Expected Return** = $R(s) + \gamma E[max_{a'} Q(s',a')]$
 - $E[]$ is shorthand for average of all future rewards
-
-**Difference between Return and State-Action Value**: Return is simply the best (max) state-action value at each state
