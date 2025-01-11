@@ -71,6 +71,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.26 [Principal Component Analysis](#principal-component-analysis)
    * 5.3 [Reinforcement Learning](#reinforcement-learning)
       * 5.31 [Return](#return)
+      * 5.32 [Policy](#policy)
     
    
 
@@ -1600,4 +1601,5 @@ Return refers to cost/benefit: When given a scenario of either walking 1 minute 
 
 In essence, there are many ways to get a reward of some sort, whether it be small or large. What is a specific set of instructions should we follow? In RL, we can develop a **policy** whose job is to take a state $s$ and map it to some action $a$.
 
+### Policy
 `(DEF)` **Policy ( $\pi(s)$ )**: A function $\pi(s) = a$ mapping from states to actions that tells you what action $a$ to take in a given every state to maximize return
