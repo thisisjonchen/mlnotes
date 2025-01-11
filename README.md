@@ -1603,3 +1603,7 @@ In essence, there are many ways to get a reward of some sort, whether it be smal
 
 ### Policy
 `(DEF)` **Policy ( $\pi(s)$ )**: A function $\pi(s) = a$ mapping from states to actions that tells you what action $a$ to take in a given every state to maximize return
+
+`(DEF)` **Markov Decision Process (MDP)**: Future actions only depends on current state, not how we go there
+- Agent $\pi$ &#8594; Action $a$ &#8594; Environment/World &#8594; State $s$, Reward $R$ &#8594; Agent $\pi$
+
