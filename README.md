@@ -1,7 +1,9 @@
 # Machine Learning Notes 📝
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/thisisjonchen/mlnotes/main?display_timestamp=author&style=for-the-badge)
 
-My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
+My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
+
+[My Certificate 📝](https://www.coursera.org/account/accomplishments/specialization/L2H0NNXWJ18U)
 
 ## Table of Contents
 1. [Tools](#tools)
@@ -56,7 +58,30 @@ My notes from Andrew Ng's "Machine Learning Specialization" (MLS)
       * 4.35 [Tree Ensembles](#tree-ensembles)
       * 4.36 [XGBoost](#xgboost)
       * 4.37 [When to Use Decision Trees](#when-to-use-decision-trees)
-        
+5. [Beyond Supervised Learning](#beyond-supervised-learning)
+   * 5.1 [Unsupervised Learning](#unsupervised-learning)
+      * 5.11 [Clustering](#clustering)
+      * 5.12 [Optimization Objective](#optimization-objective)
+      * 5.13 [Anomaly Detection](#anomaly-detection)
+      * 5.14 [Anomaly Detection vs. Supervised Learning](#anomaly-detection-vs-supervised-learning)
+   * 5.2 [Recommender Systems](#recommender-systems)
+      * 5.21 [Making Recommendations](#making-recommendations)
+      * 5.22 [Collaborative Filtering](#collaborative-filtering)
+      * 5.23 [Binary Labels](#binary-labels)
+      * 5.24 [Mean Normalization](#mean-normalization)
+      * 5.25 [Content-Based Filtering](#content-based-filtering)
+      * 5.26 [Principal Component Analysis](#principal-component-analysis)
+   * 5.3 [Reinforcement Learning](#reinforcement-learning)
+      * 5.31 [Return](#return)
+      * 5.32 [Policy](#policy)
+      * 5.33 [State-Action Value Function](#state-action-value-function)
+      * 5.34 [Random Environment](#random-environment)
+      * 5.35 [Continuous State](#continuous-state)
+      * 5.36 [Deep-Q Reinforcement Learning](#deep-q-reinforcement-learning)
+      * 5.37 [Mini-Batch and Soft Updates](#mini-batch-and-soft-updates)
+      * 5.38 [State of RL](#state-of-rl)
+6. [Credits](#credits)
+    
    
 
 # Tools
@@ -594,7 +619,7 @@ The fundamental building block of most modern neural networks is a **layer of ne
 - Every layer inputs a vector of numbers and applies a bunch of logistic regression units to it, and then outputs another vector of numbers (activations) that will be the input into subsequent layers until the final/output layer's prediction of the NN that we then can then threshold
 - The *number of layers* includes all hidden layers + output layer, excluding the input layer, and is indexed from 1 (where the input layer is 0)
 
-A neural network layer comprises many neurons, each with its own weight $w$ and bias $b$. These parameters are considered in their respective activations $g(z).
+A neural network layer comprises many neurons, each with its own weight $w$ and bias $b$. These parameters are considered in their respective activations $g(z)$.
 - By convention, the activations per layer are denoted by $a^{[i]}$, where $i$ is the index of the particular layer.
 - $a^{[1]}$ means the activations from layer 1, $a^{[2]}$ means the activations from layer 2, etc.
 - To further differentiate neurons' parameters from different layers, we could use the superscript $[i]$ again, where $w_j^{[i]}$ and $b_j^{[i]}$
@@ -1155,7 +1180,7 @@ Example - Rare Disease Classification:
 
 To setup for precision/recall, we need to separate the data and predictions into 4 categories:
 1. True Positive (Actual = 1, Predicted = 1)
-2. False Positive (Actual = 0, Predicted = 0)
+2. False Positive (Actual = 0, Predicted = 1)
 3. False Negative (Actual = 1, Predicted = 0)
 4. True Negative (Actual = 0, Predicted = 0)
 
@@ -1297,7 +1322,7 @@ There are many different ways to build decision trees and decision tree ensemble
 
 **Boosted Trees Intuition**:
 - Recall our Bagged Decision Tree algorithm. We are going to tweak it slightly under "Use sampling with replacement to create a new training set of size $m$"
-- The methodology is similar, but instead of picking from all examples with equal (1/$m$) probability, make it more likely to pick misclassified examples from *previously trained trees*
+- The methodology is similar, but instead of picking from all examples with equal ($\frac{1}{m}$) probability, make it more likely to pick misclassified examples from *previously trained trees*
   - Looks at what we are not doing "quite well at" and tries to build future decision trees to be better at that misclassification problem
  
 ### When to Use Decision Trees
@@ -1314,3 +1339,378 @@ Neural Networks:
 -  Works with transfer learning
 -  When building a system of multiple models working together, it might be easier to string together multiple neural networks
 
+
+# Beyond Supervised Learning
+This section will touch on the following topics:
+- Unsupervised Learning
+  - Clustering
+  - Anomaly Detection
+- Recommender Systems
+- Reinforcement Learning
+
+## Unsupervised Learning
+Recall that unsupervised learning is learning and structuring from data that only comes with inputs (x), not output labels (y). This type of learning is particularly helpful in finding patterns in a data pool (unstructured data) with assistance from an algorithm called **clustering**.
+
+### Clustering
+`(DEF)` **Clustering**: An algorithm that looks at a number of data points and automatically finds data points that are related/similar to each other
+- Applications of clustering: Grouping similar news, market segmentation (identifying various groups), DNA genetic traits data, etc.
+
+**K-Means Clustering Algorithm**:
+- Initialization: Randomly initialize $K$ cluster centroids ($\mu_1, \mu_2, ..., \mu_K$) on an unlabeled training set
+   - Choose $K < m$
+   - `(DEF)` **Cluster Centroids**: Centers of clusters, initially randomly guessed but will move as more iterations of k-means occur
+   - The number of clusters and cluster centroids may be ambiguous
+   - Sometimes, the guesses are not the best. We can run the initialization multiple times (maybe ~50 to 1000 times) and compare them using the distortion function (**random initialization**). Select the one with the lowest distortion (cost)
+1. Assign each point to its closest **cluster centroid**
+2. Recompute centroids by taking an average of its group of points
+   - If a cluster had zero points (dividing by 0 points for mean would be undefined), then we just eliminate that cluster
+3. Repeat until no points are reassigned (convergence)
+
+K-Means may also be applicable to unlabeled datasets where clusters are not well separated.
+
+### Optimization Objective
+In supervised learning, the goal has always been to optimize a cost function with various algorithms like gradient descent. It turns out that clustering is also optimizing a specific cost function, but it is not with gradient descent.
+
+**K-Means Optimization Objective**:
+- $c^{(i)}$ = index (from 1 to $K$) of cluster centroid closest to $x^{(i)}$
+- $\mu_k$ = cluster centroid $k$
+- $\mu_c^{(i)}$ = cluster centroid  of cluster to which example $x^{(i)}$ has been assigned
+
+`(DEF)` **Distortion Function**: Another name for cost function in clustering
+- `(EQUATION)` $J(c^{(1)}, ..., c^{(m)}, \mu_1, ..., \mu_K) = \frac{1}{m} \sum_{i=1}^{m} || x^{(i)} - \mu_{c^{(i)}} || ^2$
+- As this function is being optimized, it is *guaranteed* to go down or stay the same on each step of k-means. If it goes up, there is likely a bug in the code.
+
+**Choosing a value of $K$**:
+- `(DEF)` **Elbow Method**: Take the cost function $J$ as a function of $K$ clusters and find where the point decrease of $J$ where it starts plateauing. That point of $K$ should be your answer.
+   - Andrew does not endorse this method
+   - Don't choose $K$ just to minimize cost $J$, since the $J$ always decreases
+- Often, you want to get clusters for some later (downstream) purpose. Evaluate K-means based on how well it performs on that later purpose
+   - E.g., T-Shirt sizes, select $K=3$ for sizes S, M, and LG
+ 
+### Anomaly Detection
+Whereas clustering algorithms group similar events/values, anomaly detection looks at an unlabeled dataset of normal events and thereby learns to detect if there is an unusual or anomalous event.
+
+How can we develop such an algorithm? With a technique called **density estimation**.
+
+**Density Estimation**:
+- Helps determine the probability of $x$ ( $p(x)$ )being seen in the dataset by determining regions of high probability (denser regions of $x$) and low probability (more sparse regions of $x$)
+- $\epsilon$ = probability threshold
+  - As we decrease $\epsilon$, the algorithm is *less likely* to detect an anomaly
+- $p(x_{test}) < \epsilon$ = potential anomaly
+- $p(x_{test}) \ge \epsilon$ = ok (normal)
+
+Example Applications of Anomaly Detection:
+- Fraud detection:
+  - $x^{(i)}$ = features of user $i$'s activities (how often logged in, how many pages visited, transactions, etc.)
+  - Model $p(x)$ from data
+  - Identify unusual users by checking which have $p(x) < \epsilon$
+- Manufacturing
+  - $x^{(i)}$ = features of product $i$ (airplane engines, circuits, phones)
+    
+**Gaussian Distribution**\
+Also known as the normal distribution, it will be useful in density estimation
+- Assume $x$ is a number
+- Probability of $x$ is determined by a Gaussian with mean $\mu$ (signifying the central point in the curve) with variance $\sigma^2$
+- Contains a bell-shaped curve, $\sigma$ is the standard deviation
+- Area under the curve always sums up to 1
+- `(EQUATION)` $p(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{\frac{-(x-\mu)^2}{2\sigma^2}}$
+- `(EQUATION)` $\mu = \frac{1}{m} \sum_{i=1}^m x^{(i)}$
+- `(EQUATION)` $\sigma^2 = \frac{1}{m} \sum_{i=1}^{m} (x^{(i)} - \mu)^2$
+
+**Anomaly Detection Algorithm**:
+- Assume training set { $\vec{x}^{(1)}, \vec{x}^{(2)} ,... \vec{x}^{(m)}$ } where each example $x^{(i)}$ has $n$ features
+- `(EQUATION)` $p(\vec{x}) = p(x_1; \mu_1, \sigma_1^2) * p(x_2; \mu_2, \sigma_2^2) * ... p(x_n; \mu_n, \sigma_n^2) = \Pi_{j=1}^n p(x_j ; \mu_j, \sigma_j^2)$
+  - Assumes the features $x_1, x_2, ..., x_m$ are statistically independent but work fine even if they are dependent
+1. Choose $n$ features $x_i$ that you think might be indicative of anomalous examples
+2. Fit parameters $\mu_1, ... \mu_n, \sigma_1^2, ... \sigma_n^2$ (use equations from gaussian distribution)
+3. Given new example $x$, compute $p(x)$
+4. Flag anomaly if $p(x) < \epsilon$
+
+**The Importance of Real-Number Evaluation**
+- When developing a learning algorithm (choosing features, etc.), making decisions is much easier if we have a way of evaluating our learning algorithm (also called real-number evaluation)
+- Assume we have some labeled data of anomalous and non-anomalous examples (y=1/0)
+- We will be using the supervised learning idea of labeled data with CV and test sets to evaluate our algorithm (only a small portion of anomalies)
+  - The training set will have only normal (non-anomalous) examples and will remain unlabeled
+  - The CV and test sets will include a few anomalous examples but mostly normal examples
+- Use CV set to choose parameter $\epsilon$
+
+**Choosing Features**:
+- Replace highly non-Gaussian features with Gaussian features as our Gaussian probability functions $p(x)$ are more likely to fit and find anomalies with Gaussian features
+  - Some potential functions to try to replace $x$: $log(x), log(x+c), x^{\frac{1}{2}}, x^{\frac{1}{n}}$
+  - $c$ = some random constant (add a small number like 0.0001 if min(x) is 0 for log)
+  - Whatever transformation you apply to the training set, apply also to the CV and test sets as well
+- Q: With anomaly detection, there is a threshold $\epsilon$ for $p(x)$ to separate anomalous and non-anomalous examples, but what if both are large and comparable to one another?
+  - A: Add new features
+
+### Anomaly Detection vs. Supervised Learning
+Above, we discussed using *some* labeled data in the evaluation of our anomaly detection algorithm. Why not just go for supervised learning?
+
+When to use Anomaly Detection:
+- Very small number of positive examples/anomalies ( $y=1$ ) (0-20 is common)
+- Large number of negative ( $y=0$ ) examples
+- Many different "types of anomalies; it is hard for any algorithm to learn from positive examples what the anomalies look like
+- Future anomalies may look nothing like any of the previous anomalous examples (unpredictable in the future)
+- Ex: fraud detection, manufacturing (find new previously unseen defects), monitoring machines in data center
+
+When to use Supervised Learning:
+- Large number of positive and negative examples
+- Enough positive examples for the algorithm to get a sense of what positive examples are like
+- Future positive examples likely to be similar to ones in the training set (predictable in the future)
+- Ex: Email spam classification, manufacturing (find previously seen defects), weather prediction, disease classification
+
+
+## Recommender Systems
+Recommender systems are often used in industry applications like Amazon and Netflix but received far less attention in academia. Their impact is undeniable; they are directly responsible for a large fraction of sales in finance and e-commerce today.
+
+### Making Recommendations
+Let's use this [table](https://github.com/user-attachments/assets/790b2e92-4500-484a-8c4c-d45164c858dc) of movie ratings to illustrate recommender systems
+- $r(i,j)$ = 1 if user $j$ has rating movie $i$ (0 otherwise)
+- $n_u$ = no. of users
+- $n_m$ = no. of movies
+- $y^{(i,j)}$ = rating given by user $j$ on movie $i$ (if defined)
+- $w^{(j)}, b^{(j)}$ = parameters for user $j$
+- $x^{(i)}$ = features for movie $i$
+  - Individual features may be hard to interpret
+  - To find other items related to it, find item $k$ with $x^{(k)}$ similar to $x^{(i)}$
+    - $\sum_{i=1}^n (x_l^{(k)} - x_l^{(i)})^2$
+- For user $j$ and movie $i$, predict rating using linear regression (as there is a simple relationship): $f_{w,b}(x) = w^{(j)} \cdot x^{(i)} + b^{(j)}$
+- $m^{(j)}$ = no. of movies rated by user $j$
+- Goal: to learn $w^{(j)}, b^{(j)}$
+- Cost Function with regularization parameter for user $j$, $w^{(j)}, b^{(j)}$, recall: $\frac{1}{2m^{(j)}} \sum_{i:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2m^{(j)}} \sum_{k=1}^n  (w_k^{(j)})^2$
+  - Notice the limiter $i:r(i,j)=1$ under the summation, which limits to user-rated movies only
+
+Cost Function with regularization parameter for **all users and parameters** $w^{(1)}, b^{(1)}, w^{(2)}, b^{(2)}, ..., w^{(n_u)}, b^{(n_u)}$: 
+
+`(EQUATION)` $J(w^{(1)},...,w^{(n)}, b^{(1)}, ..., b^{(n)}) = \frac{1}{2} \sum_{j=1}^{n_u} \sum_{i:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2$
+
+What if we didn't have the features that describe the items of the movies in sufficient detail (like romance and action)? We can use an algorithm called **Collaborative Filtering**
+
+### Collaborative Filtering
+Using the same example from before, we can predict features $x^{(i)}$ since we have parameters from the *same* users and *same* movies. This allows us to infer feature vectors from data. Typical linear regression can't come up with features from scratch as it relies on predefined, explicit input features.
+
+In short, we can learn the input features!
+
+Given $w^{(1)}, b^{(1)}, w^{(2)}, b^{(2)}, ..., w^{(n_u)}, b^{(n_u)}$, cost function to learn $x^{(i)}$:
+
+`(EQUATION)` $J(x^{(i)} = \frac{1}{2} \sum_{j:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{k=2}^{n} (x_k^{(i)})^2$
+
+Cost function to learn $x^{(1)}, x^{(2)}, ... , x^{(n_m)}$:
+
+`(EQUATION)` $J(x^{(1)},...,x^{(n)}) = \frac{1}{2} \sum_{i=1}^{n_m} \sum_{j:r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{i=1}^{n_m} \sum_{k=1}^n (x_k^{(i)})^2$
+
+If we put the cost function for all parameters and the cost function for all features together:
+
+`(EQUATION)` $J(x^{(1)},...,x^{(n)}, w^{(1)},...,w^{(n)}, b^{(1)}, ..., b^{(n)}) = \frac{1}{2} \sum_{(i,j):r(i,j)=1} (w^{(j)} \cdot x^{(i)} + b^{(j)} - y^{(i,j)})^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^n (w_k^{(j)})^2 + \frac{\lambda}{2} \sum_{i=1}^{n_m} \sum_{k=1}^n (x_k^{(i)})^2$
+
+Then, we can perform a gradient descent, where the cost function is now $J(w,b,x)$. Also, we want to minimize three parameters now: $w, b, x$, where we take the partial derivatives, respectively.
+
+**Limitations of Collaborative Filtering**:
+- "Cold Start" problem: How to rank new items that few users have rated? Or show something reasonable to new users who have rated few items?
+- Not able to use side information about users or items, only one (like rating)
+  - Item ex: Genre, movie stars, studio, ...
+  - User: Demographics (age, gender, location), expressed preferences, ...
+
+### Binary Labels
+Many important applications of recommender systems involve binary labels, not just a rating from 0-5.
+- Example with item recommendation:
+  - Did the user $j$ purchase an item? (0/1/?)
+   Did the user $j$ like an item? (0/1/?)
+  - Did the user $j$ spend at least 30 secs. with an item? (0/1/?)
+  - Did the user $j$ click on an item? (0/1/?)
+- Meaning of ratings
+  - 1: engaged after being shown
+  - 0: did not engage after being shown
+  - item not yet shown
+ 
+Now, instead of regression, we use binary classification (logistic regression).
+
+Previously: predict $y^{(i,j)}$ as $w^{(j)} \cdot x^{(i)} + b^{(j)}$
+
+For binary labels, we use the logistic function: predict that the probability of $y^{(i,j)} = 1$ is given by $g(w^{(j)} \cdot x^{(i)} + b^{(j)})$ where $g(z) = \frac{1}{1+e^{-z}}$
+
+### Mean Normalization
+From back in supervised learning, we saw that normalizing can help the algorithm run faster and more efficiently.
+
+Using the movie recommendation example from earlier, the normalization process computes the average rating of each movie row and then groups them in a vector $\mu$.
+- Instead of the ratings being 0-5, we *subtract* the vector $\mu$ from each row and their respective elements (some elements, such as originally 0, can be negative... this will be handled in the prediction)
+- For user $j$ on movie $i$, predict $w^{(j)} \cdot x^{(i)} + b^{(j)} + \mu_i$
+
+### Content-Based Filtering
+*Collaborative* filtering may recommend items to you based on ratings of users who gave similar ratings as you. *Content-based* filtering may recommend items to you based on the features of the user and the item to find a good match.
+- Will continue to use $r^{(i,j)} = 1$ to indicate if $j$ has rated item $i$ and $y^{(i,j)}$ as rating given by user $j$, but with more features
+- We denote the feature vectors by $x_u^{(j)}$ for user $j$ and $x_m^{(i)}$ for movie $i$, and these vectors could vary in size in comparison to each other
+
+Predict the rating of user $j$ on movie $i$ as: 
+- `(EQUATION)` $v_u^{(j)} \cdot v_m^{(i)}$ 
+- $v_u^{(j)}$ computed from $x_u^{(j)}$
+- $v_m^{(i)}$  computed from $x_m^{(i)}$
+- Why "computed"? Since we are taking the dot product, both $v$ vectors have to be the same size, whereas their $x$ counterparts could have been different
+- This is like the linear regression algorithm but without the $b$
+
+How do we compute the $v$ vectors from $x$? One way is to use a **deep learning algorithm** (neural networks)
+- The number of units in each HL does not matter, but the output layer must have the same size/dimension
+- Then, we process it through a cost function:
+  - `(EQUATION)` $J = \sum_{(i,j):r(i,j)} (v_u^{(j)} \cdot v_m^{(i)} - y^{(i,j)}) ^2$ + NN regularization term
+  - Trains all the parameters of the user and movie networks
+
+How can you efficiently generate a recommendation from a large set of items? Two steps: **Retrieval & Ranking**
+- `(DEF)` **Retrieval**: Generate a large list of plausible item candidates, then combine retrieved items into list, removing duplicates and items already watched/purchased
+  - e.g., For each of the last 10 movies watched by user, find the 10 most similar movies
+  - Retrieving more items results in better performance but slower recommendations
+  - To analyze/optimize the trade-off, carry out *offline* experiments to see if retrieving additional items results in more relevant recommendations (i.e., $p(y^{(i,j)} = 1$ of items displayed to the user are higher)
+- `(DEF)` **Ranking**: Takes the list retrieved and ranks using the learned model (NN), then displays ranked items to the user
+
+
+### Principal Component Analysis
+`(DEF)` **Principal Component Analysis (PCA)**: An unsupervised learning algorithm that is commonly used for visualization, specifically in applications with lots of features (hard to plot, say, 50 features)
+- The goal is to reduce the number of features to 2-3 to graph and visualize
+- To get there, PCA finds a new axis and coordinates from, many features (e.g., car length and height &#8594; size). The axis is not in another dimension but "overlaid" the graph and coordinates of the original features, confusingly called the "z-axis"
+- Notation also changes, like on axes, we go from original features $x_1, x_2, ..., x_n$ to maybe $z_1, z_2$ after PCA
+
+When we choose an axis, we **project** the coordinates onto this new axis ("z-axis")
+- How do we choose an axis? We may draw a "line" to where the variance is *large*(points spread out) to where we are capturing important info from the original data
+- If the *variance* is small (points squished together), then that is an indicator of a bad axis selection
+- When we achieve the max variance possible, then the axis is called the **principal component**
+
+We can have 2-3 of these principal component axes. How so? By drawing the additional axes at a perpendicular (90 deg) angle to the 1st principal component axis.
+
+*NOTE*: PCA is not linear regression. Linear regression attempts to minimize distance in the vertical direction (ground truth y-axis). In contrast, PCA treats the axes equally and tries to minimize distance according to a "z-axis" to maximize variance.
+
+Now, let's go the other way. How can we find the (approximate) original values of $x$ given $z$? With a technique called **reconstruction**.
+
+`(DEF)` **Reconstruction**: Approximates original values of $(x_1,x_2)$ using the "z-axis" vector.
+- We multiply $z$ by the vector containing only vector lengths of $x_1, x_2$
+
+**PCA Algorithm**:
+1. Optional Pre-processing: perform feature scaling
+2. "Fit" the data to obtain 2 (or 3) new axes (principal components) (we can use sklearn's `fit` to do this automatically. Includes mean normalization)
+3. Optionally examine how much variance is explained by each principal component (using sklearn's `explained_variance_ratio`) 
+4. Transform (project) the data onto new axes
+
+## Reinforcement Learning
+Reinforcement Learning (RL) is not widely applied in commercial applications today but is one of the pillars of machine learning. RL is not classified under supervised learning or unsupervised learning but is its own category.
+- Examples of applications used today: controlling robots, factory optimization, financial (stock) trading, playing games (incl. video games)
+
+The task is to find a function (policy) that maps a state $s$ &#8594; action $a$ to maximize return $R(s)$. What makes RL so powerful is that you have to tell it ***what to do*** rather than how to do it.
+
+Example Scenario with an Autonomous Helicopter:
+- Positive reward: Helicopter flying well (+1)
+- Negative reward: Helicopter flying poorly (-1000)
+
+Why not use supervised learning? For example, when controlling a robot, it is very difficult to obtain a data set of $x$ and the *ideal* action $y$. 
+
+### Return
+Return refers to cost/benefit: When given a scenario of either walking 1 minute to get $5 vs. walking 30 minutes to get $10, wouldn't the $5 be more convenient?
+
+`(EQUATION)` **Return (R(s))** = $R_1 + \gamma R_2 + \gamma^2 R_3 +...$ (until terminal state)
+
+`(DEF)` **Discount Factor ( $\gamma$ )**: Usually a number a little less than 1 (like 0.9, 0.99, 0.999)
+- Notice that there is no discount on the first term, meaning full reward if achieved on the first step (as in, it is currently on a reward)
+- The number of steps includes its current state
+- The purpose of the discount factor is to punish additional steps/actions
+
+
+In essence, there are many ways to get a reward of some sort, whether it be small or large. What is a specific set of instructions should we follow? In RL, we can develop a **policy** whose job is to take a state $s$ and map it to some action $a$.
+
+### Policy
+`(DEF)` **Policy ( $\pi(s)$ )**: A function $\pi(s) = a$ mapping from states to actions that tells you what action $a$ to take in a given every state to maximize return
+
+`(DEF)` **Markov Decision Process (MDP)**: Future actions only depends on current state, not how we go there
+- Agent $\pi$ &#8594; Action $a$ &#8594; Environment/World &#8594; State $s$, Reward $R$ &#8594; Agent $\pi$
+
+### State-Action Value Function
+`(DEF)` **State-Action Value Function ( $Q(s,a)$ )**: The return if you start in state $s$, take action $a$ (once), then behave *optimally after that*
+- Depending on the number of actions $a$, there are many possible values of $Q(s,a)$
+- The **best** possible return from state $s$ is $\textrm{max}Q(s,a)$, so we choose that action $a$ based off that for our policy $\pi(s)$
+- Also known as **Optimal $Q$** with $Q*(s,a)$ in some literature
+
+Now, how do we compute these values of $Q(s,a)$? We can do this using the **Bellman Equation**
+
+`(EQUATION)` **Bellman Equation**: $Q(s,a) = R(s) + \gamma max_{a'} Q(s',a')$
+- $R(s)$: reward of current state
+- $s$: current state
+- $a$: current action
+- $s'$: state you get to after taking action $a$
+- $a'$: action that you take in state $s'$
+- $\gamma$: discount factor
+- Split into two parts:
+   - `(DEF)` **Immediate Reward**: $R_1$, the reward for starting out in some state, and we do not apply discount $\gamma$ to it
+   - The second term $\gamma max_{a'} Q(s',a')$ represents the future reward
+   - Sequence may look like $Q(s,a) = R_1 + \gamma R_2 + \gamma^2 R_3 + \gamma^3 R_4 +...$
+
+**Difference between Return and State-Action Value**: Return is simply the best (max) state-action value at each state
+
+### Random Environment
+In some applications, when you take an action, the outcome is not always completely reliable (in other words, random; stochastic) -- there may be an unaccounted factor.
+
+In stochastic environments, we don't look for the maximum return because the number can be random, but the *average* value of the sum of discounted rewards.
+
+`(DEF/EQUATION)` **Expected Return** = $R(s) + \gamma E[max_{a'} Q(s',a')]$
+- $E[]$ is shorthand for the average of all future rewards
+
+### Continuous State
+Compared to discrete states (finite sets of numbers), continuous states may involve infinitesimally small numbers in a set range. Continuous states may also be vectors that include not just the position states but also velocity, rotation, etc.
+
+Discrete State Example: 1, 2, 3, 4, 5, 6 in range 0-6
+
+Continuous State Example: 
+```math
+s = \begin{bmatrix} x \\ y \\ \theta \\ x' \\ y' \\ \theta' \end{bmatrix}
+```
+
+### Deep-Q Reinforcement Learning
+The key idea is to train a *neural network* to compute/approximate the state-action value function $Q(s)$ and that, in turn, will let us pick good actions.
+
+The number of HL and their units may be variable, but the output layer will always have one unit. The input $x$ will be a vector containing state $s$ and action $a$, while the output will be the predicted best state-action value.
+
+In essence, in a state $s$, use neural network to compute $Q(s, \textrm{nothing}), Q(s, \textrm{left}), Q(s, \textrm{main}), Q(s, \textrm{right})$. Pick the action $a$ that maximizes $Q(s,a)$
+
+What will be our training set? Since we don't have a policy yet, we can observe a lot of examples of attempting various actions and its rewards $R(S)$ as a form of a tuple $(s^{(n)}, a^{(n)}, R(s)^{(n)}, s'^{(n)})$. This is enough to separate into input $x$ and output $y$ for our training set, where $x = (s^{(n)}, a^{(n)})$ and $y = R(s)^{(n)}, s'^{(n)}$ in the Bellman Equation $R(s'^{(n)})^{(n)} + \gamma max_{a'} Q(s'^{(n)},a')$.
+
+**Full Deep-Q Learning Process**:
+1. Initialize the neural network randomly as a guess of $Q(s,a)$
+2. Repeat:
+   - Take actions, Get $(s, a R(s), s')$
+   - Store (some number, e.g., 10,000) most recent $(s, a, R(s), s')$ tuples (**Replay Buffer**)
+   - Train Neural Network
+     - Create a training set of (some number, e.g., 10,000) using $x = (s^{(n)}, a^{(n)})$ and $y=R(s'^{(n)})^{(n)} + \gamma max_{a'} Q(s'^{(n)},a')$
+     - Train $Q_{new}$ such that $Q_{new}(s,a) \approx y$
+     - Set $Q = Q_{new}$
+    
+**Enhancement to Improve Efficiency**
+- Rather than carrying out inference separately 4 times for $Q(s, \textrm{nothing}), Q(s, \textrm{left}), Q(s, \textrm{main}), Q(s, \textrm{right})$, we could instead train the neural network to output all four of these values *simultaneously*
+- The output layer will now have four units, which still map to $Q(s, \textrm{nothing}), Q(s, \textrm{left}), Q(s, \textrm{main}), Q(s, \textrm{right})$, and we still pick the action $a$ that maximizes $Q(s,a)$. This would only require inference once.
+
+**How do you choose actions while still learning?**:
+- Option 1:
+  - Pick the action $a$ that maximizes $Q(s,a)$
+- Option 2 ( **$\epsilon-greedy policy$** ):
+  - With probability 0.95, pick the action $a$ that maximizes $Q(s,a)$ - **Greedy, "Exploitation"**
+  - With probability 0.95, pick an action $a$ randomly - **"Exploration"**
+
+The **$\epsilon-greedy policy$** allows the neural network to overcome possible pre-conceptions and explore a bit, even though we are greedy most of the time ($\epsilon$ itself refers to the probability of exploration).
+- One modification may be to start $\epsilon$ high, then gradually decrease
+
+### Mini-Batch and Soft Updates
+Mini-batch and Soft Updates are refinements we can make to the RL algorithm (and mini-batches are also applicable to supervised learning applications as well)
+
+`(DEF)` **Mini-Batch**: Pick some subset with $m'$ examples of a large set of $m$ examples, while iteratively moving through the large set of $m$
+- In terms of supervised learning, rather than performing gradient descent on, say, 100,000,000 examples each step, we only perform it on a "mini-batch" (say, 1000) to improve performance. The next iteration may take the next unique 1,000 examples of the 100,000,000
+- On average, not as reliable and much more noisy, but significantly less computationally expensive (we typically use Adam in supervised learning instead as a result)
+- The modification here with regard to Deep-Q applies to "Create a training set", where instead of 10,000, we may choose 1,000
+  
+`(DEF)` **Soft Updates**: Updates a parameter to be the sum of a *small fraction of the new* with the *large majority being the old*. The fraction is expected to add up to 1.
+- Ex: $W = 0.01 W_new + 0.99W$, $B = 0.01 B_new + 0.99B$
+- Without soft update, the parameter updates will be  $W = 1W_new + 0W$, $B = 1B_new + B$
+- The purpose is to make a gradual change to $Q$ or neural network params $W, B$ and cause the RL algorithm to converge more reliability (like the $\alpha$ learning rate)
+
+### State of RL
+Limitations of Reinforcement Learning:
+- Much easier to get to work in a *simulation* than a real robot
+- Far fewer applications than supervised and unsupervised learning
+
+However, there is an exciting research direction with potential for future applications.
+
+# Credits
+![Lunar Lander](https://github.com/thisisjonchen/mlnotes/blob/main/labs/lunar_lander.gif)
+**Huge thanks** to Andrew Ng and the Machine Learning Specialization team!
