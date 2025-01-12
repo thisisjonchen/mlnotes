@@ -78,6 +78,7 @@ My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
       * 5.36 [Deep-Q Reinforcement Learning](#deep-q-reinforcement-learning)
       * 5.37 [Mini-Batch and Soft Updates](#mini-batch-and-soft-updates)
       * 5.38 [State of RL](#state-of-rl)
+6. [Credits](#credits)
     
    
 
@@ -1707,3 +1708,7 @@ Limitations of Reinforcement Learning:
 - Far fewer applications than supervised and unsupervised learning
 
 However, there is an exciting research direction with potential for future applications.
+
+# Credits
+![Lunar Lander](https://github.com/thisisjonchen/mlnotes/blob/main/labs/lunar_lander.gif)
+**Huge thanks** to Andrew Ng and the Machine Learning Specialization team!
