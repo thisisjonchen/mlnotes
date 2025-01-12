@@ -3,6 +3,8 @@
 
 My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
 
+[My Certificate 📝](https://www.coursera.org/account/accomplishments/specialization/L2H0NNXWJ18U)
+
 ## Table of Contents
 1. [Tools](#tools)
 2. [What is Machine Learning?](#what-is-machine-learning)
