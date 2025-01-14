@@ -1,7 +1,7 @@
 # Machine Learning Notes 📝
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/thisisjonchen/mlnotes/main?display_timestamp=author&style=for-the-badge)
 
-My notes on Andrew Ng's "Machine Learning Specialization" (MLS)
+My notes on Andrew Ng's "Machine Learning Specialization" (MLS) and more
 
 [My Certificate 📝](https://www.coursera.org/account/accomplishments/specialization/L2H0NNXWJ18U)
 
@@ -583,6 +583,16 @@ We can "combine" some of these features into one neuron or several neurons in a 
 In reality, all neurons in one layer would be able to access **all** features from the previous layer
 - For example, the neuron "Affordability" would take all inputs of "Price", "Shipping Cost", "Marketing", and "Material"
 - We also do NOT define features or neurons in the hidden layer -- the neural network determines what it wants to use in the hidden layer(s), which is what makes it so powerful
+
+The number of neurons in a **hidden** layer may be ambiguous, but a useful formula to determine the number is:
+```math
+N_h = \frac{N_s}{\alpha * (N_i + N_o))}
+```
+- $N_i$ = number of input neurons
+- $N_o$ = number of output neurons
+- $N_s$ = number of training examples
+- $\alpha$ = arbitrary scaling factor usually between 2-10
+- Obtained from [StackExchange](https://stats.stackexchange.com/questions/181/how-to-choose-the-number-of-hidden-layers-and-nodes-in-a-feedforward-neural-netw)
 
 Process:\
 Input Layer ($\vec{x}$) &#8594; Hidden Layer(s) ($\vec{a}$) &#8594; Output Layer ($a$) &#8594; Probability of Being a Top Seller
